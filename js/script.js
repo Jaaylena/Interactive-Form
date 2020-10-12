@@ -1,14 +1,11 @@
 //select element with id name and set it's focus
      document.getElementById('name').focus();
 
-//job role section 
+/***job role section **/
 
-//include a text field that appears when user selects "other" in the 
-//job role drop down 
-    //give feild an id "other-title" 
-    // add place-holder text "your job role"
-    //hide the "other" initially in order for this feature to work when JS is disabled
-
+//when "other" job role is selected in the drop down 
+    //add an input field with a placeholder text "your job role"
+    //**hide the "other" initially in order for this feature to work when JS is disabled
 
 //T-shirt section 
 //select and options elements do warm up for better understanding 
