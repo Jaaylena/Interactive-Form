@@ -1,9 +1,7 @@
 //select element with id name and set it's focus
-window.onload = function focusInput() {
      document.getElementById('name').focus();
-};
-//job role section 
 
+//job role section 
 
 //include a text field that appears when user selects "other" in the 
 //job role drop down 
