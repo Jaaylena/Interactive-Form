@@ -1,5 +1,7 @@
-//create a text field with focus upon loading 
-
+//select element with id name and set it's focus
+window.onload = function focusInput() {
+     document.getElementById('name').focus();
+};
 //job role section 
 
 
