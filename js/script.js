@@ -2,11 +2,25 @@
      document.getElementById('name').focus();
 
 /***job role section **/
-//const otherInput = document.querySelector('#other-title');
-//console.log(otherInput);
+//**hide the "other" initially in order for this feature to work when JS is disabled
+ 
+const otherInput = document.getElementById('other-title');
+    otherInput.style.display = 'none';
+const title = document.getElementById('title');
+let titleValue = title.option
 //when "other" job role is selected in the drop down 
-    //add an input field with a placeholder text "your job role"
-    //**hide the "other" initially in order for this feature to work when JS is disabled
+title.addEventListener('change', (e) => {
+    if(e.target.value === 'other') {
+        otherInput.style.display = 'block';
+    }
+    if(e.target.value !== 'other')
+        otherInput.style.display = 'none';
+});
+    //show text input with ID 'other-title'
+  
+    
+    
+    
 
 //T-shirt section 
 //select and options elements do warm up for better understanding 
