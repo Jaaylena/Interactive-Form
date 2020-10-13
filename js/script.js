@@ -10,21 +10,18 @@ const title = document.getElementById('title');
 let titleValue = title.option
 //when "other" job role is selected in the drop down 
 title.addEventListener('change', (e) => {
+    //show text input with ID 'other-title'
     if(e.target.value === 'other') {
         otherInput.style.display = 'block';
     }
     if(e.target.value !== 'other')
         otherInput.style.display = 'none';
 });
-    //show text input with ID 'other-title'
-  
-    
-    
-    
-
 //T-shirt section 
-//select and options elements do warm up for better understanding 
-    //select design theme 
+//filter the available "color" options by the selected theme in the design field
+    //at initial load update the "color" field to read "Please select a Theme"
+    //hide the colors in the "color" drop down    
+    //when a design theme 
         // if no theme in the "design" menu
               //no color options appear in the "color" dropdown 
              //color field reads "Please select a T-shirt theme"
