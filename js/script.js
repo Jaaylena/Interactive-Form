@@ -7,19 +7,28 @@
 const otherInput = document.getElementById('other-title');
     otherInput.style.display = 'none';
 const title = document.getElementById('title');
-let titleValue = title.option
+
 //when "other" job role is selected in the drop down 
 title.addEventListener('change', (e) => {
     //show text input with ID 'other-title'
     if(e.target.value === 'other') {
         otherInput.style.display = 'block';
-    }
-    if(e.target.value !== 'other')
+    }else {
         otherInput.style.display = 'none';
+    }   
 });
 //T-shirt section 
+const selectDesign = document.getElementById('design');
+const colors = document.getElementById('color');
+//at initial load update the "color" field to read "Please select a Theme"
+const colorPlaceholder = document.createElement('option');
+    colorPlaceholder.style.display = 'none';
+    colors.appendChild(colorPlaceholder).text = 'Please Select a Theme';
+    colors.value = 'Please Select a Theme';
+console.log(selectDesign);
+console.log(colors);
 //filter the available "color" options by the selected theme in the design field
-    //at initial load update the "color" field to read "Please select a Theme"
+
     //hide the colors in the "color" drop down    
     //when a design theme 
         // if no theme in the "design" menu
