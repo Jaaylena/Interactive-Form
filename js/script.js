@@ -28,8 +28,10 @@ const colorPlaceholder = document.createElement('option');
 console.log(selectDesign);
 console.log(colors);
 //filter the available "color" options by the selected theme in the design field
-
-    //hide the colors in the "color" drop down    
+for(i = 0; i <= colors.length; i++) {
+   //hide the colors in the "color" drop down    
+    colors[i].style.display = 'none';
+}
     //when a design theme 
         // if no theme in the "design" menu
               //no color options appear in the "color" dropdown 
