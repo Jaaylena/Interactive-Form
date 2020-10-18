@@ -7,11 +7,14 @@
 const otherInput = document.getElementById('other-title');
     otherInput.style.display = 'none';
 const title = document.getElementById('title');
-
+let titleValue = title.option;
 //when "other" job role is selected in the drop down 
 title.addEventListener('change', (e) => {
-    //show text input with ID 'other-title'
-   
+    if(e.target.value === 'other') {
+        otherInput.style.display = 'block';
+    }
+    if(e.target.value !== 'other')
+        otherInput.style.display = 'none';
 });
 //T-shirt section 
 const selectDesign = document.querySelector('#design');
@@ -28,21 +31,26 @@ for(let i = 0; i < colors.length; i++) {
 
 //when a design theme is selected show the colors for that theme
 selectDesign.addEventListener('change', (e) => {
-   
+    for(let i = 0; i < colors.length; i++) {
+        //hide the colors in the "color" drop down    
+         colors[i].style.display = 'none';  
+     }
 //filter the available "color" options by the selected theme in the design field
-let punOptions = {
-    "one" : colors.value = 'cornflowerblue',
-    "two" : colors.value = 'darkslategrey',
-    "three" : colors.value = 'gold' 
-};
+
+
      //if user selects "Theme- I Puns"
     if(e.target.value === 'js puns') {
      //display options that match the users theme selection
-     //the color menu should display "cornflower blue", 
-   colors.style.display= punOptions;
+     let punOptions = {
+        "one" : colors.value = 'cornflowerblue',
+        "two" : colors.value = 'darkslategrey',
+        "three" : colors.value = 'gold'
+        
+    };
     
     console.log(punOptions);
 }
+     //the color menu should display "cornflower blue", 
             //"dark slate grey", and "gold"
     
 });
