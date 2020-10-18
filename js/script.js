@@ -28,30 +28,21 @@ for(let i = 0; i < colors.length; i++) {
 
 //when a design theme is selected show the colors for that theme
 selectDesign.addEventListener('change', (e) => {
-    for(let i = 0; i < colors.length; i++) {
-        //hide the colors in the "color" drop down    
-         colors[i].style.display = 'none';  
-     }
+   
 //filter the available "color" options by the selected theme in the design field
-
-let loveJsOptions = {
-    "one" : colors.value = 'tomato',
-    "two" : colors.value = 'steelblue',
-    "three" : colors.value = 'dimgrey'
+let punOptions = {
+    "one" : colors.value = 'cornflowerblue',
+    "two" : colors.value = 'darkslategrey',
+    "three" : colors.value = 'gold' 
 };
      //if user selects "Theme- I Puns"
     if(e.target.value === 'js puns') {
      //display options that match the users theme selection
-     let punOptions = {
-        "one" : colors.value = 'cornflowerblue',
-        "two" : colors.value = 'darkslategrey',
-        "three" : colors.value = 'gold'
-    };
-    console.log(punOptions);
-
-
-    }
      //the color menu should display "cornflower blue", 
+   colors.style.display= punOptions;
+    
+    console.log(punOptions);
+}
             //"dark slate grey", and "gold"
     
 });
