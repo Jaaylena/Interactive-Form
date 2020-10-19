@@ -1,9 +1,7 @@
 //select element with id name and set it's focus
 document.getElementById('name').focus();
-
 /***job role section **/
 //**hide the "other" initially in order for this feature to work when JS is disabled
-
 const otherInput = document.getElementById('other-title');
 otherInput.style.display = 'none';
 const title = document.getElementById('title');
@@ -37,11 +35,14 @@ designMenu.addEventListener('change', (e) => {
     //when a theme is selected drop down placeholder changes to 'choose a color' 
     colors.appendChild(colorPlaceholder).text = 'Choose a Color';
     colors.value = 'Choose a Color'; 
+    if(designMenu.value === 'Select Theme') {
+        colors.appendChild(colorPlaceholder).text = 'Please Select a T-Shirt Theme';
+        colors.value = 'Please Select a T-Shirt Theme';
+    }
     //filter the available "color" options by the selected theme in the design field
     for (let i = 0; i < colors.length; i++) {
         //hide the colors in the "color" drop down    
         colors[i].style.display = 'none';
-
         //if user selects "Theme- I Puns"
         if (e.target.value === 'js puns') {
             //the color menu should display "cornflower blue", "dark slate grey", and "gold"
@@ -60,3 +61,28 @@ designMenu.addEventListener('change', (e) => {
     }
 });
 //register for activities section
+//https://drive.google.com/file/d/1U12HbHqO8gEz-Szm4hRUvxtUMvqsZbPb/view
+//create an element to display the total activity cost
+    //let totalCost = '';
+    //create a DOM element 
+        //append to the .activity section
+//listen for changes in the Activity section 
+    //use an event listener 
+        //get the 'data-cost' attribute value of the clicked element
+            //use the type-of operator to test in the console
+        //use an if/else statement to check if the clicked element is checked or unchecked.
+        //if the input element is checked
+            //add the cost of the currently clicked activity to the total cost variable.
+        //else
+            //subtract the cost
+        //set text of the total cost element = string 'total: ${} 'concatenated' with the current value of the total cost variable 
+
+//create helpful variables to store important values 
+//update and display the total actvity cost 
+        //create a global variable to store  activity cost initially set to $0
+
+//when user picks an activity disable the activities that have coinciding times
+    //if an activity with the data-day-and-time="Tuesday 9am-12pm" is chosen
+        //disable the other activities with data-day-and-time="Tuesday 9am-12pm" 
+    //if an activity with the data-day-and-time="Tuesday 1pm-4pm" is chosen
+        //disable the other activities with the data-day-and-time="Tuesday 1pm-4pm"
