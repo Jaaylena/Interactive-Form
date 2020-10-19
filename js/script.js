@@ -18,7 +18,6 @@ title.addEventListener('change', (e) => {
 const designMenu = document.querySelector('#design');
 const colors = document.getElementById('color');
 const colorOption = document.querySelectorAll('#color option');
-console.log(colorOption);
 
 //at initial load update the "color" field to read "Please select a Theme"
 const colorPlaceholder = document.createElement('option');
@@ -63,20 +62,41 @@ designMenu.addEventListener('change', (e) => {
 //register for activities section
 //https://drive.google.com/file/d/1U12HbHqO8gEz-Szm4hRUvxtUMvqsZbPb/view
 //create an element to display the total activity cost
-    //let totalCost = '';
-    //create a DOM element 
-        //append to the .activity section
-//listen for changes in the Activity section 
-    //use an event listener 
-        //get the 'data-cost' attribute value of the clicked element
-            //use the type-of operator to test in the console
-        //use an if/else statement to check if the clicked element is checked or unchecked.
+    const totalCostDiv = document.createElement('div');
+    totalCostDiv.id = 'total-cost';
+    const totalCostLabel = document.createElement('label');
+    totalCostDiv.append(totalCostLabel);
+    totalCostLabel.innerHTML = 'Total Cost:';
+    let totalCost = 0;
+    totalCostDiv.append(totalCost);
+    const activities = document.querySelector('.activities');
+    //append to the .activity section
+    activities.appendChild(totalCostDiv);
+    console.log(totalCostDiv);
+//listen for changes in the Activity section using an event listener
+activities.addEventListener('change', (e) => {
+    //variable that references the checked element 
+    let checkedBox = e.target;
+ //get the 'data-cost' attribute value of the clicked element
+    const cost = parseInt(checkedBox.getAttribute('data-cost'));
+    console.log(typeof(checkedBox)); 
+
+    //use an if/else statement to check if the clicked element is checked or unchecked.
         //if the input element is checked
-            //add the cost of the currently clicked activity to the total cost variable.
+    if(checkedBox.checked == true) {
+        totalCost += cost;
+        
+        console.log(totalCost);
+    }
+     //add the cost of the currently clicked activity to the total cost variable.
         //else
             //subtract the cost
         //set text of the total cost element = string 'total: ${} 'concatenated' with the current value of the total cost variable 
-
+});
+   
+       
+        
+           
 //create helpful variables to store important values 
 //update and display the total actvity cost 
         //create a global variable to store  activity cost initially set to $0
