@@ -1,3 +1,6 @@
+/*
+https://drive.google.com/file/d/1U12HbHqO8gEz-Szm4hRUvxtUMvqsZbPb/view
+*/
 //select element with id name and set it's focus
 document.getElementById('name').focus();
 /***job role section **/
@@ -60,9 +63,7 @@ designMenu.addEventListener('change', (e) => {
     }
 });
                     /*register for activities section*/
-/*
-https://drive.google.com/file/d/1U12HbHqO8gEz-Szm4hRUvxtUMvqsZbPb/view
-*/
+
 //create an element to display the total activity cost
     const totalCostDiv = document.createElement('div');
     totalCostDiv.id = 'total-cost';
@@ -75,27 +76,39 @@ https://drive.google.com/file/d/1U12HbHqO8gEz-Szm4hRUvxtUMvqsZbPb/view
     const activities = document.querySelector('.activities');
     //append to the .activity section
     activities.appendChild(totalCostDiv);
-    console.log(totalCostDiv);
 //listen for changes in the Activity section using an event listener
 activities.addEventListener('change', (e) => {
     //variable that references the checked element 
     let checkedBox = e.target;
  //get the 'data-cost' attribute value of the clicked element
     const cost = parseInt(checkedBox.getAttribute('data-cost'));
-    console.log(typeof(cost)); 
+    const mainEvent = activities.getAttributeNames('all');
+    console.log(mainEvent)
+    const checkboxes = document.querySelectorAll('.activity input');
+    console.log(checkboxes);  
+    const scheduledActivity = checkedBox.getAttribute('data-day-and-time');
+    console.log(scheduledActivity);
      //if the input element is checked
     if(checkedBox.checked == true) {
       //add the cost of the currently clicked activity to the total cost variable.
         totalCost += cost;
     //use a template literal to display the value of cost
     totalCostLabel.innerHTML = `Total Cost: $${totalCost}`;
-
-        console.log(totalCost);
     } else {
          //subtract the cost
          totalCost -= cost;
+    } 
+    for(let i = 0; i < checkboxes.length; i++) {
+      const selectedActivity = checkboxes[i].getAttribute('data-day-and-time');
+      console.log(selectedActivity);
+      
     }
+    //disable check boxes if main conference isn't selected 
+        
+
+  
     //when user picks an activity disable the activities that have coinciding times
+    
     //if an activity with the data-day-and-time="Tuesday 9am-12pm" is chosen
         //disable the other activities with data-day-and-time="Tuesday 9am-12pm" 
     //if an activity with the data-day-and-time="Tuesday 1pm-4pm" is chosen
