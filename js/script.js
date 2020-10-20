@@ -60,7 +60,9 @@ designMenu.addEventListener('change', (e) => {
     }
 });
 //register for activities section
-//https://drive.google.com/file/d/1U12HbHqO8gEz-Szm4hRUvxtUMvqsZbPb/view
+/*
+https://drive.google.com/file/d/1U12HbHqO8gEz-Szm4hRUvxtUMvqsZbPb/view
+*/
 //create an element to display the total activity cost
     const totalCostDiv = document.createElement('div');
     totalCostDiv.id = 'total-cost';
@@ -79,17 +81,16 @@ activities.addEventListener('change', (e) => {
     let checkedBox = e.target;
  //get the 'data-cost' attribute value of the clicked element
     const cost = parseInt(checkedBox.getAttribute('data-cost'));
-    console.log(typeof(checkedBox)); 
+    console.log(typeof(cost)); 
 
     //use an if/else statement to check if the clicked element is checked or unchecked.
         //if the input element is checked
     if(checkedBox.checked == true) {
+      //add the cost of the currently clicked activity to the total cost variable.
         totalCost += cost;
-        
+        totalCostDiv.append(totalCost);
         console.log(totalCost);
-    }
-     //add the cost of the currently clicked activity to the total cost variable.
-        //else
+    }//else
             //subtract the cost
         //set text of the total cost element = string 'total: ${} 'concatenated' with the current value of the total cost variable 
 });
