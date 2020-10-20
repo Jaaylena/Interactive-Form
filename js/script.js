@@ -59,7 +59,7 @@ designMenu.addEventListener('change', (e) => {
         }
     }
 });
-//register for activities section
+                    /*register for activities section*/
 /*
 https://drive.google.com/file/d/1U12HbHqO8gEz-Szm4hRUvxtUMvqsZbPb/view
 */
@@ -68,9 +68,10 @@ https://drive.google.com/file/d/1U12HbHqO8gEz-Szm4hRUvxtUMvqsZbPb/view
     totalCostDiv.id = 'total-cost';
     const totalCostLabel = document.createElement('label');
     totalCostDiv.append(totalCostLabel);
-    totalCostLabel.innerHTML = 'Total Cost:';
+ //create a global variable to store  activity cost initially set to $0
     let totalCost = 0;
-    totalCostDiv.append(totalCost);
+    totalCostLabel.innerHTML = `Total Cost: $${totalCost}`;
+    //totalCostDiv.append(totalCost);
     const activities = document.querySelector('.activities');
     //append to the .activity section
     activities.appendChild(totalCostDiv);
@@ -82,28 +83,22 @@ activities.addEventListener('change', (e) => {
  //get the 'data-cost' attribute value of the clicked element
     const cost = parseInt(checkedBox.getAttribute('data-cost'));
     console.log(typeof(cost)); 
-
-    //use an if/else statement to check if the clicked element is checked or unchecked.
-        //if the input element is checked
+     //if the input element is checked
     if(checkedBox.checked == true) {
       //add the cost of the currently clicked activity to the total cost variable.
         totalCost += cost;
-        totalCostDiv.append(totalCost);
-        console.log(totalCost);
-    }//else
-            //subtract the cost
-        //set text of the total cost element = string 'total: ${} 'concatenated' with the current value of the total cost variable 
-});
-   
-       
-        
-           
-//create helpful variables to store important values 
-//update and display the total actvity cost 
-        //create a global variable to store  activity cost initially set to $0
+    //use a template literal to display the value of cost
+    totalCostLabel.innerHTML = `Total Cost: $${totalCost}`;
 
-//when user picks an activity disable the activities that have coinciding times
+        console.log(totalCost);
+    } else {
+         //subtract the cost
+         totalCost -= cost;
+    }
+    //when user picks an activity disable the activities that have coinciding times
     //if an activity with the data-day-and-time="Tuesday 9am-12pm" is chosen
         //disable the other activities with data-day-and-time="Tuesday 9am-12pm" 
     //if an activity with the data-day-and-time="Tuesday 1pm-4pm" is chosen
         //disable the other activities with the data-day-and-time="Tuesday 1pm-4pm"
+});  
+
