@@ -86,9 +86,6 @@ activities.addEventListener('change', (e) => {
     console.log(checkboxes);  
     const scheduledActivity = checkedBox.getAttribute('data-day-and-time');
     console.log(scheduledActivity);
-    function disable () {
-        activities.disabled = true;
-    }
      //if the input element is checked
     if(checkedBox.checked == true) {
       //add the cost of the currently clicked activity to the total cost variable.
