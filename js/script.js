@@ -98,9 +98,17 @@ activities.addEventListener('change', (e) => {
          totalCostLabel.innerHTML = `Total Cost: $${totalCost}`;
     }         
     //when user picks an activity disable the activities that have coinciding
-    /*without disabling the activity hat was just checked */ 
-
+    /*without disabling the activity that was just checked */ 
     //loop through all of the checkbox input in the activity section
+    for(let i = 0; i < checkboxes.length; i++) {
+        let selectedActivity = checkboxes[i];
+        
+        if(selectedActivity.checked && checkedBox === scheduledActivity) {
+            scheduledActivity.disabled = true;
+        }
+        console.log(selectedActivity);
+    }
+    
         //create a variable that targets the activity input (input[i])
             //log out this variable to test it's value
         //if an activity with the data-day-and-time="Tuesday 9am-12pm" is chosen
