@@ -82,12 +82,16 @@ activities.addEventListener('change', (e) => {
     let checkedBox = e.target;
  //get the 'data-cost' attribute value of the clicked element
     const cost = parseInt(checkedBox.getAttribute('data-cost'));
+    //this variable is an attempt to disable all checkboxes that weren't the main conference
     const mainEvent = activities.getAttributeNames('all');
-    console.log(mainEvent)
+    console.log(mainEvent);
     const checkboxes = document.querySelectorAll('.activity input');
     console.log(checkboxes);  
     const scheduledActivity = checkedBox.getAttribute('data-day-and-time');
     console.log(scheduledActivity);
+    function disable () {
+        activities.disabled = true;
+    }
      //if the input element is checked
     if(checkedBox.checked == true) {
       //add the cost of the currently clicked activity to the total cost variable.
@@ -100,8 +104,9 @@ activities.addEventListener('change', (e) => {
     } 
     for(let i = 0; i < checkboxes.length; i++) {
       const selectedActivity = checkboxes[i].getAttribute('data-day-and-time');
-      console.log(selectedActivity);
-      
+      if(selectedActivity.checked === scheduledActivity.value) {
+          scheduledActivity.disabled = true;
+      }
     }
     //disable check boxes if main conference isn't selected 
         
