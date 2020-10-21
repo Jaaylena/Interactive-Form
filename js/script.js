@@ -76,17 +76,12 @@ designMenu.addEventListener('change', (e) => {
     const activities = document.querySelector('.activities');
     //append to the .activity section
     activities.appendChild(totalCostDiv);
-    const checkboxes = document.querySelectorAll('.activity input');
-        console.log(checkboxes);
 //listen for changes in the Activity section using an event listener
 activities.addEventListener('change', (e) => {
     //variable that references the checked element 
     let checkedBox = e.target;
  //get the 'data-cost' attribute value of the clicked element
     const cost = parseInt(checkedBox.getAttribute('data-cost'));
-      
-    const scheduledActivity = checkedBox.getAttribute('data-day-and-time');
-    console.log(scheduledActivity);
      //if the input element is checked
     if(checkedBox.checked == true) {
       //add the cost of the currently clicked activity to the total cost variable.
@@ -98,22 +93,16 @@ activities.addEventListener('change', (e) => {
          totalCost -= cost;
          totalCostLabel.innerHTML = `Total Cost: $${totalCost}`;
     }         
+    //create a variable 'eventSchedule' that gets the attribute 'data-day-and-time' value of the checked Element
     //when user picks an activity disable the activities that have coinciding
     /*without disabling the activity that was just checked */ 
+    //disable any activity with conflicting times
     //loop through all of the checkbox input in the activity section
-    for(let i = 0; i < checkboxes.length; i++) {
-        let selectedActivity = checkboxes[i].getAttribute('data-day-and-time');
-        
-        if(selectedActivity.checked && scheduledActivity == true) {
-            selectedActivity.disabled = true;
-            console.log(selectedActivity);
-        }
-    }
-    
-
-        //create a variable that targets the activity input (input[i])
+        //create a variable called 'activity' that holds the current iteration (input[i])
             //log out this variable to test it's value
-        //if an activity with the data-day-and-time="Tuesday 9am-12pm" is chosen
+        //test the conditions of each activity 
+        //if `data-day-and-time` attribute && activity.checked == true {disable matching activity}
+        //if d
       
 });  
 
