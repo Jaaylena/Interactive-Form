@@ -82,9 +82,6 @@ activities.addEventListener('change', (e) => {
     let checkedBox = e.target;
  //get the 'data-cost' attribute value of the clicked element
     const cost = parseInt(checkedBox.getAttribute('data-cost'));
-    //this variable is an attempt to disable all checkboxes that weren't the main conference
-    const mainEvent = activities.getAttributeNames('all');
-    console.log(mainEvent);
     const checkboxes = document.querySelectorAll('.activity input');
     console.log(checkboxes);  
     const scheduledActivity = checkedBox.getAttribute('data-day-and-time');
@@ -101,22 +98,15 @@ activities.addEventListener('change', (e) => {
     } else {
          //subtract the cost
          totalCost -= cost;
-    } 
-    for(let i = 0; i < checkboxes.length; i++) {
-      const selectedActivity = checkboxes[i].getAttribute('data-day-and-time');
-      if(selectedActivity.checked === scheduledActivity.value) {
-          scheduledActivity.disabled = true;
-      }
-    }
-    //disable check boxes if main conference isn't selected 
-        
+         totalCostLabel.innerHTML = `Total Cost: $${totalCost}`;
+    }         
+    //when user picks an activity disable the activities that have coinciding
+    /*without disabling the activity hat was just checked */ 
 
-  
-    //when user picks an activity disable the activities that have coinciding times
-    
-    //if an activity with the data-day-and-time="Tuesday 9am-12pm" is chosen
-        //disable the other activities with data-day-and-time="Tuesday 9am-12pm" 
-    //if an activity with the data-day-and-time="Tuesday 1pm-4pm" is chosen
-        //disable the other activities with the data-day-and-time="Tuesday 1pm-4pm"
+    //loop through all of the checkbox input in the activity section
+        //create a variable that targets the activity input (input[i])
+            //log out this variable to test it's value
+        //if an activity with the data-day-and-time="Tuesday 9am-12pm" is chosen
+      
 });  
 
