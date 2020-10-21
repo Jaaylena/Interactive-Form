@@ -76,14 +76,15 @@ designMenu.addEventListener('change', (e) => {
     const activities = document.querySelector('.activities');
     //append to the .activity section
     activities.appendChild(totalCostDiv);
+    const checkboxes = document.querySelectorAll('.activity input');
+        console.log(checkboxes);
 //listen for changes in the Activity section using an event listener
 activities.addEventListener('change', (e) => {
     //variable that references the checked element 
     let checkedBox = e.target;
  //get the 'data-cost' attribute value of the clicked element
     const cost = parseInt(checkedBox.getAttribute('data-cost'));
-    const checkboxes = document.querySelectorAll('.activity input');
-    console.log(checkboxes);  
+      
     const scheduledActivity = checkedBox.getAttribute('data-day-and-time');
     console.log(scheduledActivity);
      //if the input element is checked
