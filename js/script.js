@@ -92,17 +92,23 @@ activities.addEventListener('change', (e) => {
          //subtract the cost
          totalCost -= cost;
          totalCostLabel.innerHTML = `Total Cost: $${totalCost}`;
-    }         
-    //create a variable 'eventSchedule' that gets the attribute 'data-day-and-time' value of the checked Element
+    }       
+    //select the activity checkbox element and store it in a variable called activity  
+    const activity = document.querySelectorAll('input[type="checkbox"]');
+    console.log(activity);
     //when user picks an activity disable the activities that have coinciding
     /*without disabling the activity that was just checked */ 
     //disable any activity with conflicting times
-    //loop through all of the checkbox input in the activity section
+    for(let i= 0; i < activity.length; i++) {
+        let dateAndTime = activity[i].getAttribute('data-day-and-time');
+        
+       
+        
+    }
         //create a variable called 'activity' that holds the current iteration (input[i])
             //log out this variable to test it's value
         //test the conditions of each activity 
-        //if `data-day-and-time` attribute && activity.checked == true {disable matching activity}
-        //if d
-      
+        //if (eventSchedule == activity.checked && }
+
 });  
 
