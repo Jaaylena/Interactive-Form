@@ -100,15 +100,13 @@ activities.addEventListener('change', (e) => {
     /*without disabling the activity that was just checked */ 
     //disable any activity with conflicting times
     for(let i= 0; i < activity.length; i++) {
+    //create a variable called 'activity' that holds the current iteration (input[i])
         let dateAndTime = activity[i].getAttribute('data-day-and-time');
-        
-       
-        
+        if (dateAndTime.check == activities.getAttribute('data-day-and-time') && dateAndTime != activities.getAttribute('data-day-and-time')) {
+            activity.setAttribute('disabled');
+        }
+       console.log(dateAndTime);
     }
-        //create a variable called 'activity' that holds the current iteration (input[i])
-            //log out this variable to test it's value
-        //test the conditions of each activity 
-        //if (eventSchedule == activity.checked && }
 
 });  
 
