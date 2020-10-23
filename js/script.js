@@ -92,20 +92,25 @@ activities.addEventListener('change', (e) => {
          //subtract the cost
          totalCost -= cost;
          totalCostLabel.innerHTML = `Total Cost: $${totalCost}`;
-    }       
+    }   
+       
     //select the activity checkbox element and store it in a variable called activity  
-    const activity = document.querySelectorAll('input[type="checkbox"]');
+    const activity = checkedBox.getAttribute('data-day-and-time');
     console.log(activity);
-    //when user picks an activity disable the activities that have coinciding
-    /*without disabling the activity that was just checked */ 
-    //disable any activity with conflicting times
-    for(let i= 0; i < activity.length; i++) {
-    //create a variable called 'activity' that holds the current iteration (input[i])
-        let dateAndTime = activity[i].getAttribute('data-day-and-time');
-        if (dateAndTime.check == activities.getAttribute('data-day-and-time') && dateAndTime != activities.getAttribute('data-day-and-time')) {
-            activity.setAttribute('disabled');
+    
+    //set the checkbox input to a variable checkboxes
+    const checkboxes = document.querySelectorAll('.activities input');
+    //retrieve the list of activities with an attribute of 'data-day-and time'
+    for(let i= 0; i < checkboxes.length; i++) {
+        //set the iterate to a variable called dateAndTimee
+        const dateAndTime = checkboxes[i].getAttribute('data-day-and-time');
+        //check to see if the checked activity matches anothers dateAndTime
+        if(dateAndTime === activity && checkedBox !== checkboxes[i]) {
+          //disable any activity with conflicting times 
+            checkedBox.checked
+            ?(checkboxes[i].disabled = true) 
+            :(checkboxes[i].disabled = false);
         }
-       console.log(dateAndTime);
     }
 
 });  
