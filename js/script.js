@@ -62,7 +62,7 @@ designMenu.addEventListener('change', (e) => {
         }
     }
 });
-                    /*register for activities section*/
+ /*register for activities section*/
 
 //create an element to display the total activity cost
     const totalCostDiv = document.createElement('div');
@@ -92,12 +92,10 @@ activities.addEventListener('change', (e) => {
          //subtract the cost
          totalCost -= cost;
          totalCostLabel.innerHTML = `Total Cost: $${totalCost}`;
-    }   
-       
+    }      
     //select the activity checkbox element and store it in a variable called activity  
     const activity = checkedBox.getAttribute('data-day-and-time');
     console.log(activity);
-    
     //set the checkbox input to a variable checkboxes
     const checkboxes = document.querySelectorAll('.activities input');
     //retrieve the list of activities with an attribute of 'data-day-and time'
@@ -112,6 +110,8 @@ activities.addEventListener('change', (e) => {
             :(checkboxes[i].disabled = false);
         }
     }
-
 });  
-
+/* payment section */
+//get element with 'payment' id and set it to the variable paymentOption
+//get paymentOption.value('select method') = hide;
+//get the value of paymentOption
