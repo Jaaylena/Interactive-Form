@@ -36,8 +36,8 @@ for (let i = 0; i < colors.length; i++) {
 designMenu.addEventListener('change', (e) => {
     //when a theme is selected drop down placeholder changes to 'choose a color' 
     colors.appendChild(colorPlaceholder).text = 'Choose a Color';
-    colors.value = 'Choose a Color'; 
-    if(designMenu.value === 'Select Theme') {
+    colors.value = 'Choose a Color';
+    if (designMenu.value === 'Select Theme') {
         colors.appendChild(colorPlaceholder).text = 'Please Select a T-Shirt Theme';
         colors.value = 'Please Select a T-Shirt Theme';
     }
@@ -62,55 +62,55 @@ designMenu.addEventListener('change', (e) => {
         }
     }
 });
- /*register for activities section*/
+/*register for activities section*/
 
 //create an element to display the total activity cost
-    const totalCostDiv = document.createElement('div');
-    totalCostDiv.id = 'total-cost';
-    const totalCostLabel = document.createElement('label');
-    totalCostDiv.append(totalCostLabel);
- //create a global variable to store  activity cost initially set to $0
-    let totalCost = 0;
-    totalCostLabel.innerHTML = `Total Cost: $${totalCost}`;
-    //totalCostDiv.append(totalCost);
-    const activities = document.querySelector('.activities');
-    //append to the .activity section
-    activities.appendChild(totalCostDiv);
+const totalCostDiv = document.createElement('div');
+totalCostDiv.id = 'total-cost';
+const totalCostLabel = document.createElement('label');
+totalCostDiv.append(totalCostLabel);
+//create a global variable to store  activity cost initially set to $0
+let totalCost = 0;
+totalCostLabel.innerHTML = `Total Cost: $${totalCost}`;
+//totalCostDiv.append(totalCost);
+const activities = document.querySelector('.activities');
+//append to the .activity section
+activities.appendChild(totalCostDiv);
 //listen for changes in the Activity section using an event listener
 activities.addEventListener('change', (e) => {
     //variable that references the checked element 
     let checkedBox = e.target;
- //get the 'data-cost' attribute value of the clicked element
+    //get the 'data-cost' attribute value of the clicked element
     const cost = parseInt(checkedBox.getAttribute('data-cost'));
-     //if the input element is checked
-    if(checkedBox.checked == true) {
-      //add the cost of the currently clicked activity to the total cost variable.
+    //if the input element is checked
+    if (checkedBox.checked == true) {
+        //add the cost of the currently clicked activity to the total cost variable.
         totalCost += cost;
-    //use a template literal to display the value of cost
-    totalCostLabel.innerHTML = `Total Cost: $${totalCost}`;
+        //use a template literal to display the value of cost
+        totalCostLabel.innerHTML = `Total Cost: $${totalCost}`;
     } else {
-         //subtract the cost
-         totalCost -= cost;
-         totalCostLabel.innerHTML = `Total Cost: $${totalCost}`;
-    }      
+        //subtract the cost
+        totalCost -= cost;
+        totalCostLabel.innerHTML = `Total Cost: $${totalCost}`;
+    }
     //select the activity checkbox element and store it in a variable called activity  
     const activity = checkedBox.getAttribute('data-day-and-time');
     //set the checkbox input to a variable checkboxes
     const checkboxes = document.querySelectorAll('.activities input');
     //retrieve the list of activities with an attribute of 'data-day-and time'
-    for(let i= 0; i < checkboxes.length; i++) {
+    for (let i = 0; i < checkboxes.length; i++) {
         //set the iterate to a variable called dateAndTimee
         const dateAndTime = checkboxes[i].getAttribute('data-day-and-time');
         //check to see if the checked activity matches anothers dateAndTime
-        if(dateAndTime === activity && checkedBox !== checkboxes[i]) {
-          //disable any activity with conflicting times 
-           checkedBox.checked
-            ?checkboxes[i].disabled = true
-            :checkboxes[i].disabled = false;
-           
+        if (dateAndTime === activity && checkedBox !== checkboxes[i]) {
+            //disable any activity with conflicting times 
+            checkedBox.checked ?
+                checkboxes[i].disabled = true :
+                checkboxes[i].disabled = false;
+
         }
     }
-});  
+});
 /* payment section */
 //get element with 'payment' id and set it to the variable paymentOption
 const payments = document.querySelectorAll('#payment');
@@ -125,35 +125,27 @@ console.log(payments);
 console.log(paymentOption);
 //hide 'Select Payment Method' from dropdown option;
 paymentOption[0].hidden = true;
+payment.value = 'credit card';
+payPal.hidden = true;
+bitcoin.hidden = true;
 // listen for change in dropdown in select payment 
 payment.addEventListener('change', (e) => {
-//get the value for each value 
-for(i = 0; i < paymentOption.length; i++) {
-   let paymentSelections = paymentOption[i].value;
-   if ( e.target.value === 'credit card') {
-       creditCard.style.display = 'block';
-       payPal.style.display = 'none';
-       bitcoin.style.display = 'none';
-   } if (e.target.value === 'paypal') {
-        payPal.style.display = 'block';
-        creditCard.style.display = 'none';
-        bitcoin.style.display = 'none';
-   } if(e.target.value === 'bitcoin') {
-        bitcoin.style.display = 'block';
-        creditCard.style.display = 'none';
-        payPal.style.display = 'none';
-   }
-}
-
-//else 
-    //hide other options 
-//if paymentoption.value === 'paypal' 
-    //get div element with id 'paypal'.show
-// else
-    //hide other options 
-//if paymentOption.value == 'bitcoin'
-    //get div element with id 'bitcoin' show
-//else
-    //hide other options 
- });
-
+        //if selected value is credit card hide paypal and bitcoin option
+        if (e.target.value === 'credit card') {
+            creditCard.style.display = 'block';
+            payPal.style.display = 'none';
+            bitcoin.style.display = 'none';
+            //if selected value is paypal hide credit card and bitcoin option
+        }
+        if (e.target.value === 'paypal') {
+            payPal.style.display = 'block';
+            creditCard.style.display = 'none';
+            bitcoin.style.display = 'none';
+            //if selected value is bitcoin hide paypal, and credit card option 
+        }
+        if (e.target.value === 'bitcoin') {
+            bitcoin.style.display = 'block';
+            creditCard.style.display = 'none';
+            payPal.style.display = 'none';
+        }
+});
