@@ -123,13 +123,28 @@ const bitcoin = document.querySelector('#bitcoin');
 console.log(bitcoin);
 console.log(payments);
 console.log(paymentOption);
+//hide 'Select Payment Method' from dropdown option;
+paymentOption[0].hidden = true;
 // listen for change in dropdown in select payment 
 payment.addEventListener('change', (e) => {
-    //get paymentOption.value('select method') = toHide;
-    paymentOption[0].remove();
-// //get the value for each value 
-//if paymentOption.value ===  '' 
-    //get div element with id 'creditcard'.show
+//get the value for each value 
+for(i = 0; i < paymentOption.length; i++) {
+   let paymentSelections = paymentOption[i].value;
+   if ( e.target.value === 'credit card') {
+       creditCard.style.display = 'block';
+       payPal.style.display = 'none';
+       bitcoin.style.display = 'none';
+   } if (e.target.value === 'paypal') {
+        payPal.style.display = 'block';
+        creditCard.style.display = 'none';
+        bitcoin.style.display = 'none';
+   } if(e.target.value === 'bitcoin') {
+        bitcoin.style.display = 'block';
+        creditCard.style.display = 'none';
+        payPal.style.display = 'none';
+   }
+}
+
 //else 
     //hide other options 
 //if paymentoption.value === 'paypal' 
