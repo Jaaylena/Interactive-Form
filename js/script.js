@@ -126,8 +126,8 @@ console.log(paymentOption);
 //hide 'Select Payment Method' from dropdown option;
 paymentOption[0].hidden = true;
 payment.value = 'credit card';
-payPal.hidden = true;
-bitcoin.hidden = true;
+payPal.style.display = 'none';
+bitcoin.style.display = 'none';
 // listen for change in dropdown in select payment 
 payment.addEventListener('change', (e) => {
         //if selected value is credit card hide paypal and bitcoin option
