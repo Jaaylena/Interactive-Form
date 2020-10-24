@@ -149,3 +149,5 @@ payment.addEventListener('change', (e) => {
             payPal.style.display = 'none';
         }
 });
+
+/** form Validation section */
