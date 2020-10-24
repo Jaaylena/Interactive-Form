@@ -105,13 +105,15 @@ activities.addEventListener('change', (e) => {
         //check to see if the checked activity matches anothers dateAndTime
         if(dateAndTime === activity && checkedBox !== checkboxes[i]) {
           //disable any activity with conflicting times 
-            checkedBox.checked
-            ?(checkboxes[i].disabled = true) 
-            :(checkboxes[i].disabled = false);
+            if(checkedBox.checked) {
+                checkboxes[i].disabled = true;
+            }else {
+                checkboxes[i].disabled = false;
+            }
         }
     }
 });  
 /* payment section */
 //get element with 'payment' id and set it to the variable paymentOption
-//get paymentOption.value('select method') = hide;
+//get paymentOption.value('select method') = toide;
 //get the value of paymentOption
