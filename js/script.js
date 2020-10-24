@@ -11,11 +11,10 @@ const title = document.getElementById('title');
 let titleValue = title.value;
 //when "other" job role is selected in the drop down 
 title.addEventListener('change', (e) => {
-    if (e.target.value === 'other') {
-        otherInput.style.display = 'block';
-    } else {
-        otherInput.style.display = 'none';
-    }
+    e.target.value === 'other' 
+        ?otherInput.style.display = 'block'
+        :otherInput.style.display = 'none';
+    
 });
 //T-shirt section 
 const designMenu = document.querySelector('#design');
