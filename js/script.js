@@ -95,7 +95,6 @@ activities.addEventListener('change', (e) => {
     }      
     //select the activity checkbox element and store it in a variable called activity  
     const activity = checkedBox.getAttribute('data-day-and-time');
-    console.log(activity);
     //set the checkbox input to a variable checkboxes
     const checkboxes = document.querySelectorAll('.activities input');
     //retrieve the list of activities with an attribute of 'data-day-and time'
@@ -105,15 +104,41 @@ activities.addEventListener('change', (e) => {
         //check to see if the checked activity matches anothers dateAndTime
         if(dateAndTime === activity && checkedBox !== checkboxes[i]) {
           //disable any activity with conflicting times 
-            if(checkedBox.checked) {
-                checkboxes[i].disabled = true;
-            }else {
-                checkboxes[i].disabled = false;
-            }
+           checkedBox.checked
+            ?checkboxes[i].disabled = true
+            :checkboxes[i].disabled = false;
+           
         }
     }
 });  
 /* payment section */
 //get element with 'payment' id and set it to the variable paymentOption
-//get paymentOption.value('select method') = toide;
-//get the value of paymentOption
+const payments = document.querySelectorAll('#payment');
+const paymentOption = document.querySelectorAll('#payment option');
+const creditCard = document.querySelector('#credit-card');
+console.log(creditCard);
+const payPal = document.querySelector('#paypal');
+console.log(payPal);
+const bitcoin = document.querySelector('#bitcoin');
+console.log(bitcoin);
+console.log(payments);
+console.log(paymentOption);
+// listen for change in dropdown in select payment 
+payment.addEventListener('change', (e) => {
+    //get paymentOption.value('select method') = toHide;
+    paymentOption[0].remove();
+// //get the value for each value 
+//if paymentOption.value ===  '' 
+    //get div element with id 'creditcard'.show
+//else 
+    //hide other options 
+//if paymentoption.value === 'paypal' 
+    //get div element with id 'paypal'.show
+// else
+    //hide other options 
+//if paymentOption.value == 'bitcoin'
+    //get div element with id 'bitcoin' show
+//else
+    //hide other options 
+ });
+
