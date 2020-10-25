@@ -11,9 +11,9 @@ const title = document.getElementById('title');
 let titleValue = title.value;
 //when "other" job role is selected in the drop down 
 title.addEventListener('change', (e) => {
-    e.target.value === 'other' 
-        ?otherInput.style.display = 'block'
-        :otherInput.style.display = 'none';
+    e.target.value === 'other'?
+        otherInput.style.display = 'block':
+        otherInput.style.display = 'none';
     
 });
 //T-shirt section 
@@ -106,7 +106,6 @@ activities.addEventListener('change', (e) => {
             checkedBox.checked ?
                 checkboxes[i].disabled = true :
                 checkboxes[i].disabled = false;
-
         }
     }
 });
@@ -115,13 +114,8 @@ activities.addEventListener('change', (e) => {
 const payments = document.querySelectorAll('#payment');
 const paymentOption = document.querySelectorAll('#payment option');
 const creditCard = document.querySelector('#credit-card');
-console.log(creditCard);
 const payPal = document.querySelector('#paypal');
-console.log(payPal);
 const bitcoin = document.querySelector('#bitcoin');
-console.log(bitcoin);
-console.log(payments);
-console.log(paymentOption);
 //hide 'Select Payment Method' from dropdown option;
 paymentOption[0].hidden = true;
 payment.value = 'credit card';
@@ -150,3 +144,12 @@ payment.addEventListener('change', (e) => {
 });
 
 /** form Validation section */
+//get form element and set it to forms 
+const forms = document.forms;
+console.log(forms);
+//function validName 
+    //get form value name
+    //end function 
+//function validEmail 
+    //get form value name
+    //end function 
