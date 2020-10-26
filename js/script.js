@@ -143,13 +143,26 @@ payment.addEventListener('change', (e) => {
         }
 });
 /** form Validation section */
+
 //function validateFormInformation
-window.onload = function () {
-    //pass in form id name
-const nameInput = document.getElementById('name');
-console.log(nameInput);
-};
+//found on https://www.codexworld.com/how-to/validate-first-last-name-with-regular-expression-using-javascript/
+function validateName() {
+    let regName = /^[a-zA-Z]+ [a-zA-Z]+$/;
+    console.log(regName);
+        //pass in form id name
+    const nameInput = document.getElementById('name').value;
+    console.log(nameInput);
+    if(!regName.test(nameInput)) {
+    alert('Please enter your full name (first and last name).')
+        document.getElementById('name').focus();
+        return false;
+    } else {
+        return true;
+    }
+}
+validateName();
     //if userInput in name field is blank
+    
         //display message 'name is required'
     //end function 
 //function validateEmail 

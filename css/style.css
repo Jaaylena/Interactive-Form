@@ -105,6 +105,31 @@ input[type="checkbox"],
 input[type="radio"] {
 	display: inline-block;
 }
+/** created this block to display invalid*/
+input + span {
+	position: relative;
+  }
+  
+  input + span::before {
+	position: absolute;
+	right: -20px;
+	top: 5px;
+  }
+  
+  input:invalid {
+	border: 2px solid red;
+  }
+  
+  input:invalid + span::before {
+	content: '✖';
+	color: red;
+  }
+  
+  input:valid + span::before {
+	content: '✓';
+	color: green;
+  }
+/** end of the created invalid structure*/
 
 button {
 	color: #fff;
