@@ -142,14 +142,24 @@ payment.addEventListener('change', (e) => {
             payPal.style.display = 'none';
         }
 });
-
 /** form Validation section */
-//get form element and set it to forms 
-const forms = document.forms;
-console.log(forms);
-//function validName 
-    //get form value name
+//function validateFormInformation
+window.onload = function () {
+    //pass in form id name
+const nameInput = document.getElementById('name');
+console.log(nameInput);
+};
+    //if userInput in name field is blank
+        //display message 'name is required'
     //end function 
-//function validEmail 
-    //get form value name
+//function validateEmail 
+    //get form with ID mail
+    //if userInput != @ | .com 
+        //display message 'incorrect email information'
     //end function 
+//function ValidateActivity
+    //get form id activity
+    //if no selection 
+        //display message 'please choose an activity'
+    //endfunction
+
