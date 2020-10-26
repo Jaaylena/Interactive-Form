@@ -105,7 +105,8 @@ input[type="checkbox"],
 input[type="radio"] {
 	display: inline-block;
 }
-/** created this block to display invalid*/
+/** created this block to display invalid
+found on this page https://developer.mozilla.org/en-US/docs/Web/CSS/:valid*/
 input + span {
 	position: relative;
   }
