@@ -145,6 +145,7 @@ payment.addEventListener('change', (e) => {
 /** form Validation section */
 
 //function validateFormInformation
+<<<<<<< Updated upstream
 //found on https://www.codexworld.com/how-to/validate-first-last-name-with-regular-expression-using-javascript/
 function validateName() {
     let regName = /^[a-zA-Z]+ [a-zA-Z]+$/;
@@ -161,6 +162,12 @@ function validateName() {
     }
 }
 validateName();
+=======
+window.onload = function () {
+    //pass in form id name
+document.getElementById('name').required = "";
+};
+>>>>>>> Stashed changes
     //if userInput in name field is blank
     
         //display message 'name is required'
