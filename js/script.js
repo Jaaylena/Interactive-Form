@@ -143,9 +143,10 @@ payment.addEventListener('change', (e) => {
         }
 });
 /** form Validation section */
-
+document.getElementById('mail').setAttribute('required', true);
+document.getElementById('name').setAttribute('required', true);
+activities.setAttribute('required', true);
 //function validateFormInformation
-<<<<<<< Updated upstream
 //found on https://www.codexworld.com/how-to/validate-first-last-name-with-regular-expression-using-javascript/
 function validateName() {
     let regName = /^[a-zA-Z]+ [a-zA-Z]+$/;
@@ -153,24 +154,38 @@ function validateName() {
         //pass in form id name
     const nameInput = document.getElementById('name').value;
     console.log(nameInput);
-    if(!regName.test(nameInput)) {
-    alert('Please enter your full name (first and last name).')
-        document.getElementById('name').focus();
+     //if userInput in name field is blank 
+    if(!regName.test(nameInput) ) {
+    //display message 'name is required'
+
         return false;
     } else {
+        document.getElementById('name').setAttribute('required', false);
+
         return true;
     }
 }
 validateName();
-=======
-window.onload = function () {
-    //pass in form id name
-document.getElementById('name').required = "";
-};
->>>>>>> Stashed changes
-    //if userInput in name field is blank
+function validateName() {
+    let regName = /^[a-zA-Z]+ [a-zA-Z]+$/;
+    console.log(regName);
+        //pass in form id name
+    const nameInput = document.getElementById('name').value;
+    console.log(nameInput);
+    if(!regName.test(nameInput) ) {
+     document.getElementById('name').setAttribute('required', true);
+
+        return true;
+    } else {
+        document.getElementById('name').setAttribute('required', false);
+
+        return false;
+    }
+}
+
+   
     
-        //display message 'name is required'
+        
     //end function 
 //function validateEmail 
     //get form with ID mail
