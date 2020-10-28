@@ -1,7 +1,7 @@
 /*
-https://drive.google.com/file/d/1U12HbHqO8gEz-Szm4hRUvxtUMvqsZbPb/view
 */
 //select element with id name and set it's focus
+https://drive.google.com/file/d/1U12HbHqO8gEz-Szm4hRUvxtUMvqsZbPb/view
 document.getElementById('name').focus();
 /***job role section **/
 //**hide the "other" initially in order for this feature to work when JS is disabled
