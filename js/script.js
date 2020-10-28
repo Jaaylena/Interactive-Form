@@ -144,7 +144,6 @@ payment.addEventListener('change', (e) => {
 });
 /** form Validation section */
 document.getElementById('mail').setAttribute('required', true);
-document.getElementById('name').setAttribute('required', true);
 activities.setAttribute('required', true);
 //function validateFormInformation
 //found on https://www.codexworld.com/how-to/validate-first-last-name-with-regular-expression-using-javascript/
@@ -154,16 +153,10 @@ function validateName() {
         //pass in form id name
     const nameInput = document.getElementById('name').value;
     console.log(nameInput);
-<<<<<<< HEAD
-    if(nameInput.length === 0 ) {
-        
-        document.getElementById('name').focus();
-=======
      //if userInput in name field is blank 
     if(!regName.test(nameInput) ) {
     //display message 'name is required'
-
->>>>>>> 1efebf7b0e945c1ac6e2c989cbdc95fa6dedc4f4
+    document.getElementById('name').setAttribute('required', true);
         return false;
     } else {
         document.getElementById('name').setAttribute('required', false);
@@ -172,30 +165,7 @@ function validateName() {
     }
 }
 validateName();
-<<<<<<< HEAD
 
-    //if userInput in name field is blank
-=======
-function validateName() {
-    let regName = /^[a-zA-Z]+ [a-zA-Z]+$/;
-    console.log(regName);
-        //pass in form id name
-    const nameInput = document.getElementById('name').value;
-    console.log(nameInput);
-    if(!regName.test(nameInput) ) {
-     document.getElementById('name').setAttribute('required', true);
-
-        return true;
-    } else {
-        document.getElementById('name').setAttribute('required', false);
-
-        return false;
-    }
-}
-
-   
->>>>>>> 1efebf7b0e945c1ac6e2c989cbdc95fa6dedc4f4
-    
         
     //end function 
 //function validateEmail 
