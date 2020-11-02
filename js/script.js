@@ -144,7 +144,6 @@ payment.addEventListener('change', (e) => {
 });
 /** form Validation section */
 document.getElementById('mail').setAttribute('required', true);
-activities.setAttribute('required', true);
 //function validateFormInformation
 //found on https://www.codexworld.com/how-to/validate-first-last-name-with-regular-expression-using-javascript/
 function validateName() {
