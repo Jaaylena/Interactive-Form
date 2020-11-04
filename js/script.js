@@ -8,6 +8,7 @@ const reqField = document.createElement('p');
 reqField.innerHTML = '* - required field';
 const fieldset = document.querySelector('fieldset');
 fieldset.form.append(reqField);
+
 console.log(reqField);
 const span = document.createElement('span');
 
@@ -156,7 +157,6 @@ payment.addEventListener('change', (e) => {
 /** found on https://www.codexworld.com/how-to/validate-first-last-name-with-regular-expression-using-javascript **/
 function validateName() {
     let regName = /^[a-zA-Z]+ [a-zA-Z]+$/;
-    console.log(span);
     const name = document.getElementsByTagName('label')[0];
     name.innerHTML = '*Name:'
     name.appendChild(span);
