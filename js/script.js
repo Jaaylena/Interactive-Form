@@ -9,6 +9,8 @@ reqField.innerHTML = '* - required field';
 const fieldset = document.querySelector('fieldset');
 fieldset.form.append(reqField);
 console.log(reqField);
+const span = document.createElement('span');
+
 /***job role section **/
 //**hide the "other" initially in order for this feature to work when JS is disabled
 const otherInput = document.getElementById('other-title');
@@ -19,8 +21,7 @@ let titleValue = title.value;
 title.addEventListener('change', (e) => {
     e.target.value === 'other'?
         otherInput.style.display = 'block':
-        otherInput.style.display = 'none';
-    
+        otherInput.style.display = 'none'; 
 });
 //T-shirt section 
 const designMenu = document.querySelector('#design');
@@ -155,9 +156,10 @@ payment.addEventListener('change', (e) => {
 /** found on https://www.codexworld.com/how-to/validate-first-last-name-with-regular-expression-using-javascript **/
 function validateName() {
     let regName = /^[a-zA-Z]+ [a-zA-Z]+$/;
+    console.log(span);
     const name = document.getElementsByTagName('label')[0];
     name.innerHTML = '*Name:'
-    document.createElement('span');
+    name.appendChild(span);
         //pass in form id name
     const nameInputValue = document.getElementById('name').value;
     const nameInput = document.getElementById('name');
@@ -168,34 +170,36 @@ function validateName() {
         return false;
     } else {
         nameInput.setAttribute('required', false);
-
         return true;
     }
 }
-validateName();
 //function validateEmail 
 function validateEmail() {
 //get form with ID mail
     const emailInputValue = document.getElementById('mail').value;
-    const emailInpuut = document.getElementById('mail');
+    const emailInput = document.getElementById('mail');
     const email = document.getElementsByTagName('label')[1];
     email.innerHTML = '*Email:'
     //if userInput is null
     if(emailInputValue == null || ''){
     //display message 'incorrect email information'
-    document.getElementById('mail').setAttribute('required', true);
+    emailInput.setAttribute('required', true);
     return false;
     } else {
-    document.getElementById('mail').setAttribute('required', false);
+    emailInput.setAttribute('required', false);
     return true;
     }
-    
-    //end function 
+     //end function 
 }
-validateEmail();
-  
 //function ValidateActivity
     //get form id activity
     //if no selection 
         //display message 'please choose an activity'
     //endfunction
+
+//an eventlistener that calls tha validate funtions and verifies true or false 
+fieldset.addEventListener('keyup', (e) => {
+    validateName();
+    validateEmail();
+
+});
