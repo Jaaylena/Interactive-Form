@@ -1,8 +1,10 @@
 /*
 */
 //select element with id name and set it's focus
-https://drive.google.com/file/d/1U12HbHqO8gEz-Szm4hRUvxtUMvqsZbPb/view
+//https://drive.google.com/file/d/1U12HbHqO8gEz-Szm4hRUvxtUMvqsZbPb/view
 document.getElementById('name').focus();
+//create a error message explaination
+document.createElement('p').textContent = '* - required field';
 /***job role section **/
 //**hide the "other" initially in order for this feature to work when JS is disabled
 const otherInput = document.getElementById('other-title');
@@ -144,34 +146,36 @@ payment.addEventListener('change', (e) => {
 });
 /** form Validation section */
 document.getElementById('mail').setAttribute('required', true);
+
 //function validateFormInformation
-//found on https://www.codexworld.com/how-to/validate-first-last-name-with-regular-expression-using-javascript/
+/** found on https://www.codexworld.com/how-to/validate-first-last-name-with-regular-expression-using-javascript **/
 function validateName() {
     let regName = /^[a-zA-Z]+ [a-zA-Z]+$/;
-    console.log(regName);
         //pass in form id name
-    const nameInput = document.getElementById('name').value;
-    console.log(nameInput);
+    const nameInputValue = document.getElementById('name').value;
+    const nameInput = document.getElementById('name');
      //if userInput in name field is blank 
-    if(!regName.test(nameInput) ) {
+    if(!regName.test(nameInputValue) ) {
     //display message 'name is required'
-    document.getElementById('name').setAttribute('required', true);
+        nameInput.setAttribute('required', true);
         return false;
     } else {
-        document.getElementById('name').setAttribute('required', false);
+        nameInput.setAttribute('required', false);
 
         return true;
     }
 }
 validateName();
-
-        
-    //end function 
 //function validateEmail 
-    //get form with ID mail
+function validateEmail() {
+//get form with ID mail
+document.getElementById('mail');
     //if userInput != @ | .com 
         //display message 'incorrect email information'
     //end function 
+
+}
+    
 //function ValidateActivity
     //get form id activity
     //if no selection 
