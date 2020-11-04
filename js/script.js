@@ -181,4 +181,3 @@ document.getElementById('mail');
     //if no selection 
         //display message 'please choose an activity'
     //endfunction
-
