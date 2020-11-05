@@ -8,14 +8,16 @@ const reqField = document.createElement('p');
 reqField.innerHTML = '* - required field';
 const fieldset = document.querySelector('fieldset');
 console.log(reqField);
+//created a span for the CSS file to display valid and invalid
 const span = document.createElement('span');
 fieldset.prepend(reqField);
+//set name label to innerHTML *Name: to show user required fields
 const name = document.getElementsByTagName('label')[0];
     name.innerHTML = '*Name:';
     name.appendChild(span);
+//set email label innerHTML to *Email: to show user required fields
 const email = document.getElementsByTagName('label')[1];
     email.innerHTML = '*Email:';
-
 /***job role section **/
 //**hide the "other" initially in order for this feature to work when JS is disabled
 const otherInput = document.getElementById('other-title');
@@ -191,13 +193,32 @@ function validateEmail() {
     emailInput.setAttribute('required', false);
     return true;
     }
-     //end function 
 }
 //function ValidateActivity
     //get form id activity
     //if no selection 
         //display message 'please choose an activity'
     //endfunction
+    //get the label of the div element with id credit-card
+    const ccLabel = document.querySelector('#credit-card label');
+    //set it's innerHTML to required field
+    ccLabel.innerHTML = '*Card Number:';
+    const zipLabel = document.querySelector('.col-3 label');
+    zipLabel.innerHTML = '*Zip Code:';
+    const cvvLabel = document.querySelector('#cvv');
+    console.log(cvvLabel);
+    console.log(zipLabel);
+console.log(ccLabel);
+//function to validatecredit card info
+    //get the value of the input element with id cc-num set it to ccNumValue
+    //get the input element with id cc-num set it to ccNum
+    //if ccNumValue is null or empty 
+        //setAttribute('required', true);
+        //return false
+    //else 
+        //setAttribute('required, false);
+        //return true
+        //end function
 
 //an eventlistener that calls tha validate funtions and verifies true or false 
 fieldset.addEventListener('keyup', (e) => {
