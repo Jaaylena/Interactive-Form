@@ -9,7 +9,7 @@ reqField.innerHTML = '* - required field';
 const fieldset = document.querySelector('fieldset');
 //created a span for the CSS file to display valid and invalid
 const span = document.createElement('span');
-document.querySelector('form').insertAdjacentHTML('afterbegin', reqField);
+document.querySelector('form').insertAdjacentHTML('afterbegin', `<p class="reqField">* - required field</p>`);
 //set name label to innerHTML *Name: to show user required fields
 const name = document.getElementsByTagName('label')[0];
     name.innerHTML = '*Name:';
@@ -186,6 +186,7 @@ function validateEmail() {
     if(emailInputValue == null || ''){
     //display message 'incorrect email information'
     emailInput.setAttribute('required', true);
+
     return false;
     } else {
     emailInput.setAttribute('required', false);
