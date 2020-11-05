@@ -13,6 +13,11 @@ document.querySelector('form').insertAdjacentHTML('afterbegin', `<p class="reqFi
 //set name label to innerHTML *Name: to show user required fields
 const name = document.getElementsByTagName('label')[0];
     name.innerHTML = '*Name:';
+ const nameInputValue = document.getElementById('name').value;
+const nameInput = document.getElementById('name');
+//get form with ID mail
+const emailInputValue = document.getElementById('mail').value;
+const emailInput = document.getElementById('mail');
 //set email label innerHTML to *Email: to show user required fields
 const email = document.getElementsByTagName('label')[1];
     email.innerHTML = '*Email:';
@@ -116,7 +121,7 @@ activities.addEventListener('change', (e) => {
         if (dateAndTime === activity && checkedBox !== checkboxes[i]) {
             //disable any activity with conflicting times 
             checkedBox.checked ?
-                checkboxes[i].disabled = true :
+                checkboxes[i].disabled = true:
                 checkboxes[i].disabled = false;
         }
     }
@@ -162,15 +167,12 @@ payment.addEventListener('change', (e) => {
 function validateName() {
     let regName = /^[a-zA-Z]+ [a-zA-Z]+$/;
         //pass in form id name
-    const nameInputValue = document.getElementById('name').value;
-    const nameInput = document.getElementById('name');
+   
      //if userInput in name field is blank 
     if(!regName.test(nameInputValue) ) {
     //display message 'name is required'
         nameInput.setAttribute('required', true);
-        document.getElementsById('error').innerHTML = 'Please enter a Name';
         name.appendChild(span);
-
         return false;
     } else {
         nameInput.setAttribute('required', false);
@@ -179,21 +181,22 @@ function validateName() {
 }
 //function validateEmail 
 function validateEmail() {
-//get form with ID mail
-    const emailInputValue = document.getElementById('mail').value;
-    const emailInput = document.getElementById('mail');
     //if userInput is null
     if(emailInputValue == null || ''){
     //display message 'incorrect email information'
     emailInput.setAttribute('required', true);
-
     return false;
     } else {
     emailInput.setAttribute('required', false);
     return true;
     }
 }
+const reqAct = document.querySelectorAll('.activities input');
+function ValidateActivity() {
+    
+}
 
+console.log(reqAct);
 //function ValidateActivity
     //get form id activity
     //if no selection 
@@ -209,24 +212,46 @@ function validateEmail() {
     cvvLabel.innerHTML = '*cvv';
     const expDate = document.querySelectorAll('.credit-card label')[3];
     expDate.innerHTML = '*Expiration Date:';
-    console.log(expDate);
     const expYear = document.querySelectorAll('.credit-card label')[4];
     expYear.innerHTML = '*Expiration Year:';
-
 //function to validatecredit card info
-    //get the value of the input element with id cc-num set it to ccNumValue
-    //get the input element with id cc-num set it to ccNum
-    //if ccNumValue is null or empty 
-        //setAttribute('required', true);
-        //return false
-    //else 
-        //setAttribute('required, false);
-        //return true
+function validateCreditCard () {
+//get the value of the input element with id cc-num set it to ccNumValue
+const ccNumValue = document.getElementById('cc-num').value;
+ //get the input element with id cc-num set it to ccNum
+const ccNum = document.getElementById('cc-num');
+//get zip input element with ID zip value 
+const zipValue = document.getElementById('zip').value;
+const zip = document.getElementById('zip');
+const cvvValue = document.getElementById('cvv').value;
+const cvvInput = document.getElementById('cvv');
+console.log(ccNumValue);
+//if ccNumValue, zipvalue and cvvInput is null or empty
+    if(ccNumValue || zipValue || cvvValue === null || ''){
+        cvvInput.setAttribute('required', true);
+        zip.setAttribute('required', true);
+        ccNum.setAttribute('required', true);
+        return false;
+    }else {
+        cvvInput.setAttribute('required', false);
+        zip.setAttribute('required', false);
+        ccNum.setAttribute('required', false);
+        return true;
         //end function
+    } 
+}
 
 //an eventlistener that calls tha validate funtions and verifies true or false 
 fieldset.addEventListener('keyup', (e) => {
+    e.preventDefault();
+    if(e.target.value === nameInputValue) {
+        
+    }
+    if(e.target.value === emailInputValue) {
+
+    }
     validateName();
     validateEmail();
+    validateCreditCard();
 
 });
