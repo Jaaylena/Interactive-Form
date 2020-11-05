@@ -7,14 +7,12 @@ document.getElementById('name').focus();
 const reqField = document.createElement('p');
 reqField.innerHTML = '* - required field';
 const fieldset = document.querySelector('fieldset');
-console.log(reqField);
 //created a span for the CSS file to display valid and invalid
 const span = document.createElement('span');
-fieldset.prepend(reqField);
+document.querySelector('form').insertAdjacentHTML('afterbegin', reqField);
 //set name label to innerHTML *Name: to show user required fields
 const name = document.getElementsByTagName('label')[0];
     name.innerHTML = '*Name:';
-    name.appendChild(span);
 //set email label innerHTML to *Email: to show user required fields
 const email = document.getElementsByTagName('label')[1];
     email.innerHTML = '*Email:';
@@ -163,8 +161,6 @@ payment.addEventListener('change', (e) => {
 /** found on https://www.codexworld.com/how-to/validate-first-last-name-with-regular-expression-using-javascript **/
 function validateName() {
     let regName = /^[a-zA-Z]+ [a-zA-Z]+$/;
-    fieldset.prepend(reqField);
-    
         //pass in form id name
     const nameInputValue = document.getElementById('name').value;
     const nameInput = document.getElementById('name');
@@ -172,6 +168,9 @@ function validateName() {
     if(!regName.test(nameInputValue) ) {
     //display message 'name is required'
         nameInput.setAttribute('required', true);
+        document.getElementsById('error').innerHTML = 'Please enter a Name';
+        name.appendChild(span);
+
         return false;
     } else {
         nameInput.setAttribute('required', false);
@@ -181,7 +180,6 @@ function validateName() {
 //function validateEmail 
 function validateEmail() {
 //get form with ID mail
-
     const emailInputValue = document.getElementById('mail').value;
     const emailInput = document.getElementById('mail');
     //if userInput is null
@@ -194,6 +192,7 @@ function validateEmail() {
     return true;
     }
 }
+
 //function ValidateActivity
     //get form id activity
     //if no selection 
@@ -203,12 +202,16 @@ function validateEmail() {
     const ccLabel = document.querySelector('#credit-card label');
     //set it's innerHTML to required field
     ccLabel.innerHTML = '*Card Number:';
-    const zipLabel = document.querySelector('.col-3 label');
+    const zipLabel = document.querySelectorAll('.col-3 label')[0];
     zipLabel.innerHTML = '*Zip Code:';
-    const cvvLabel = document.querySelector('#cvv');
-    console.log(cvvLabel);
-    console.log(zipLabel);
-console.log(ccLabel);
+    const cvvLabel = document.querySelectorAll('.col-3 label')[1];
+    cvvLabel.innerHTML = '*cvv';
+    const expDate = document.querySelectorAll('.credit-card label')[3];
+    expDate.innerHTML = '*Expiration Date:';
+    console.log(expDate);
+    const expYear = document.querySelectorAll('.credit-card label')[4];
+    expYear.innerHTML = '*Expiration Year:';
+
 //function to validatecredit card info
     //get the value of the input element with id cc-num set it to ccNumValue
     //get the input element with id cc-num set it to ccNum
