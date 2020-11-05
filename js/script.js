@@ -9,6 +9,12 @@ reqField.innerHTML = '* - required field';
 const fieldset = document.querySelector('fieldset');
 console.log(reqField);
 const span = document.createElement('span');
+fieldset.prepend(reqField);
+const name = document.getElementsByTagName('label')[0];
+    name.innerHTML = '*Name:';
+    name.appendChild(span);
+const email = document.getElementsByTagName('label')[1];
+    email.innerHTML = '*Email:';
 
 /***job role section **/
 //**hide the "other" initially in order for this feature to work when JS is disabled
@@ -156,9 +162,7 @@ payment.addEventListener('change', (e) => {
 function validateName() {
     let regName = /^[a-zA-Z]+ [a-zA-Z]+$/;
     fieldset.prepend(reqField);
-    const name = document.getElementsByTagName('label')[0];
-    name.innerHTML = '*Name:';
-    name.appendChild(span);
+    
         //pass in form id name
     const nameInputValue = document.getElementById('name').value;
     const nameInput = document.getElementById('name');
@@ -175,12 +179,9 @@ function validateName() {
 //function validateEmail 
 function validateEmail() {
 //get form with ID mail
-fieldset.prepend(reqField);
 
     const emailInputValue = document.getElementById('mail').value;
     const emailInput = document.getElementById('mail');
-    const email = document.getElementsByTagName('label')[1];
-    email.innerHTML = '*Email:';
     //if userInput is null
     if(emailInputValue == null || ''){
     //display message 'incorrect email information'
