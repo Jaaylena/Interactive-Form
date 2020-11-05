@@ -7,8 +7,6 @@ document.getElementById('name').focus();
 const reqField = document.createElement('p');
 reqField.innerHTML = '* - required field';
 const fieldset = document.querySelector('fieldset');
-fieldset.form.append(reqField);
-
 console.log(reqField);
 const span = document.createElement('span');
 
@@ -157,8 +155,9 @@ payment.addEventListener('change', (e) => {
 /** found on https://www.codexworld.com/how-to/validate-first-last-name-with-regular-expression-using-javascript **/
 function validateName() {
     let regName = /^[a-zA-Z]+ [a-zA-Z]+$/;
+    fieldset.prepend(reqField);
     const name = document.getElementsByTagName('label')[0];
-    name.innerHTML = '*Name:'
+    name.innerHTML = '*Name:';
     name.appendChild(span);
         //pass in form id name
     const nameInputValue = document.getElementById('name').value;
@@ -176,10 +175,12 @@ function validateName() {
 //function validateEmail 
 function validateEmail() {
 //get form with ID mail
+fieldset.prepend(reqField);
+
     const emailInputValue = document.getElementById('mail').value;
     const emailInput = document.getElementById('mail');
     const email = document.getElementsByTagName('label')[1];
-    email.innerHTML = '*Email:'
+    email.innerHTML = '*Email:';
     //if userInput is null
     if(emailInputValue == null || ''){
     //display message 'incorrect email information'
