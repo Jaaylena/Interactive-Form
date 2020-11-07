@@ -20,6 +20,9 @@ body {
 	background: #5e5cd3;
 }
 
+span {
+	font-size: 2.5em;
+}
 header {
 	text-align: center;  
 }
@@ -107,7 +110,7 @@ input[type="radio"] {
 }
 /** created this block to display invalid
 found on this page https://developer.mozilla.org/en-US/docs/Web/CSS/:valid */
-input + span {
+input {
 	position: relative;
   }
   
