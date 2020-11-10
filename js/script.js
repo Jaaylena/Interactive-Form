@@ -240,11 +240,11 @@ console.log(ccNumValue);
         //end function
     } 
 }
-e.preventDefault();
 //an eventlistener that calls tha validate funtions and verifies true or false 
 fieldset.addEventListener('keyup', (e) => {
     if(e.target.value === nameInputValue) {
-       
+        
+
 
     }
     if(e.target.value === emailInputValue) {
@@ -254,4 +254,6 @@ fieldset.addEventListener('keyup', (e) => {
     validateEmail();
     validateCreditCard();
 
+
 });
+e.preventDefault();
