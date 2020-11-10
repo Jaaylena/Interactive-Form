@@ -8,7 +8,7 @@ const reqField = document.createElement('p');
 reqField.innerHTML = '* - required field';
 const fieldset = document.querySelector('fieldset');
 //created a span for the CSS file to display valid and invalid
-const span = document.createElement('span');
+const span = document.createElement('span:before');
 document.querySelector('form').insertAdjacentHTML('afterbegin', `<p class="reqField">* - required field</p>`);
 //set name label to innerHTML *Name: to show user required fields
 const name = document.getElementsByTagName('label')[0];
@@ -160,19 +160,15 @@ payment.addEventListener('change', (e) => {
         }
 });
 /** form Validation section */
-
-
 //function validateFormInformation
 /** found on https://www.codexworld.com/how-to/validate-first-last-name-with-regular-expression-using-javascript **/
 function validateName() {
-    let regName = /^[a-zA-Z]+ [a-zA-Z]+$/;
-        //pass in form id name
-   
+    let regName = /^[a-zA-Z]+ [a-zA-Z]+$/;   
      //if userInput in name field is blank 
     if(!regName.test(nameInputValue) ) {
     //display message 'name is required'
         nameInput.setAttribute('required', true);
-        name.appendChild(span);
+        name.appendChild(span); //css file has a span rule that gives content trying to make that happen
         return false;
     } else {
         nameInput.setAttribute('required', false);
@@ -185,6 +181,8 @@ function validateEmail() {
     if(emailInputValue == null || ''){
     //display message 'incorrect email information'
     emailInput.setAttribute('required', true);
+    email.appendChild(span); //css file has a span rule that gives content trying to make that happen
+
     return false;
     } else {
     emailInput.setAttribute('required', false);
@@ -192,16 +190,17 @@ function validateEmail() {
     }
 }
 const reqAct = document.querySelectorAll('.activities input');
-function ValidateActivity() {
-    
-}
-
-console.log(reqAct);
 //function ValidateActivity
-    //get form id activity
-    //if no selection 
+function validateActivity() {
+    //if check boxes are not checked 
+        //set activity as required 
+    }
+     //if no selection 
         //display message 'please choose an activity'
     //endfunction
+
+validateActivity();
+console.log(reqAct);
     //get the label of the div element with id credit-card
     const ccLabel = document.querySelector('#credit-card label');
     //set it's innerHTML to required field
@@ -216,16 +215,17 @@ console.log(reqAct);
     expYear.innerHTML = '*Expiration Year:';
 //function to validatecredit card info
 function validateCreditCard () {
-//get the value of the input element with id cc-num set it to ccNumValue
-const ccNumValue = document.getElementById('cc-num').value;
- //get the input element with id cc-num set it to ccNum
-const ccNum = document.getElementById('cc-num');
-//get zip input element with ID zip value 
-const zipValue = document.getElementById('zip').value;
-const zip = document.getElementById('zip');
-const cvvValue = document.getElementById('cvv').value;
-const cvvInput = document.getElementById('cvv');
-console.log(ccNumValue);
+    const regNums = /^[0-zA-Z]+ [a-zA-Z]+$/;
+    //get the value of the input element with id cc-num set it to ccNumValue
+    const ccNumValue = document.getElementById('cc-num').value;
+    //get the input element with id cc-num set it to ccNum
+    const ccNum = document.getElementById('cc-num');
+    //get zip input element with ID zip value 
+    const zipValue = document.getElementById('zip').value;
+    const zip = document.getElementById('zip');
+    const cvvValue = document.getElementById('cvv').value;
+    const cvvInput = document.getElementById('cvv');
+    console.log(ccNumValue);
 //if ccNumValue, zipvalue and cvvInput is null or empty
     if(ccNumValue || zipValue || cvvValue === null || ''){
         cvvInput.setAttribute('required', true);
@@ -240,20 +240,28 @@ console.log(ccNumValue);
         //end function
     } 
 }
-//an eventlistener that calls tha validate funtions and verifies true or false 
+//an eventlistener that calls tha validate funtions and verifies 
 fieldset.addEventListener('keyup', (e) => {
-    if(e.target.value === nameInputValue) {
+//if user enters text in name input 
+    if(e.target.id === 'name') {
+        //validate name
+    } else {
+        validateName();
+
+        //give name input an error message "please enter your full name "
+        span.textContent = ` Please Enter Your Full Name`;
+    }
+    if(e.target.id === 'email') {
+        validateEmail();
+
+    } else {
+
+
+    }
+    if(e.target.id === 'cc-num') {
+        validateCreditCard();
+    } else {
         
-
-
     }
-    if(e.target.value === emailInputValue) {
-
-    }
-    validateName();
-    validateEmail();
-    validateCreditCard();
-
-
+    e.preventDefault();
 });
-e.preventDefault();
