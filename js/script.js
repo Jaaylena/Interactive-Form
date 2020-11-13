@@ -252,9 +252,9 @@ fieldset.addEventListener('keyup', (e) => {
         span.textContent = ` Please Enter Your Full Name`;
     }
     if(e.target.id === 'email') {
-        validateEmail();
 
     } else {
+        validateEmail();
 
 
     }
