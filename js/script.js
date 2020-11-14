@@ -259,5 +259,25 @@ function validateCreditCard () {
 }
 validateCreditCard();
 
+<<<<<<< HEAD
 //an eventlistener that calls the validate funtions
 
+=======
+        //give name input an error message "please enter your full name "
+        span.textContent = ` Please Enter Your Full Name`;
+    }
+    if(e.target.id === 'email') {
+
+    } else {
+        validateEmail();
+
+
+    }
+    if(e.target.id === 'cc-num') {
+        validateCreditCard();
+    } else {
+        
+    }
+    e.preventDefault();
+});
+>>>>>>> 7cc048a1a3aeebd7a44f5a9937e4ab94b6b8e301
