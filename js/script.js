@@ -8,7 +8,7 @@ const reqField = document.createElement('p');
 reqField.innerHTML = '* - required field';
 const fieldset = document.querySelector('fieldset');
 //created a span for the CSS file to display valid and invalid
-const span = document.createElement('span:before');
+const span = document.createElement('span');
 document.querySelector('form').insertAdjacentHTML('afterbegin', `<p class="reqField">* - required field</p>`);
 //set name label to innerHTML *Name: to show user required fields
 const name = document.getElementsByTagName('label')[0];
@@ -160,6 +160,22 @@ payment.addEventListener('change', (e) => {
         }
 });
 /** form Validation section */
+function showOrHideTip(show, element) {
+    if(show) {
+        element.style.display = 'inherit';
+    } else {
+        element.style.display = 'none';
+    }
+}
+function createListener(validator) {
+    return e => {
+        const text = e.target.value;
+        const valid = validator(text);
+        const showTip = text !== '' && !valid;
+        const toolTip = e.target.nextElementSibling;
+        showOrHideTip(showTip, tooltip);
+    };
+}
 //function validateFormInformation
 /** found on https://www.codexworld.com/how-to/validate-first-last-name-with-regular-expression-using-javascript **/
 function validateName() {
@@ -175,6 +191,7 @@ function validateName() {
         return true;
     }
 }
+fieldset.addEventListener("input", createListener(validateName));
 //function validateEmail 
 function validateEmail() {
     //if userInput is null
@@ -215,7 +232,8 @@ console.log(reqAct);
     expYear.innerHTML = '*Expiration Year:';
 //function to validatecredit card info
 function validateCreditCard () {
-    const regNums = /^[0-zA-Z]+ [a-zA-Z]+$/;
+    //A variable to store a regex for numbers 
+    const regNums = /^[\d]+$/;
     //get the value of the input element with id cc-num set it to ccNumValue
     const ccNumValue = document.getElementById('cc-num').value;
     //get the input element with id cc-num set it to ccNum
@@ -225,7 +243,6 @@ function validateCreditCard () {
     const zip = document.getElementById('zip');
     const cvvValue = document.getElementById('cvv').value;
     const cvvInput = document.getElementById('cvv');
-    console.log(ccNumValue);
 //if ccNumValue, zipvalue and cvvInput is null or empty
     if(ccNumValue || zipValue || cvvValue === null || ''){
         cvvInput.setAttribute('required', true);
@@ -240,28 +257,7 @@ function validateCreditCard () {
         //end function
     } 
 }
-//an eventlistener that calls tha validate funtions and verifies 
-fieldset.addEventListener('keyup', (e) => {
-//if user enters text in name input 
-    if(e.target.id === 'name') {
-        //validate name
-    } else {
-        validateName();
+validateCreditCard();
 
-        //give name input an error message "please enter your full name "
-        span.textContent = ` Please Enter Your Full Name`;
-    }
-    if(e.target.id === 'email') {
-        validateEmail();
+//an eventlistener that calls the validate funtions
 
-    } else {
-
-
-    }
-    if(e.target.id === 'cc-num') {
-        validateCreditCard();
-    } else {
-        
-    }
-    e.preventDefault();
-});
