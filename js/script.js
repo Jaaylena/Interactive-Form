@@ -257,32 +257,33 @@ function validateCreditCard () {
         //end function
     } 
 }
-validateCreditCard();
+
 
 //an eventlistener that calls the validate funtions
 
 //an eventlistener that calls tha validate funtions and verifies 
-fieldset.addEventListener('keyup', (e) => {
-    //if user enters text in name input 
-        if(e.target.id === 'name') {
-            //validate name
-        } else {
-            validateName();
+// fieldset.addEventListener('keyup', (e) => {
+//     //if user enters text in name input 
+//         if(e.target.id === 'name') {
+//             //validate name
+//         } else {
+//             validateName();
     
-            //give name input an error message "please enter your full name "
-            span.textContent = ` Please Enter Your Full Name`;
-        }
-        if(e.target.id === 'email') {
+//             //give name input an error message "please enter your full name "
+//             span.textContent = ` Please Enter Your Full Name`;
+//         }
+//         if(e.target.id === 'email') {
     
-        } else {
-            validateEmail();
+//         } else {
+//             validateEmail();
     
     
-        }
-        if(e.target.id === 'cc-num') {
-            validateCreditCard();
-        } else {
-            
-        }
-        e.preventDefault();
-    });
+//         }
+//         if(e.target.id === 'cc-num') {
+
+//         } else {
+//             validateCreditCard();
+
+//         }
+//         e.preventDefault();
+//     });
