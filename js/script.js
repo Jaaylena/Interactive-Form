@@ -8,7 +8,7 @@ const reqField = document.createElement('p');
 reqField.innerHTML = '* - required field';
 const fieldset = document.querySelector('fieldset');
 //created a span for the CSS file to display valid and invalid
-const span = document.createElement('span');
+const span = document.createElement('span:before');
 document.querySelector('form').insertAdjacentHTML('afterbegin', `<p class="reqField">* - required field</p>`);
 //set name label to innerHTML *Name: to show user required fields
 const name = document.getElementsByTagName('label')[0];
@@ -174,6 +174,7 @@ function createListener(validator) {
         const showTip = text !== '' && !valid;
         const toolTip = e.target.nextElementSibling;
         showOrHideTip(showTip, tooltip);
+
     };
 }
 //function validateFormInformation
@@ -191,7 +192,6 @@ function validateName() {
         return true;
     }
 }
-fieldset.addEventListener("input", createListener(validateName));
 //function validateEmail 
 function validateEmail() {
     //if userInput is null
@@ -243,14 +243,6 @@ function validateCreditCard () {
     const zip = document.getElementById('zip');
     const cvvValue = document.getElementById('cvv').value;
     const cvvInput = document.getElementById('cvv');
-    let ccSpan = document.createElement('span');
-    ccNum.appendChild(ccSpan);
-    const ccMessage = 'Credit Card number required';
-    //make sure input ccNumValue only has numbers 
-    if(!regNums.test(ccNumValue)) {
-        ccSpan.textContent = ccMessage;
-        console.log(ccSpan);
-    }
 //if ccNumValue, zipvalue and cvvInput is null or empty
     if(ccNumValue || zipValue || cvvValue === null || ''){
         cvvInput.setAttribute('required', true);
@@ -267,5 +259,30 @@ function validateCreditCard () {
 }
 validateCreditCard();
 
+//an eventlistener that calls the validate funtions
 
-
+//an eventlistener that calls tha validate funtions and verifies 
+fieldset.addEventListener('keyup', (e) => {
+    //if user enters text in name input 
+        if(e.target.id === 'name') {
+            //validate name
+        } else {
+            validateName();
+    
+            //give name input an error message "please enter your full name "
+            span.textContent = ` Please Enter Your Full Name`;
+        }
+        if(e.target.id === 'email') {
+    
+        } else {
+            validateEmail();
+    
+    
+        }
+        if(e.target.id === 'cc-num') {
+            validateCreditCard();
+        } else {
+            
+        }
+        e.preventDefault();
+    });
