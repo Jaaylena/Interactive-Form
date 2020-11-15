@@ -243,6 +243,14 @@ function validateCreditCard () {
     const zip = document.getElementById('zip');
     const cvvValue = document.getElementById('cvv').value;
     const cvvInput = document.getElementById('cvv');
+    let ccSpan = document.createElement('span');
+    ccNum.appendChild(ccSpan);
+    const ccMessage = 'Credit Card number required';
+    //make sure input ccNumValue only has numbers 
+    if(!regNums.test(ccNumValue)) {
+        ccSpan.textContent = ccMessage;
+        console.log(ccSpan);
+    }
 //if ccNumValue, zipvalue and cvvInput is null or empty
     if(ccNumValue || zipValue || cvvValue === null || ''){
         cvvInput.setAttribute('required', true);
@@ -259,25 +267,5 @@ function validateCreditCard () {
 }
 validateCreditCard();
 
-<<<<<<< HEAD
-//an eventlistener that calls the validate funtions
-
-=======
-        //give name input an error message "please enter your full name "
-        span.textContent = ` Please Enter Your Full Name`;
-    }
-    if(e.target.id === 'email') {
-
-    } else {
-        validateEmail();
 
 
-    }
-    if(e.target.id === 'cc-num') {
-        validateCreditCard();
-    } else {
-        
-    }
-    e.preventDefault();
-});
->>>>>>> 7cc048a1a3aeebd7a44f5a9937e4ab94b6b8e301
