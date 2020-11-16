@@ -207,16 +207,12 @@ function validateEmail() {
     return true;
   }
 }
-const reqAct = document.querySelectorAll('.activities input');
+//const reqAct = document.querySelectorAll('.activities input');
 //function ValidateActivity
 function validateActivity() {
-  const span = document.createElement('span');
+  
   //if check boxes are not checked 
-  if (!this.form.checkbox.checked) {
-    span.innerHTML = 'please select an activity';
-    reqAct.setAttribute('required', false)
-    return true;
-  }
+ 
   //set activity as required 
 }
 //if no selection 
