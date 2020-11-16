@@ -4,11 +4,10 @@
 //https://drive.google.com/file/d/1U12HbHqO8gEz-Szm4hRUvxtUMvqsZbPb/view
 document.getElementById('name').focus();
 //create a error message explaination
-const reqField = document.createElement('p');
-reqField.innerHTML = '* - required field';
 const fieldset = document.querySelector('fieldset');
 //created a span for the CSS file to display valid and invalid
 const span = document.createElement('span:before');
+//create a error message explaination
 document.querySelector('form').insertAdjacentHTML('afterbegin', `<p class="reqField">* - required field</p>`);
 //set name label to innerHTML *Name: to show user required fields
 const name = document.getElementsByTagName('label')[0];
@@ -21,6 +20,8 @@ const emailInput = document.getElementById('mail');
 //set email label innerHTML to *Email: to show user required fields
 const email = document.getElementsByTagName('label')[1];
 email.innerHTML = '*Email:';
+const actP = document.createElement('p')
+document.querySelector('.activities').insertAdjacentHTML('afterbegin', `<p class="reqField">* Please Select an Activity </p>`);
 /***job role section **/
 //**hide the "other" initially in order for this feature to work when JS is disabled
 const otherInput = document.getElementById('other-title');
@@ -92,6 +93,9 @@ totalCostLabel.innerHTML = `Total Cost: $${totalCost}`;
 const activities = document.querySelector('.activities');
 //append to the .activity section
 activities.appendChild(totalCostDiv);
+  //set the checkbox input to a variable checkboxes
+  const checkboxes = document.querySelectorAll('.activities input');
+  console.log(checkboxes);
 //listen for changes in the Activity section using an event listener
 activities.addEventListener('change', (e) => {
   //variable that references the checked element 
@@ -111,8 +115,7 @@ activities.addEventListener('change', (e) => {
   }
   //select the activity checkbox element and store it in a variable called activity  
   const activity = checkedBox.getAttribute('data-day-and-time');
-  //set the checkbox input to a variable checkboxes
-  const checkboxes = document.querySelectorAll('.activities input');
+
   //retrieve the list of activities with an attribute of 'data-day-and time'
   for (let i = 0; i < checkboxes.length; i++) {
     //set the iterate to a variable called dateAndTimee
@@ -183,16 +186,17 @@ function createListener(validator) {
 function validateName() {
   let regName = /^[a-zA-Z]+ [a-zA-Z]+$/;
   //if userInput in name field is blank 
-  if (!regName.test(nameInputValue)) {
+  if (!regName.test(nameInputValue) ) {
     //display message 'name is required'
     nameInput.setAttribute('required', true);
-    name.appendChild(span); //css file has a span rule that gives content trying to make that happen
     return false;
   } else {
     nameInput.setAttribute('required', false);
+    name.appendChild(span); //css file has a span rule that gives content trying to make that happen
     return true;
   }
 }
+validateName();
 //function validateEmail 
 function validateEmail() {
   //if userInput is null
@@ -220,7 +224,7 @@ function validateActivity() {
 //endfunction
 
 validateActivity();
-console.log(reqAct);
+
 //get the label of the div element with id credit-card
 const ccLabel = document.querySelector('#credit-card label');
 //set it's innerHTML to required field
@@ -263,26 +267,27 @@ function validateCreditCard() {
 //an eventlistener that calls the validate funtions
 
 //an eventlistener that calls tha validate funtions and verifies 
-// fieldset.addEventListener('keyup', (e) => {
-//     //if user enters text in name input 
-//         if(e.target.id === 'name') {
-//             //validate name
-//         } else {
-//             validateName();
+fieldset.addEventListener('keyup', (e) => {
+    //if user enters text in name input 
+        if(e.target.id === 'name') {
+            //validate name
+           nameInput.style.display = 'inputvalid';
+        } else {
+            validateName();
 
-//             //give name input an error message "please enter your full name "
-//             span.textContent = ` Please Enter Your Full Name`;
-//         }
-//         if(e.target.id === 'email') {
+            //give name input an error message "please enter your full name "
+            span.textContent = ` Please Enter Your Full Name`;
+        }
+        if(e.target.id === 'email') {
 
-//         } else {
-//             validateEmail();
-//         }
-//         if(e.target.id === 'cc-num') {
+        } else {
+            validateEmail();
+        }
+        if(e.target.id === 'cc-num') {
 
-//         } else {
-//             validateCreditCard();
+        } else {
+            validateCreditCard();
 
-//         }
-//         e.preventDefault();
-//     });
+        }
+        e.preventDefault();
+    });
