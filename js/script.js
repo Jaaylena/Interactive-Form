@@ -271,10 +271,10 @@ fieldset.addEventListener('keyup', (e) => {
     //if user enters text in name input 
         if(e.target.id === 'name') {
             //validate name
-           nameInput.style.display = 'inputvalid';
-        } else {
             validateName();
-
+        } else {
+            
+            e.preventDefault();
             //give name input an error message "please enter your full name "
             span.textContent = ` Please Enter Your Full Name`;
         }
