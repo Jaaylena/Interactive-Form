@@ -182,9 +182,11 @@ function validateName() {
     nameError.textContent = '* Please enter your name';
     return false;
   }
+    nameError.remove();
 }
 //function validateEmail 
 function validateEmail() {
+
   //if userInput is null
   if (emailInputValue == null || '') {
     //display message 'incorrect email information'
