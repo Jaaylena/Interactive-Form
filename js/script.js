@@ -5,8 +5,7 @@
 document.getElementById('name').focus();
 //create a error message explaination
 const fieldset = document.querySelector('fieldset');
-//created a span for the CSS file to display valid and invalid
-const span = document.createElement('span:before');
+
 //create a error message explaination
 document.querySelector('form').insertAdjacentHTML('afterbegin', `<p class="reqField">* - required field</p>`);
 //set name label to innerHTML *Name: to show user required fields
@@ -14,13 +13,16 @@ const name = document.getElementsByTagName('label')[0];
 name.innerHTML = '*Name:';
 const nameInputValue = document.getElementById('name').value;
 const nameInput = document.getElementById('name');
+//created a span for the CSS file to display valid and invalid
+const nameError = document.createElement('span:before');
+nameError.textContent = '';
+nameInput.insertAdjacentElement('beforebegin', nameError);
 //get form with ID mail
 const emailInputValue = document.getElementById('mail').value;
 const emailInput = document.getElementById('mail');
 //set email label innerHTML to *Email: to show user required fields
 const email = document.getElementsByTagName('label')[1];
 email.innerHTML = '*Email:';
-const actP = document.createElement('p')
 document.querySelector('.activities').insertAdjacentHTML('afterbegin', `<p class="reqField">* Please Select an Activity </p>`);
 /***job role section **/
 //**hide the "other" initially in order for this feature to work when JS is disabled
@@ -80,7 +82,6 @@ designMenu.addEventListener('change', (e) => {
   }
 });
 /*register for activities section*/
-
 //create an element to display the total activity cost
 const totalCostDiv = document.createElement('div');
 totalCostDiv.id = 'total-cost';
@@ -163,40 +164,25 @@ payment.addEventListener('change', (e) => {
   }
 });
 /** form Validation section */
-function showOrHideTip(show, element) {
-  if (show) {
-    element.style.display = 'inherit';
-  } else {
-    element.style.display = 'none';
-  }
-}
-
-function createListener(validator) {
-  return e => {
-    const text = e.target.value;
-    const valid = validator(text);
-    const showTip = text !== '' && !valid;
-    const toolTip = e.target.nextElementSibling;
-    showOrHideTip(showTip, tooltip);
-
-  };
-}
 //function validateFormInformation
 /** found on https://www.codexworld.com/how-to/validate-first-last-name-with-regular-expression-using-javascript **/
 function validateName() {
-  let regName = /^[a-zA-Z]+ [a-zA-Z]+$/;
+  const nameValue = name.value;
+  const validName = (name) => {
+    return /^[a-z ]+$/i.test(nameInput);
+  }
   //if userInput in name field is blank 
-  if (!regName.test(nameInputValue) ) {
+  if (validName(nameValue) === true ) {
     //display message 'name is required'
     nameInput.setAttribute('required', true);
-    return false;
+    nameError.innerHTML = '';
+    return true;
   } else {
     nameInput.setAttribute('required', false);
-    name.appendChild(span); //css file has a span rule that gives content trying to make that happen
-    return true;
+    nameError.textContent = '* Please enter your name';
+    return false;
   }
 }
-validateName();
 //function validateEmail 
 function validateEmail() {
   //if userInput is null
@@ -211,13 +197,23 @@ function validateEmail() {
     return true;
   }
 }
-//const reqAct = document.querySelectorAll('.activities input');
 //function ValidateActivity
 function validateActivity() {
-  
+  for(let i = 0; i < checkboxes.length; i++) {
+
+    if(checkboxes[i].checked) {
+      actReqMess.textContent = '';
+      checkboxes[i].setAttribute('required', false);
+      return false;
+    } else {
+    checkboxes[i].setAttribute('required', true);
+      return true;
+    }
+  }  
   //if check boxes are not checked 
- 
+
   //set activity as required 
+  return false;
 }
 //if no selection 
 //display message 'please choose an activity'
@@ -270,24 +266,24 @@ function validateCreditCard() {
 fieldset.addEventListener('keyup', (e) => {
     //if user enters text in name input 
         if(e.target.id === 'name') {
+          e.preventDefault();
             //validate name
-            validateName();
         } else {
-            
-            e.preventDefault();
-            //give name input an error message "please enter your full name "
-            span.textContent = ` Please Enter Your Full Name`;
+          validateName();
+
+       
         }
         if(e.target.id === 'email') {
+          e.preventDefault();
 
         } else {
             validateEmail();
         }
         if(e.target.id === 'cc-num') {
+          e.preventDefault();
 
         } else {
             validateCreditCard();
 
         }
-        e.preventDefault();
     });

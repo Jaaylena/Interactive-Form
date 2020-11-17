@@ -37,6 +37,11 @@ a {
   text-decoration: none;
 }
 
+.reqField {
+	font-size: 1.2em;
+	color: red;
+}
+
 /* ================================= 
   Form Element Styles
 ==================================== */
