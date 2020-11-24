@@ -202,14 +202,12 @@ function validateEmail() {
 //function ValidateActivity
 function validateActivity() {
   for(let i = 0; i < checkboxes.length; i++) {
-
     if(checkboxes[i].checked) {
+      return true;
+    } else {
       actReqMess.textContent = '';
       checkboxes[i].setAttribute('required', false);
-      return false;
-    } else {
-    checkboxes[i].setAttribute('required', true);
-      return true;
+      return false;      
     }
   }  
   //if check boxes are not checked 
@@ -266,9 +264,9 @@ function validateCreditCard() {
 
 //an eventlistener that calls tha validate funtions and verifies 
 fieldset.addEventListener('keyup', (e) => {
+  
     //if user enters text in name input 
         if(e.target.id === 'name') {
-          e.preventDefault();
             //validate name
         } else {
           validateName();
