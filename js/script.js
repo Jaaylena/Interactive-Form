@@ -217,8 +217,6 @@ function validateActivity() {
     }
   }  
 }
-//if no selection 
-//display message 'please choose an activity'
 //endfunction
 
 validateActivity();
@@ -238,18 +236,14 @@ expYear.innerHTML = '*Expiration Year:';
 //function to validatecredit card info
 function validateCreditCard() {
   //A variable to store a regex for numbers 
-  const regNums = /^[\d]+$/;
+  const regexNums = /^\D*(\d{4})\D*(\d{4})\D*(\d{4})\D*(\d{4});
   //get the value of the input element with id cc-num set it to ccNumValue
   const ccNumValue = document.getElementById('cc-num').value;
   //get the input element with id cc-num set it to ccNum
   const ccNum = document.getElementById('cc-num');
-  //get zip input element with ID zip value 
-  const zipValue = document.getElementById('zip').value;
-  const zip = document.getElementById('zip');
-  const cvvValue = document.getElementById('cvv').value;
-  const cvvInput = document.getElementById('cvv');
-  //if ccNumValue, zipvalue and cvvInput is null or empty
-  if (ccNumValue || zipValue || cvvValue === null || '') {
+  //test the inputed cc numbers against the regexNums
+  //if ccNumValue is null or empty
+  if (ccNumValue === null || '') {
     cvvInput.setAttribute('required', true);
     zip.setAttribute('required', true);
     ccNum.setAttribute('required', true);
@@ -262,6 +256,14 @@ function validateCreditCard() {
     //end function
   }
 }
+//function that validates the zip code input
+ //get zip input element with ID zip value 
+ const zipValue = document.getElementById('zip').value;
+ const zip = document.getElementById('zip');
+ //function the validates the cvv code input
+ const cvvValue = document.getElementById('cvv').value;
+ const cvvInput = document.getElementById('cvv');
+ 
 //an eventlistener that calls the validate funtions
 
 //an eventlistener that calls tha validate funtions and verifies 
