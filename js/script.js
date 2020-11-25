@@ -11,19 +11,13 @@ document.querySelector('form').insertAdjacentHTML('afterbegin', `<p class="reqFi
 //set name label to innerHTML *Name: to show user required fields
 const name = document.getElementsByTagName('label')[0];
 name.innerHTML = '*Name:';
-const nameInputValue = document.getElementById('name').value;
-const nameInput = document.getElementById('name');
-//created a span for the CSS file to display valid and invalid
-const nameError = document.createElement('span:before');
-nameError.textContent = '';
-nameInput.insertAdjacentElement('beforebegin', nameError);
+
 //get form with ID mail
 const emailInputValue = document.getElementById('mail').value;
 const emailInput = document.getElementById('mail');
 //set email label innerHTML to *Email: to show user required fields
 const email = document.getElementsByTagName('label')[1];
 email.innerHTML = '*Email:';
-document.querySelector('.activities').insertAdjacentHTML('afterbegin', `<p class="reqField">* Please Select an Activity </p>`);
 /***job role section **/
 //**hide the "other" initially in order for this feature to work when JS is disabled
 const otherInput = document.getElementById('other-title');
@@ -167,9 +161,17 @@ payment.addEventListener('change', (e) => {
 //function validateFormInformation
 /** found on https://www.codexworld.com/how-to/validate-first-last-name-with-regular-expression-using-javascript **/
 function validateName() {
+  // a variable that gets the element with the ID 'name'
+  const nameInput = document.getElementById('name');
+  //a variable that gets the value of the element with ID 'name'
+  const nameInputValue = nameInput.value;
+//created a span for the CSS file to display valid and invalid
+const nameError = document.createElement('span:before');
+nameError.textContent = '';
+nameInput.insertAdjacentElement('beforebegin', nameError);
   const nameValue = name.value;
   const validName = (name) => {
-    return /^[a-z ]+$/i.test(nameInput);
+    return /^(\w+)\s(\w+)$/i.test(nameInputValue);
   }
   //if userInput in name field is blank 
   if (validName(nameValue) === true ) {
@@ -199,21 +201,21 @@ function validateEmail() {
     return true;
   }
 }
-//function ValidateActivity
+//function to validate activity
 function validateActivity() {
+  //for each check box check if the boxes have been checked
   for(let i = 0; i < checkboxes.length; i++) {
+    //if checkboxes have been checked return true
     if(checkboxes[i].checked) {
       return true;
+    //else display an error message if not checked on submit
     } else {
       actReqMess.textContent = '';
       checkboxes[i].setAttribute('required', false);
+      document.querySelector('.activities').insertAdjacentHTML('afterbegin', `<p class="reqField">* Please Select an Activity </p>`);
       return false;      
     }
   }  
-  //if check boxes are not checked 
-
-  //set activity as required 
-  return false;
 }
 //if no selection 
 //display message 'please choose an activity'
