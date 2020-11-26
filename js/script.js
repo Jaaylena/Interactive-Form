@@ -5,19 +5,12 @@
 document.getElementById('name').focus();
 //create a error message explaination
 const fieldset = document.querySelector('fieldset');
-
+const submitButton = document.querySelector('button');
 //create a error message explaination
 document.querySelector('form').insertAdjacentHTML('afterbegin', `<p class="reqField">* - required field</p>`);
-//set name label to innerHTML *Name: to show user required fields
-const name = document.getElementsByTagName('label')[0];
-name.innerHTML = '*Name:';
-
-//get form with ID mail
-const emailInputValue = document.getElementById('mail').value;
-const emailInput = document.getElementById('mail');
-//set email label innerHTML to *Email: to show user required fields
-const email = document.getElementsByTagName('label')[1];
-email.innerHTML = '*Email:';
+//created a span for the CSS file to display valid and invalid
+const nameError = document.createElement('span:before');
+nameError.textContent = '';
 /***job role section **/
 //**hide the "other" initially in order for this feature to work when JS is disabled
 const otherInput = document.getElementById('other-title');
@@ -110,7 +103,6 @@ activities.addEventListener('change', (e) => {
   }
   //select the activity checkbox element and store it in a variable called activity  
   const activity = checkedBox.getAttribute('data-day-and-time');
-
   //retrieve the list of activities with an attribute of 'data-day-and time'
   for (let i = 0; i < checkboxes.length; i++) {
     //set the iterate to a variable called dateAndTimee
@@ -161,40 +153,44 @@ payment.addEventListener('change', (e) => {
 //function validateFormInformation
 /** found on https://www.codexworld.com/how-to/validate-first-last-name-with-regular-expression-using-javascript **/
 function validateName() {
+  //setting the first label element and setting it to the variable name
+  const name = document.getElementsByTagName('label')[0];
   // a variable that gets the element with the ID 'name'
   const nameInput = document.getElementById('name');
   //a variable that gets the value of the element with ID 'name'
   const nameInputValue = nameInput.value;
-//created a span for the CSS file to display valid and invalid
-const nameError = document.createElement('span:before');
-nameError.textContent = '';
-nameInput.insertAdjacentElement('beforebegin', nameError);
-  const nameValue = name.value;
-  const validName = (name) => {
-    return /^(\w+)\s(\w+)$/i.test(nameInputValue);
-  }
+  nameInput.insertAdjacentElement('beforebegin', nameError);
+  const regName = /^(\w+)\s(\w+)$/i;
   //if userInput in name field is blank 
-  if (validName(nameValue) === true ) {
-    //display message 'name is required'
+  if (!regName.test(nameInputValue) ) {
+   //display message 'name is required'
     nameInput.setAttribute('required', true);
-    nameError.innerHTML = '';
+    //adding a * to the name lable to alert the user that its required
+    name.innerHTML = '*Name:';
+    nameError.textContent = '* Please enter your name';
     return true;
   } else {
-    nameInput.setAttribute('required', false);
-    nameError.textContent = '* Please enter your name';
-    return false;
-  }
-    nameError.remove();
+      nameInput.setAttribute('required', false);
+      nameError.remove();
+      return false;
+   }
 }
+console.log(validateName());
 //function validateEmail 
 function validateEmail() {
-
+  //regex for testing the input email
+  const regEmail = /^[^@]+@[^@.]+\.[a-z]+$/i;
+  //get the input with id email and set it to a variable
+  const emailInput = document.getElementById('mail');
+  //get the value of the input with ID mail setting it to a variable
+  const emailInputValue = emailInput.value;
+  //set email label innerHTML to *Email: to show user required fields
+  const email = document.getElementsByTagName('label')[1];
   //if userInput is null
-  if (emailInputValue == null || '') {
+  if (!regEmail.test(emailInputValue)) {
     //display message 'incorrect email information'
     emailInput.setAttribute('required', true);
-    email.appendChild(span); //css file has a span rule that gives content trying to make that happen
-
+    email.innerHTML = '*Email:';
     return false;
   } else {
     emailInput.setAttribute('required', false);
@@ -203,6 +199,8 @@ function validateEmail() {
 }
 //function to validate activity
 function validateActivity() {
+  //get the fieldset with the classname activities 
+  activities.insertAdjacentHTML('afterbegin', `<p class="reqField"> * Please Select an Activity </p>`);
   //for each check box check if the boxes have been checked
   for(let i = 0; i < checkboxes.length; i++) {
     //if checkboxes have been checked return true
@@ -210,21 +208,13 @@ function validateActivity() {
       return true;
     //else display an error message if not checked on submit
     } else {
-      actReqMess.textContent = '';
       checkboxes[i].setAttribute('required', false);
-      document.querySelector('.activities').insertAdjacentHTML('afterbegin', `<p class="reqField">* Please Select an Activity </p>`);
       return false;      
-    }
-  }  
+    }  
+  }
 }
+console.log(validateActivity());
 //endfunction
-
-validateActivity();
-
-//get the label of the div element with id credit-card
-const ccLabel = document.querySelector('#credit-card label');
-//set it's innerHTML to required field
-ccLabel.innerHTML = '*Card Number:';
 const zipLabel = document.querySelectorAll('.col-3 label')[0];
 zipLabel.innerHTML = '*Zip Code:';
 const cvvLabel = document.querySelectorAll('.col-3 label')[1];
@@ -233,52 +223,59 @@ const expDate = document.querySelectorAll('.credit-card label')[3];
 expDate.innerHTML = '*Expiration Date:';
 const expYear = document.querySelectorAll('.credit-card label')[4];
 expYear.innerHTML = '*Expiration Year:';
+
 //function to validatecredit card info
-function validateCreditCard() {
-  //A variable to store a regex for numbers 
-  const regexNums = /^\D*(\d{4})\D*(\d{4})\D*(\d{4})\D*(\d{4});
-  //get the value of the input element with id cc-num set it to ccNumValue
-  const ccNumValue = document.getElementById('cc-num').value;
-  //get the input element with id cc-num set it to ccNum
-  const ccNum = document.getElementById('cc-num');
-  //test the inputed cc numbers against the regexNums
-  //if ccNumValue is null or empty
-  if (ccNumValue === null || '') {
-    cvvInput.setAttribute('required', true);
-    zip.setAttribute('required', true);
-    ccNum.setAttribute('required', true);
-    return false;
-  } else {
-    cvvInput.setAttribute('required', false);
-    zip.setAttribute('required', false);
-    ccNum.setAttribute('required', false);
-    return true;
-    //end function
-  }
-}
-//function that validates the zip code input
- //get zip input element with ID zip value 
- const zipValue = document.getElementById('zip').value;
- const zip = document.getElementById('zip');
- //function the validates the cvv code input
- const cvvValue = document.getElementById('cvv').value;
- const cvvInput = document.getElementById('cvv');
+
+// function validateCreditCard() {
+  //get the label of the div element with id credit-card
+  const ccLabel = document.querySelector('#credit-card label');
+  //set it's innerHTML to required field
+  ccLabel.innerHTML = '*Card Number:';
+//   //A variable to store a regex for numbers 
+//   const regexNums = /^\D*(\d{4})\D*(\d{4})\D*(\d{4})\D*(\d{4})/;
+//   //get the value of the input element with id cc-num set it to ccNumValue
+//   const ccNumValue = document.getElementById('cc-num').value;
+//   //get the input element with id cc-num set it to ccNum
+//   const ccNum = document.getElementById('cc-num');
+//   //test the inputed cc numbers against the regexNums
+//   //if ccNumValue is null or empty
+//   if (ccNumValue === null || '') {
+//     cvvInput.setAttribute('required', true);
+//     zip.setAttribute('required', true);
+//     ccNum.setAttribute('required', true);
+//     return false;
+//   } else {
+//     cvvInput.setAttribute('required', false);
+//     zip.setAttribute('required', false);
+//     ccNum.setAttribute('required', false);
+//     return true;
+//     //end function
+//   }
+// }
+// //function that validates the zip code input
+//  //get zip input element with ID zip value 
+//  const zipValue = document.getElementById('zip').value;
+//  const zip = document.getElementById('zip');
+//  //function the validates the cvv code input
+//  const cvvValue = document.getElementById('cvv').value;
+//  const cvvInput = document.getElementById('cvv');
  
 //an eventlistener that calls the validate funtions
 
 //an eventlistener that calls tha validate funtions and verifies 
 fieldset.addEventListener('keyup', (e) => {
-  
+  e.preventDefault();
+
     //if user enters text in name input 
         if(e.target.id === 'name') {
+          e.preventDefault();
+
             //validate name
         } else {
           validateName();
 
-       
         }
         if(e.target.id === 'email') {
-          e.preventDefault();
 
         } else {
             validateEmail();
@@ -287,7 +284,12 @@ fieldset.addEventListener('keyup', (e) => {
           e.preventDefault();
 
         } else {
-            validateCreditCard();
+           // validateCreditCard();
 
         }
+    });
+    submitButton.addEventListener('click', (e) => {
+      console.log('the button works boom');
+      validateActivity();
+
     });
