@@ -162,7 +162,7 @@ function validateName() {
   nameInput.insertAdjacentElement('beforebegin', nameError);
   const regName = /^(\w+)\s(\w+)$/i;
   //if userInput in name field is blank 
-  if (!regName.test(nameInputValue) ) {
+  if (!regName.test(nameInputValue)) {
    //display message 'name is required'
     nameInput.setAttribute('required', true);
     //adding a * to the name lable to alert the user that its required
@@ -171,7 +171,6 @@ function validateName() {
     return true;
   } else {
       nameInput.setAttribute('required', false);
-      nameError.remove();
       return false;
    }
 }
@@ -199,16 +198,16 @@ function validateEmail() {
 }
 //function to validate activity
 function validateActivity() {
-  //get the fieldset with the classname activities 
-  activities.insertAdjacentHTML('afterbegin', `<p class="reqField"> * Please Select an Activity </p>`);
   //for each check box check if the boxes have been checked
   for(let i = 0; i < checkboxes.length; i++) {
     //if checkboxes have been checked return true
-    if(checkboxes[i].checked) {
+    if(!checkboxes[i].checked) {
       return true;
     //else display an error message if not checked on submit
     } else {
       checkboxes[i].setAttribute('required', false);
+       //get the fieldset with the classname activities 
+      activities.insertAdjacentHTML('afterbegin', `<p class="reqField"> * Please Select an Activity </p>`);
       return false;      
     }  
   }
@@ -225,21 +224,20 @@ const expYear = document.querySelectorAll('.credit-card label')[4];
 expYear.innerHTML = '*Expiration Year:';
 
 //function to validatecredit card info
-
 // function validateCreditCard() {
   //get the label of the div element with id credit-card
   const ccLabel = document.querySelector('#credit-card label');
   //set it's innerHTML to required field
   ccLabel.innerHTML = '*Card Number:';
-//   //A variable to store a regex for numbers 
-//   const regexNums = /^\D*(\d{4})\D*(\d{4})\D*(\d{4})\D*(\d{4})/;
-//   //get the value of the input element with id cc-num set it to ccNumValue
-//   const ccNumValue = document.getElementById('cc-num').value;
-//   //get the input element with id cc-num set it to ccNum
+  //A variable to store a regex for numbers 
+  const regexNums = /^\D*(\d{4})\D*(\d{4})\D*(\d{4})\D*(\d{4})/;
+  //get the value of the input element with id cc-num set it to ccNumValue
+   const ccNumValue = document.getElementById('cc-num').value;
+  //get the input element with id cc-num set it to ccNum
 //   const ccNum = document.getElementById('cc-num');
 //   //test the inputed cc numbers against the regexNums
 //   //if ccNumValue is null or empty
-//   if (ccNumValue === null || '') {
+   if (!regexNums.test(ccNumValue) === null || '') {
 //     cvvInput.setAttribute('required', true);
 //     zip.setAttribute('required', true);
 //     ccNum.setAttribute('required', true);
@@ -251,7 +249,7 @@ expYear.innerHTML = '*Expiration Year:';
 //     return true;
 //     //end function
 //   }
-// }
+ }
 // //function that validates the zip code input
 //  //get zip input element with ID zip value 
 //  const zipValue = document.getElementById('zip').value;
