@@ -153,6 +153,7 @@ payment.addEventListener('change', (e) => {
 //function validateFormInformation
 /** found on https://www.codexworld.com/how-to/validate-first-last-name-with-regular-expression-using-javascript **/
 function validateName() {
+
   //setting the first label element and setting it to the variable name
   const name = document.getElementsByTagName('label')[0];
   // a variable that gets the element with the ID 'name'
@@ -173,6 +174,7 @@ function validateName() {
       nameInput.setAttribute('required', false);
       return false;
    }
+
 }
 console.log(validateName());
 //function validateEmail 
@@ -192,7 +194,7 @@ function validateEmail() {
     email.innerHTML = '*Email:';
     return false;
   } else {
-    emailInput.setAttribute('required', false);
+    emailInput.setAttribute('required', false); 
     return true;
   }
 }
@@ -224,31 +226,34 @@ const expYear = document.querySelectorAll('.credit-card label')[4];
 expYear.innerHTML = '*Expiration Year:';
 
 //function to validatecredit card info
-// function validateCreditCard() {
+ function validateCreditCard() {
   //get the label of the div element with id credit-card
   const ccLabel = document.querySelector('#credit-card label');
   //set it's innerHTML to required field
   ccLabel.innerHTML = '*Card Number:';
   //A variable to store a regex for numbers 
   const regexNums = /^\D*(\d{4})\D*(\d{4})\D*(\d{4})\D*(\d{4})/;
+   //get the input element with id cc-num set it to ccNum
+    const ccNum = document.getElementById('cc-num');
+    //add a place holder to the credit card label
+    const ccPlaceholder = '1234 1234 1234 1234';
+    ccNum.append(ccPlaceholder);
   //get the value of the input element with id cc-num set it to ccNumValue
-   const ccNumValue = document.getElementById('cc-num').value;
-  //get the input element with id cc-num set it to ccNum
-//   const ccNum = document.getElementById('cc-num');
-//   //test the inputed cc numbers against the regexNums
-//   //if ccNumValue is null or empty
-   if (!regexNums.test(ccNumValue) === null || '') {
+   const ccNumValue = ccNum.value;
+ //test the inputed cc numbers against the regexNums
+   //if ccNumValue is null or empty
+   if (!regexNums.test(ccNumValue)) {
 //     cvvInput.setAttribute('required', true);
 //     zip.setAttribute('required', true);
-//     ccNum.setAttribute('required', true);
-//     return false;
+      ccNum.setAttribute('required', true);
+       return true;
 //   } else {
 //     cvvInput.setAttribute('required', false);
 //     zip.setAttribute('required', false);
 //     ccNum.setAttribute('required', false);
 //     return true;
 //     //end function
-//   }
+   }
  }
 // //function that validates the zip code input
 //  //get zip input element with ID zip value 
@@ -266,7 +271,6 @@ fieldset.addEventListener('keyup', (e) => {
 
     //if user enters text in name input 
         if(e.target.id === 'name') {
-          e.preventDefault();
 
             //validate name
         } else {
