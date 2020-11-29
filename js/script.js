@@ -11,6 +11,7 @@ document.querySelector('form').insertAdjacentHTML('afterbegin', `<p class="reqFi
 const nameError = document.createElement('span:before');
 const emailError = document.createElement('span:before');
 const ccNumError = document.createElement('span:before');
+console.log(ccNumError);
 /***job role section **/
 //**hide the "other" initially in order for this feature to work when JS is disabled
 const otherInput = document.getElementById('other-title');
@@ -230,7 +231,7 @@ ccLabel.innerHTML = '*Card Number:';
 //function not working still accepting nondigit input
 function isCcValid() {
     //A variable to store a regex for numbers 
-    const regexNums = /\d{4}?\s?-?\s?\d{4}?\s?-?\d{4}?\s?-?\d{4}/;
+    const regexNums = /^(\d{13,16})$/;
     //get the input element with id cc-num set it to ccNum
     const ccNum = document.getElementById('cc-num');
     const ccNumValue = ccNum.value;
@@ -250,10 +251,11 @@ function isCcValid() {
 }
 //formatting funtion to reformat the ccnumber input
 
-// function formatCcNumber() {
-//     const regexNums = /\d{4}-?\d{4}-?\d{4}-?\d{4}/;
-//     return ccNum.replace(regexNums, $1 - $2 - $3 - $4);
-// }
+function formatCcNumber() {
+    const regexNums = /\d{4}-?\d{4}-?\d{4}-?\d{4}/;
+    return ccnumber.replace(regexNums, $1 - $2 - $3 - $4);
+}
+console.log(formatCcNumber);
 // //function that validates the zip code input
 function isZipValid() {
     //create a regex to test zip code input that 
@@ -282,7 +284,7 @@ function isCvvValid(){
 
 //an eventlistener that calls tha validate funtions and verifies fieldsets
 fieldset.addEventListener('keyup', (e) => {
-    e.preventDefault(); 
+    e.preventDefault();
 
     //if user enters text in name input 
     if (e.target.id === 'name') {
