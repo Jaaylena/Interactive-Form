@@ -231,7 +231,7 @@ ccLabel.innerHTML = '*Card Number:';
 //function not working still accepting nondigit input
 function isCcValid() {
     //A variable to store a regex for numbers 
-    const regexNums = /^d(\d{13,16})$/mg;
+    const regexNums = /^d(\d{13,16})$/;
     //get the input element with id cc-num set it to ccNum
     const ccNum = document.getElementById('cc-num');
     const ccNumValue = ccNum.value;
