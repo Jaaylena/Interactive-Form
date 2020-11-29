@@ -11,6 +11,7 @@ document.querySelector('form').insertAdjacentHTML('afterbegin', `<p class="reqFi
 const nameError = document.createElement('span:before');
 const emailError = document.createElement('span:before');
 const ccNumError = document.createElement('span:before');
+console.log(ccNumError);
 /***job role section **/
 //**hide the "other" initially in order for this feature to work when JS is disabled
 const otherInput = document.getElementById('other-title');
@@ -19,9 +20,9 @@ const title = document.getElementById('title');
 let titleValue = title.value;
 //when "other" job role is selected in the drop down 
 title.addEventListener('change', (e) => {
-  e.target.value === 'other' ?
-    otherInput.style.display = 'block' :
-    otherInput.style.display = 'none';
+    e.target.value === 'other' ?
+        otherInput.style.display = 'block' :
+        otherInput.style.display = 'none';
 });
 //T-shirt section 
 const designMenu = document.querySelector('#design');
@@ -34,38 +35,38 @@ colorPlaceholder.style.display = 'none';
 colors.appendChild(colorPlaceholder).text = 'Please Select a T-Shirt Theme';
 colors.value = 'Please Select a T-Shirt Theme';
 for (let i = 0; i < colors.length; i++) {
-  //hide the colors in the "color" drop down    
-  colors[i].style.display = 'none';
+    //hide the colors in the "color" drop down    
+    colors[i].style.display = 'none';
 }
 //when a design theme is selected show the colors for that theme
 designMenu.addEventListener('change', (e) => {
-  //when a theme is selected drop down placeholder changes to 'choose a color' 
-  colors.appendChild(colorPlaceholder).text = 'Choose a Color';
-  colors.value = 'Choose a Color';
-  if (designMenu.value === 'Select Theme') {
-    colors.appendChild(colorPlaceholder).text = 'Please Select a T-Shirt Theme';
-    colors.value = 'Please Select a T-Shirt Theme';
-  }
-  //filter the available "color" options by the selected theme in the design field
-  for (let i = 0; i < colors.length; i++) {
-    //hide the colors in the "color" drop down    
-    colors[i].style.display = 'none';
-    //if user selects "Theme- I Puns"
-    if (e.target.value === 'js puns') {
-      //the color menu should display "cornflower blue", "dark slate grey", and "gold"
-      colorOption[0].style.display = 'block';
-      colorOption[1].style.display = 'block';
-      colorOption[2].style.display = 'block';
-      //display options that match the users theme selection
+    //when a theme is selected drop down placeholder changes to 'choose a color' 
+    colors.appendChild(colorPlaceholder).text = 'Choose a Color';
+    colors.value = 'Choose a Color';
+    if (designMenu.value === 'Select Theme') {
+        colors.appendChild(colorPlaceholder).text = 'Please Select a T-Shirt Theme';
+        colors.value = 'Please Select a T-Shirt Theme';
     }
-    //if user selects "theme- I heart JS" 
-    if (e.target.value === 'heart js') {
-      //color menu should display "Tomatoe", "steel blue", and "dim grey"
-      colorOption[3].style.display = 'block';
-      colorOption[4].style.display = 'block';
-      colorOption[5].style.display = 'block';
+    //filter the available "color" options by the selected theme in the design field
+    for (let i = 0; i < colors.length; i++) {
+        //hide the colors in the "color" drop down    
+        colors[i].style.display = 'none';
+        //if user selects "Theme- I Puns"
+        if (e.target.value === 'js puns') {
+            //the color menu should display "cornflower blue", "dark slate grey", and "gold"
+            colorOption[0].style.display = 'block';
+            colorOption[1].style.display = 'block';
+            colorOption[2].style.display = 'block';
+            //display options that match the users theme selection
+        }
+        //if user selects "theme- I heart JS" 
+        if (e.target.value === 'heart js') {
+            //color menu should display "Tomatoe", "steel blue", and "dim grey"
+            colorOption[3].style.display = 'block';
+            colorOption[4].style.display = 'block';
+            colorOption[5].style.display = 'block';
+        }
     }
-  }
 });
 /*register for activities section*/
 //create an element to display the total activity cost
@@ -80,39 +81,39 @@ totalCostLabel.innerHTML = `Total Cost: $${totalCost}`;
 const activities = document.querySelector('.activities');
 //append to the .activity section
 activities.appendChild(totalCostDiv);
-  //set the checkbox input to a variable checkboxes
-  const checkboxes = document.querySelectorAll('.activities input');
+//set the checkbox input to a variable checkboxes
+const checkboxes = document.querySelectorAll('.activities input');
 //listen for changes in the Activity section using an event listener
 activities.addEventListener('change', (e) => {
-  //variable that references the checked element 
-  let checkedBox = e.target;
-  //get the 'data-cost' attribute value of the clicked element
-  const cost = parseInt(checkedBox.getAttribute('data-cost'));
-  //if the input element is checked
-  if (checkedBox.checked == true) {
-    //add the cost of the currently clicked activity to the total cost variable.
-    totalCost += cost;
-    //use a template literal to display the value of cost
-    totalCostLabel.innerHTML = `Total Cost: $${totalCost}`;
-  } else {
-    //subtract the cost
-    totalCost -= cost;
-    totalCostLabel.innerHTML = `Total Cost: $${totalCost}`;
-  }
-  //select the activity checkbox element and store it in a variable called activity  
-  const activity = checkedBox.getAttribute('data-day-and-time');
-  //retrieve the list of activities with an attribute of 'data-day-and time'
-  for (let i = 0; i < checkboxes.length; i++) {
-    //set the iterate to a variable called dateAndTimee
-    const dateAndTime = checkboxes[i].getAttribute('data-day-and-time');
-    //check to see if the checked activity matches anothers dateAndTime
-    if (dateAndTime === activity && checkedBox !== checkboxes[i]) {
-      //disable any activity with conflicting times 
-      checkedBox.checked ?
-        checkboxes[i].disabled = true :
-        checkboxes[i].disabled = false;
+    //variable that references the checked element 
+    let checkedBox = e.target;
+    //get the 'data-cost' attribute value of the clicked element
+    const cost = parseInt(checkedBox.getAttribute('data-cost'));
+    //if the input element is checked
+    if (checkedBox.checked == true) {
+        //add the cost of the currently clicked activity to the total cost variable.
+        totalCost += cost;
+        //use a template literal to display the value of cost
+        totalCostLabel.innerHTML = `Total Cost: $${totalCost}`;
+    } else {
+        //subtract the cost
+        totalCost -= cost;
+        totalCostLabel.innerHTML = `Total Cost: $${totalCost}`;
     }
-  }
+    //select the activity checkbox element and store it in a variable called activity  
+    const activity = checkedBox.getAttribute('data-day-and-time');
+    //retrieve the list of activities with an attribute of 'data-day-and time'
+    for (let i = 0; i < checkboxes.length; i++) {
+        //set the iterate to a variable called dateAndTimee
+        const dateAndTime = checkboxes[i].getAttribute('data-day-and-time');
+        //check to see if the checked activity matches anothers dateAndTime
+        if (dateAndTime === activity && checkedBox !== checkboxes[i]) {
+            //disable any activity with conflicting times 
+            checkedBox.checked ?
+                checkboxes[i].disabled = true :
+                checkboxes[i].disabled = false;
+        }
+    }
 });
 /* payment section */
 //get element with 'payment' id and set it to the variable paymentOption
@@ -128,95 +129,98 @@ payPal.style.display = 'none';
 bitcoin.style.display = 'none';
 // listen for change in dropdown in select payment 
 payment.addEventListener('change', (e) => {
-  //if selected value is credit card hide paypal and bitcoin option
-  if (e.target.value === 'credit card') {
-    creditCard.style.display = 'block';
-    payPal.style.display = 'none';
-    bitcoin.style.display = 'none';
-  //if selected value is paypal hide credit card and bitcoin option
-  }
-  if (e.target.value === 'paypal') {
-    payPal.style.display = 'block';
-    creditCard.style.display = 'none';
-    bitcoin.style.display = 'none';
-  //if selected value is bitcoin hide paypal, and credit card option 
-  }
-  if (e.target.value === 'bitcoin') {
-    bitcoin.style.display = 'block';
-    creditCard.style.display = 'none';
-    payPal.style.display = 'none';
-  }
+    //if selected value is credit card hide paypal and bitcoin option
+    if (e.target.value === 'credit card') {
+        creditCard.style.display = 'block';
+        payPal.style.display = 'none';
+        bitcoin.style.display = 'none';
+        //if selected value is paypal hide credit card and bitcoin option
+    }
+    if (e.target.value === 'paypal') {
+        payPal.style.display = 'block';
+        creditCard.style.display = 'none';
+        bitcoin.style.display = 'none';
+        //if selected value is bitcoin hide paypal, and credit card option 
+    }
+    if (e.target.value === 'bitcoin') {
+        bitcoin.style.display = 'block';
+        creditCard.style.display = 'none';
+        payPal.style.display = 'none';
+    }
 });
 /** form Validation section */
-function validateName() {
-  //setting the first label element and setting it to the variable name
-  const name = document.getElementsByTagName('label')[0];
-  // a variable that gets the element with the ID 'name'
-  const nameInput = document.getElementById('name');
-  //a variable that gets the value of the element with ID 'name'
-  const nameInputValue = nameInput.value;
-  nameInput.insertAdjacentElement('beforebegin', nameError);
-  const regName = /^(\w+)\s(\w+)\s?$/i;
-  //if userInput in name field is blank 
-  if (!regName.test(nameInputValue)) {
-   //display message 'name is required'
-    nameInput.setAttribute('required', true);
-    //adding a * to the name lable to alert the user that its required
-    name.innerHTML = '*Name:';
-    nameError.textContent = '* Please enter your first and last name';
-    nameError.style.color = '#250D54';
-    return true;
-  } else if(regName.test(nameInputValue)){
-      nameInput.setAttribute('required', false);
-      nameError.textContent = '';
-      return false;
-   }
+function isNameValid() {
+    //setting the first label element and setting it to the variable name
+    const name = document.getElementsByTagName('label')[0];
+    // a variable that gets the element with the ID 'name'
+    const nameInput = document.getElementById('name');
+    //a variable that gets the value of the element with ID 'name'
+    const nameInputValue = nameInput.value;
+    nameInput.insertAdjacentElement('beforebegin', nameError);
+    const regName = /^(\w+)\s(\w+)\s?$/i;
+    //if userInput in name field is blank 
+    if (!regName.test(nameInputValue)) {
+        //display message 'name is required'
+        nameInput.setAttribute('required', true);
+        //adding a * to the name lable to alert the user that its required
+        name.innerHTML = '*Name:';
+        nameError.textContent = '* Please enter your first and last name';
+        nameError.style.color = '#250D54';
+        return true;
+    } else if (regName.test(nameInputValue)) {
+        nameInput.setAttribute('required', false);
+        nameError.textContent = '';
+        return false;
+    }
 }
-function validateEmail() {
-  //regex for testing the input email
-  const regEmail = /^[^@]+@[^@.]+\.[a-z]+$/i;
-  //get the input with id email and set it to a variable
-  const emailInput = document.getElementById('mail');
-  //get the value of the input with ID mail setting it to a variable
-  const emailInputValue = emailInput.value;
-  emailInput.insertAdjacentElement('beforebegin', emailError);
-  //set email label innerHTML to *Email: to show user required fields
-  const email = document.getElementsByTagName('label')[1];
-  email.innerHTML = '*Email:';
-  //if userInput is null
-  if (!regEmail.test(emailInputValue)) {
-    //display message 'incorrect email information'
-    emailInput.setAttribute('required', true);
-    emailError.textContent = '*Please enter a valid Email address';
-    emailError.style.color = '#250D54';
-    return true;
-  } else {
-    emailInput.setAttribute('required', false); 
-    emailError.textContent = '';
-    return false;
-  }
+
+function isEmailValid(e) {
+    //regex for testing the input email
+    const regEmail = /^[^@]+@[^@.]+\.[a-z]+$/i;
+    //get the input with id email and set it to a variable
+    const emailInput = document.getElementById('mail');
+    //get the value of the input with ID mail setting it to a variable
+    const emailInputValue = emailInput.value;
+    emailInput.insertAdjacentElement('beforebegin', emailError);
+    //set email label innerHTML to *Email: to show user required fields
+    const email = document.getElementsByTagName('label')[1];
+    email.innerHTML = '*Email:';
+    //if userInput is null
+    if (!regEmail.test(emailInputValue)) {
+        //display message 'incorrect email information'
+        emailInput.setAttribute('required', true);
+        emailError.textContent = '*Please enter a valid Email address';
+        emailError.style.color = '#250D54';
+        return true;
+        e.preventDefault();
+    } else {
+        emailInput.setAttribute('required', false);
+        emailError.textContent = '';
+        return false;
+    }
 }
 //function to validate activity
-function validateActivity() {
-  //for each check box check if the boxes have been checked
-  for(let i = 0; i < checkboxes.length; i++) {
-    console.log(checkboxes[i]);
-    //if checkboxes have been checked return true
-    if(!checkboxes[i].checked) {
-      checkboxes[i].setAttribute('required', true);
-      activities.insertAdjacentHTML('afterbegin', `<p class="reqField"> * Please Select an Activity </p>`);
-      return true;
-    //else display an error message if not checked on submit
-    } else {
-      checkboxes[i].setAttribute('required', false);
-      activities.insertAdjacentHTML('afterbegin', `<p> </p>`);
-       //get the fieldset with the classname activities 
-      return false;      
-    }  
-  }
+function isActivityChecked(e) {
+    const actError = document.createElement('p');
+    let unchecked = 0;
+    //for each check box check if the boxes have been checked
+    for(let i = 0; checkboxes.length > i; i++) {
+    //if display an error message if not checked on submit 
+        if (checkboxes[i].checked === false) {
+            unchecked++
+            //else checkboxes have been checked return false
+        }
+        if (unchecked === checkboxes.length) {
+          actError.textContent = 'Please Select an Activity';
+          actError.style.color = '#250D54';
+          activities.appendChild(actError);
+          if(activities.children.length > 9) {
+            activities.removeChild(activities.lastElementChild);
+          }
+        }
+    }
 }
-console.log(validateActivity());
-
+isActivityChecked();
 const zipLabel = document.querySelectorAll('.col-3 label')[0];
 zipLabel.innerHTML = '*Zip Code:';
 const cvvLabel = document.querySelectorAll('.col-3 label')[1];
@@ -225,80 +229,81 @@ const expDate = document.querySelectorAll('.credit-card label')[3];
 expDate.innerHTML = '*Expiration Date:';
 const expYear = document.querySelectorAll('.credit-card label')[4];
 expYear.innerHTML = '*Expiration Year:';
-  //get the label of the div element with id credit-card
-  const ccLabel = document.querySelector('#credit-card label');
-  //set it's innerHTML to required field
-  ccLabel.innerHTML = '*Card Number:';
-
-  function validateCreditCard() {
-  //A variable to store a regex for numbers 
-  const regexNums = /^\D*[\d{4}]\D*[\d{4}]\D*[\d{4}]\D*[\d{4}]$/;
-   //get the input element with id cc-num set it to ccNum
+//get the label of the div element with id credit-card
+const ccLabel = document.querySelector('.col-6 label');
+//set it's innerHTML to required field
+ccLabel.innerHTML = '*Card Number:';
+//function not working still accepting nondigit input
+function isCcValid() {
+    //A variable to store a regex for numbers 
+    const regexNums = /^\d{4}-?\d{4}-?\d{4}-?\d{4}$/;
+    //get the input element with id cc-num set it to ccNum
     const ccNum = document.getElementById('cc-num');
-  //get the value of the input element with id cc-num set it to ccNumValue
-   const ccNumValue = ccNum.value;
-   ccLabel.insertAdjacentElement('beforebegin', ccNumError);
+    //get the value of the input element with id cc-num set it to ccNumValue
+    const ccNumValue = ccNum.value;
+    ccLabel.insertAdjacentElement('beforebegin', ccNumError);
 
- //test the inputed cc numbers against the regexNums
-   if (!regexNums.test(ccNumValue)) {
-      ccNum.setAttribute('required', true);
-      ccNumError.textContent = 'Please enter a valid credit card number';
-       return true;
-  } else {
-     
+    const cvvValue = document.getElementById('cvv').value;
+    const cvvInput = document.getElementById('cvv');
+    console.log(ccNumValue);
+    //if ccNumValue, zipvalue and cvvInput is null or empty
+    if (!regexNums.test(ccNumValue) || zipValue || cvvValue === null || '') {
+        cvvInput.setAttribute('required', true);
+        zip.setAttribute('required', true);
+        ccNum.setAttribute('required', true);
+        return true;
+    } else {
+        cvvInput.setAttribute('required', false);
+        formatCcNumber(ccNumValue);
+        zip.setAttribute('required', false);
+        ccNum.setAttribute('required', false);
+        return false;
+        //end function	    
+    }
+}
+//formatting funtion to reformat the ccnumber input
 
-   }
- }
+function formatCcNumber(ccnumber) {
+    const regexNums = /\d{4}-?\d{4}-?\d{4}-?\d{4}/;
+    return ccnumber.replace(regexNums, $1 - $2 - $3 - $4);
+}
 // //function that validates the zip code input
- //create a regex to test zip code input
-//  //get zip input element with ID zip value 
-//  const zipValue = document.getElementById('zip').value;
-//  const zip = document.getElementById('zip');
-// if regex.test is false
-  //set zip required leave an error message return true
-  //     zip.setAttribute('required', true);
+function isZipValid() {
+    //create a regex to test zip code input that 
+    const regexZip = /\b\d{5}\b/;
+}
 
-  //else remove error message return false 
-
-//  //function the validates the cvv code input
-//  const cvvValue = document.getElementById('cvv').value;
-//  const cvvInput = document.getElementById('cvv');
-// if cvv regex is not only numbers 
-// send an error message
-//     cvvInput.setAttribute('required', true); 
-//if cvv is only number cvv number is not required remove error message
- //     cvvInput.setAttribute('required', false);
-
-//end function
- 
 //an eventlistener that calls tha validate funtions and verifies fieldsets
 fieldset.addEventListener('keyup', (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
     //if user enters text in name input 
-        if(e.target.id === 'name') {
-          e.preventDefault();
+    if (e.target.id === 'name') {
+        e.preventDefault();
 
-            //validate name
-        } else {
-          validateName();
+        //validate name
+    } else {
+        isNameValid();
 
-        }
-        if(e.target.id === 'email') {
+    }
+    if (e.target.id === 'email') {
+        e.preventDefault();
 
-        } else {
-            validateEmail();
-        }
-        if(e.target.id === 'cc-num') {
-          e.preventDefault();
+    } else {
+        isEmailValid();
+    }
+    if (e.target.id === 'cc-num') {
+        e.preventDefault();
 
-        } else {
-           // validateCreditCard();
-        }
-    });
-    submitButton.addEventListener('click', (e) => {
-      console.log('the button works boom');
-      validateName();
-      validateActivity();
+    } else {
+        isCcValid();
+    }
+});
+submitButton.addEventListener('click', (e) => {
+    console.log('the button works boom');
+    isNameValid();
+    isEmailValid();
+    isActivityChecked();
+    alert('Please complete the form');
 
-    });
+});
