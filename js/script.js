@@ -11,7 +11,6 @@ document.querySelector('form').insertAdjacentHTML('afterbegin', `<p class="reqFi
 const nameError = document.createElement('span:before');
 const emailError = document.createElement('span:before');
 const ccNumError = document.createElement('span:before');
-console.log(ccNumError);
 /***job role section **/
 //**hide the "other" initially in order for this feature to work when JS is disabled
 const otherInput = document.getElementById('other-title');
@@ -231,46 +230,59 @@ ccLabel.innerHTML = '*Card Number:';
 //function not working still accepting nondigit input
 function isCcValid() {
     //A variable to store a regex for numbers 
-    const regexNums = /^\d{4}-?\d{4}-?\d{4}-?\d{4}$/;
+    const regexNums = /\d{4}?\s?-?\s?\d{4}?\s?-?\d{4}?\s?-?\d{4}/;
     //get the input element with id cc-num set it to ccNum
     const ccNum = document.getElementById('cc-num');
-    //get the value of the input element with id cc-num set it to ccNumValue
     const ccNumValue = ccNum.value;
     ccLabel.insertAdjacentElement('beforebegin', ccNumError);
-    const cvvValue = document.getElementById('cvv').value;
-    const cvvInput = document.getElementById('cvv');
-    //if ccNumValue, zipvalue and cvvInput is null or empty
-    if (!regexNums.test(ccNumValue) || zipValue || cvvValue === null || '') {
-        cvvInput.setAttribute('required', true);
+    //if input matches the regex requirements return true and display error message
+    if (!regexNums.test(ccNumValue)) {
         ccNum.setAttribute('required', true);
         ccNumError.textContent = 'credit card number needs to have 13 or 16 numbers';
+        ccNumError.style.color - 'red';
         return true;
     } else {
-        cvvInput.setAttribute('required', false);
-        formatCcNumber(ccNumValue);
-        zip.setAttribute('required', false);
         ccNum.setAttribute('required', false);
+        ccNumError.textContent = '';
         return false;
         //end function	    
     }
 }
 //formatting funtion to reformat the ccnumber input
 
-function formatCcNumber(ccnumber) {
-    const regexNums = /\d{4}-?\d{4}-?\d{4}-?\d{4}/;
-    return ccnumber.replace(regexNums, $1 - $2 - $3 - $4);
-}
+// function formatCcNumber() {
+//     const regexNums = /\d{4}-?\d{4}-?\d{4}-?\d{4}/;
+//     return ccNum.replace(regexNums, $1 - $2 - $3 - $4);
+// }
 // //function that validates the zip code input
 function isZipValid() {
     //create a regex to test zip code input that 
     const regexZip = /\b\d{5}\b/;
     const zipLabel = document.querySelectorAll('.col-3 label')[0];
     zipLabel.innerHTML = '*Zip Code:';
+    if(regexZip.test(zipValue)){
+      zip.setAttribute('required', true);
+
+    } else {
+      zip.setAttribute('required', false);
+
+    }
+}
+function isCvvValid(){
+  const cvvInput = document.getElementById('cvv');
+  const regexCvv = /^\d{3}$/;
+  if(regexCvv.test(cvvInput.value) === false) {
+  cvvInput.setAttribute('required', true);
+  cvvInput.style.borderColor = 'red';
+  } else {
+    cvvInput.setAttribute('required', false);
+
+  }
 }
 
 //an eventlistener that calls tha validate funtions and verifies fieldsets
 fieldset.addEventListener('keyup', (e) => {
-    e.preventDefault();
+    e.preventDefault(); 
 
     //if user enters text in name input 
     if (e.target.id === 'name') {
