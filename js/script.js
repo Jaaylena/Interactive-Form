@@ -82,10 +82,9 @@ const activities = document.querySelector('.activities');
 //append to the .activity section
 activities.appendChild(totalCostDiv);
 //set the checkbox input to a variable checkboxes
-const checkboxes = document.querySelectorAll('.activities input');
+const checkboxes = document.querySelectorAll('input[type="checkbox]');
 //listen for changes in the Activity section using an event listener
 activities.addEventListener('change', (e) => {
-    //variable that references the checked element 
     let checkedBox = e.target;
     //get the 'data-cost' attribute value of the clicked element
     const cost = parseInt(checkedBox.getAttribute('data-cost'));
@@ -115,14 +114,13 @@ activities.addEventListener('change', (e) => {
         }
     }
 });
-/* payment section */
-//get element with 'payment' id and set it to the variable paymentOption
+/********* payment section ********/
 const payments = document.querySelectorAll('#payment');
 const paymentOption = document.querySelectorAll('#payment option');
 const creditCard = document.querySelector('#credit-card');
 const payPal = document.querySelector('#paypal');
 const bitcoin = document.querySelector('#bitcoin');
-//hide 'Select Payment Method' from dropdown option;
+//hide 'Select Payment Method' from dropdown option
 paymentOption[0].hidden = true;
 payment.value = 'credit card';
 payPal.style.display = 'none';
@@ -174,7 +172,7 @@ function isNameValid() {
     }
 }
 
-function isEmailValid(e) {
+function isEmailValid() {
     //regex for testing the input email
     const regEmail = /^[^@]+@[^@.]+\.[a-z]+$/i;
     //get the input with id email and set it to a variable
@@ -200,29 +198,26 @@ function isEmailValid(e) {
     }
 }
 //function to validate activity
-function isActivityChecked(e) {
-    const actError = document.createElement('p');
-    let unchecked = 0;
-    //for each check box check if the boxes have been checked
-    for(let i = 0; checkboxes.length > i; i++) {
-    //if display an error message if not checked on submit 
-        if (checkboxes[i].checked === false) {
-            unchecked++
-            //else checkboxes have been checked return false
-        }
-        if (unchecked === checkboxes.length) {
-          actError.textContent = 'Please Select an Activity';
-          actError.style.color = '#250D54';
-          activities.appendChild(actError);
-          if(activities.children.length > 9) {
-            activities.removeChild(activities.lastElementChild);
-          }
-        }
-    }
-}
-isActivityChecked();
-const zipLabel = document.querySelectorAll('.col-3 label')[0];
-zipLabel.innerHTML = '*Zip Code:';
+// function isActivityChecked(e) {
+//     const actError = document.createElement('p');
+//     let unchecked = 0;
+//     //for each check box check if the boxes have been checked
+    
+//       if(unchecked === checkboxes.length){
+//         actError.textContent = 'Please Select at least one activity';
+//         actError.style.color = 'red';
+//         activities.appendChild(actError);
+//         if(activities.children.length > 9 ) {
+//           activities.removeChild(activities.lastElementChild);
+//         }
+//         e.preventDefault();
+//       }
+
+//     }
+    
+
+// isActivityChecked();
+
 const cvvLabel = document.querySelectorAll('.col-3 label')[1];
 cvvLabel.innerHTML = '*cvv';
 const expDate = document.querySelectorAll('.credit-card label')[3];
@@ -242,15 +237,13 @@ function isCcValid() {
     //get the value of the input element with id cc-num set it to ccNumValue
     const ccNumValue = ccNum.value;
     ccLabel.insertAdjacentElement('beforebegin', ccNumError);
-
     const cvvValue = document.getElementById('cvv').value;
     const cvvInput = document.getElementById('cvv');
-    console.log(ccNumValue);
     //if ccNumValue, zipvalue and cvvInput is null or empty
     if (!regexNums.test(ccNumValue) || zipValue || cvvValue === null || '') {
         cvvInput.setAttribute('required', true);
-        zip.setAttribute('required', true);
         ccNum.setAttribute('required', true);
+        ccNumError.textContent = 'credit card number needs to have 13 or 16 numbers';
         return true;
     } else {
         cvvInput.setAttribute('required', false);
@@ -271,6 +264,8 @@ function formatCcNumber(ccnumber) {
 function isZipValid() {
     //create a regex to test zip code input that 
     const regexZip = /\b\d{5}\b/;
+    const zipLabel = document.querySelectorAll('.col-3 label')[0];
+    zipLabel.innerHTML = '*Zip Code:';
 }
 
 //an eventlistener that calls tha validate funtions and verifies fieldsets
