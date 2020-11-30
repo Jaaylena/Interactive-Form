@@ -11,7 +11,7 @@ document.querySelector('form').insertAdjacentHTML('afterbegin', `<p class="reqFi
 const nameError = document.createElement('span:before');
 const emailError = document.createElement('span:before');
 const ccNumError = document.createElement('span:before');
-console.log(ccNumError);
+const zipErrorSpan = document.createElement('span:before');
 /***job role section **/
 //**hide the "other" initially in order for this feature to work when JS is disabled
 const otherInput = document.getElementById('other-title');
@@ -217,7 +217,9 @@ function isEmailValid() {
     
 
 // isActivityChecked();
-
+ //get the input element with id cc-num set it to ccNum
+const ccNum = document.getElementById('cc-num');
+const ccNumValue = ccNum.value;
 const cvvLabel = document.querySelectorAll('.col-3 label')[1];
 cvvLabel.innerHTML = '*cvv';
 const expDate = document.querySelectorAll('.credit-card label')[3];
@@ -231,56 +233,57 @@ ccLabel.innerHTML = '*Card Number:';
 //function not working still accepting nondigit input
 function isCcValid() {
     //A variable to store a regex for numbers 
-    const regexNums = /^d(\d{13,16})$/;
-    //get the input element with id cc-num set it to ccNum
-    const ccNum = document.getElementById('cc-num');
-    const ccNumValue = ccNum.value;
-    ccLabel.insertAdjacentElement('beforebegin', ccNumError);
+    const regexNums = /^(\d{13,16})$/;
+    ccLabel.append(ccNumError);
     //if input matches the regex requirements return true and display error message
     if (!regexNums.test(ccNumValue)) {
         ccNum.setAttribute('required', true);
-        ccNumError.textContent = 'credit card number needs to have 13 or 16 numbers';
-        ccNumError.style.color - 'red';
+        ccNumError.innerHTML = ' Card number should contain 13 to 16 digits';
+        ccNumError.style.color = 'red';
         return true;
-    } else {
+    } else if(regexNums.test(ccNumValue)) {
         ccNum.setAttribute('required', false);
-        ccNumError.textContent = '';
+        //ccNumError change in text content is not working        
+        ccNumError.textContent = 'none';
         return false;
         //end function	    
     }
 }
 //formatting funtion to reformat the ccnumber input
 
-function formatCcNumber() {
-    const regexNums = /\d{4}-?\d{4}-?\d{4}-?\d{4}/;
-    return ccnumber.replace(regexNums, $1 - $2 - $3 - $4);
-}
-console.log(formatCcNumber);
-// //function that validates the zip code input
-function isZipValid() {
-    //create a regex to test zip code input that 
-    const regexZip = /\b\d{5}\b/;
-    const zipLabel = document.querySelectorAll('.col-3 label')[0];
-    zipLabel.innerHTML = '*Zip Code:';
-    if(regexZip.test(zipValue)){
-      zip.setAttribute('required', true);
+//  function formatCcNumber() {
+//      const regexNums = /(\d{4})-?(\d{4})-?(\d{4})-?(\d{4})/;
+//      return ccNumValue.replace(regexNums, $1 - $2 - $3 - $4);
+//  }
+// console.log(formatCcNumber);
+// // //function that validates the zip code input
+// function isZipValid() {
+//     //create a regex to test zip code input that 
+//     const regexZip = /\b\d{5}\b/;
+//     const zip = document.getElementById('zip');
+//     const zipLabel = document.querySelectorAll('.col-3 label')[0];
+//     zip.append(zipErrorSpan);
+//     zipLabel.innerHTML = '*Zip Code:';
+//     if(!regexZip.test(zip.value)){
+//       zip.setAttribute('required', true);
+//       zipErrorSpan.innerHTML = 'Please enter a valid Zip code';
+//       return true;
+//     } else {
+//       zip.setAttribute('required', false);
+//       return false;
+//     }
+// }
+// function isCvvValid(){
+//   const cvvInput = document.getElementById('cvv');
+//   const regexCvv = /^\d{3}$/;
+//   if(!regexCvv.test(cvvInput.value) === false) {
+//   cvvInput.setAttribute('required', true);
+//   cvvInput.style.borderColor = 'red';
+//   } else {
+//     cvvInput.setAttribute('required', false);
 
-    } else {
-      zip.setAttribute('required', false);
-
-    }
-}
-function isCvvValid(){
-  const cvvInput = document.getElementById('cvv');
-  const regexCvv = /^\d{3}$/;
-  if(regexCvv.test(cvvInput.value) === false) {
-  cvvInput.setAttribute('required', true);
-  cvvInput.style.borderColor = 'red';
-  } else {
-    cvvInput.setAttribute('required', false);
-
-  }
-}
+//   }
+// }
 
 //an eventlistener that calls tha validate funtions and verifies fieldsets
 fieldset.addEventListener('keyup', (e) => {
