@@ -128,12 +128,13 @@ input {
   
   input:invalid {
 	border: 2px solid rgb(241, 6, 6);
-	background-color: rgb(243, 107, 107);
+	
   }
   /* not function css code  */
   input:invalid + span {
 	content: '✖';
 	background-color: red;
+	background-color: rgb(243, 107, 107);
   }
   
   input:valid + span::before {

@@ -152,12 +152,10 @@ function isNameValid() {
     const name = document.getElementsByTagName('label')[0];
     // a variable that gets the element with the ID 'name'
     const nameInput = document.getElementById('name');
-    //a variable that gets the value of the element with ID 'name'
-    const nameInputValue = nameInput.value;
     nameInput.insertAdjacentElement('beforebegin', nameError);
     const regName = /^(\w+)\s(\w+)\s?$/i;
     //if userInput in name field is blank 
-    if (!regName.test(nameInputValue)) {
+    if (!regName.test(nameInput.value)) {
         //display message 'name is required'
         nameInput.setAttribute('required', true);
         //adding a * to the name lable to alert the user that its required
@@ -165,7 +163,7 @@ function isNameValid() {
         nameError.textContent = '* Please enter your first and last name';
         nameError.style.color = '#250D54';
         return true;
-    } else if (regName.test(nameInputValue)) {
+    } else if (regName.test(nameInput.value)) {
         nameInput.setAttribute('required', false);
         nameError.textContent = '';
         return false;
@@ -174,7 +172,7 @@ function isNameValid() {
 
 function isEmailValid() {
     //regex for testing the input email
-    const regEmail = /^[^@]+@[^@.]+\.[a-z]+$/i;
+    const regEmail = /^[^@]+@[^@.]+\.[\w+]+$/i;
     //get the input with id email and set it to a variable
     const emailInput = document.getElementById('mail');
     //get the value of the input with ID mail setting it to a variable
@@ -198,22 +196,21 @@ function isEmailValid() {
     }
 }
 //function to validate activity
-// function isActivityChecked(e) {
-//     const actError = document.createElement('p');
-//     let unchecked = 0;
-//     //for each check box check if the boxes have been checked
+function isActivityChecked() {
+    const actError = document.createElement('p');
+    let unchecked = 0;
+    //for each check box check if the boxes have been checked
     
-//       if(unchecked === checkboxes.length){
-//         actError.textContent = 'Please Select at least one activity';
-//         actError.style.color = 'red';
-//         activities.appendChild(actError);
-//         if(activities.children.length > 9 ) {
-//           activities.removeChild(activities.lastElementChild);
-//         }
-//         e.preventDefault();
-//       }
-
-//     }
+      if(unchecked === checkboxes.length){
+        actError.textContent = 'Please Select at least one activity';
+        actError.style.color = 'red';
+        activities.appendChild(actError);
+        if(activities.children.length > 9 ) {
+          activities.removeChild(activities.lastElementChild);
+        }
+     
+      }
+    }
 // isActivityChecked();
  //get the input element with id cc-num set it to ccNum
 const ccNum = document.getElementById('cc-num');
@@ -235,13 +232,12 @@ function isCcValid() {
     //if input matches the regex requirements return true and display error message
     if (!regexNums.test(ccNum.value) || 0) {
         ccNum.setAttribute('required', true);
-        ccNumError.innerHTML = ' Card number should contain 13 to 16 digits';
+        ccNumError.textContent = ' Card number should contain 13 to 16 digits';
         ccNumError.style.color = 'red';
         return true;
-    } else if(regexNums.test(ccNumValue)) {
+    } else if(regexNums.test(ccNum.value)) {
         ccNum.setAttribute('required', false);
-        //ccNumError change in text content is not working        
-        ccNumError.innerHTML = '';
+        ccNumError.textContent = '';
         return false;
         //end function	    
     }
@@ -283,31 +279,32 @@ function isCcValid() {
 // }
 
 //an eventlistener that calls tha validate funtions and verifies fieldsets
-form.addEventListener('keyup', (e) => {
-    e.preventDefault();
+// form.addEventListener('keyup', (e) => {
+//     e.preventDefault();
 
-    //if user enters text in name input 
-    if (e.target.id === 'name') {
-        e.preventDefault();
+//     //if user enters text in name input 
+//     if (e.target.id === 'name') {
+//         e.preventDefault();
 
-        //validate name
-    } else {
-        isNameValid();
+//         //validate name
+//     } else {
+//         isNameValid();
 
-    }
-    if (e.target.id === 'email') {
-        e.preventDefault();
+//     }
+//     if (e.target.id === 'email') {
+//         e.preventDefault();
 
-    } else {
-        isEmailValid();
-    }
-    if (e.target.id === 'cc-num') {
+//     } else {
+//         isEmailValid();
+//     }
+//     if (e.target.id === 'cc-num') {
 
-    } else {
-        isCcValid();
-    }
-});
+//     } else {
+//         isCcValid();
+//     }
+// });
 submitButton.addEventListener('click', (e) => {
+    e.preventDefault();
     console.log('the button works boom');
     isNameValid();
     isEmailValid();
