@@ -1,39 +1,46 @@
 /*
  */
-//select element with id name and set it to focus
 document.getElementById('name').focus();
-//create a error message explaination
 const form = document.querySelector('fieldset');
 const submitButton = document.querySelector('button');
 //create a error message explaination
 document.querySelector('form').insertAdjacentHTML('afterbegin', `<p class="reqField">* - required field</p>`);
-//created a span for the CSS file to display valid and invalid
-const nameError = document.createElement('span:before');
-const emailError = document.createElement('span:before');
-const ccNumError = document.createElement('span:before');
-const zipErrorSpan = document.createElement('span:before');
-/***job role section **/
-//**hide the "other" initially in order for this feature to work when JS is disabled
 const otherInput = document.getElementById('other-title');
 otherInput.style.display = 'none';
 const title = document.getElementById('title');
 let titleValue = title.value;
-//when "other" job role is selected in the drop down 
+//created elements to display error messages
+const nameError = document.createElement('span:before');
+const emailError = document.createElement('span:before');
+const ccNumError = document.createElement('span:before');
+const zipErrorSpan = document.createElement('span:before');
+const pickActivity = document.createElement('p');
+//variables for separating the payment methods 
+const payments = document.querySelectorAll('#payment');
+const paymentOption = document.querySelectorAll('#payment option');
+const creditCard = document.querySelector('#credit-card');
+const payPal = document.querySelector('#paypal');
+const bitcoin = document.querySelector('#bitcoin');
+paymentOption[0].hidden = true;
+payment.value = 'credit card';
+payPal.style.display = 'none';
+bitcoin.style.display = 'none';
+const designMenu = document.querySelector('#design');
+const colors = document.getElementById('color');
+const colorOption = document.querySelectorAll('#color option'); 
+//at initial load update the "color" field to read "Please select a Theme"
+const colorPlaceholder = document.createElement('option');
+colorPlaceholder.style.display = 'none';
+colors.appendChild(colorPlaceholder).text = 'Please Select a T-Shirt Theme';
+colors.value = 'Please Select a T-Shirt Theme';   
+/***job role section **/
+//when "other" job role is selected in the drop down and text input appears 
 title.addEventListener('change', (e) => {
     e.target.value === 'other' ?
         otherInput.style.display = 'block' :
         otherInput.style.display = 'none';
 });
 //T-shirt section 
-const designMenu = document.querySelector('#design');
-const colors = document.getElementById('color');
-const colorOption = document.querySelectorAll('#color option');
-
-//at initial load update the "color" field to read "Please select a Theme"
-const colorPlaceholder = document.createElement('option');
-colorPlaceholder.style.display = 'none';
-colors.appendChild(colorPlaceholder).text = 'Please Select a T-Shirt Theme';
-colors.value = 'Please Select a T-Shirt Theme';
 for (let i = 0; i < colors.length; i++) {
     //hide the colors in the "color" drop down    
     colors[i].style.display = 'none';
@@ -99,14 +106,13 @@ activities.addEventListener('change', (e) => {
         totalCost -= cost;
         totalCostLabel.innerHTML = `Total Cost: $${totalCost}`;
     }
-    //select the activity checkbox element and store it in a variable called activity  
-    const activity = checkedBox.getAttribute('data-day-and-time');
+    const activityTime = checkedBox.getAttribute('data-day-and-time');
     //retrieve the list of activities with an attribute of 'data-day-and time'
     for (let i = 0; i < checkboxes.length; i++) {
         //set the iterate to a variable called dateAndTimee
         const dateAndTime = checkboxes[i].getAttribute('data-day-and-time');
         //check to see if the checked activity matches anothers dateAndTime
-        if (dateAndTime === activity && checkedBox !== checkboxes[i]) {
+        if (dateAndTime === activityTime && checkedBox !== checkboxes[i]) {
             //disable any activity with conflicting times 
             checkedBox.checked ?
                 checkboxes[i].disabled = true :
@@ -115,16 +121,7 @@ activities.addEventListener('change', (e) => {
     }
 });
 /********* payment section ********/
-const payments = document.querySelectorAll('#payment');
-const paymentOption = document.querySelectorAll('#payment option');
-const creditCard = document.querySelector('#credit-card');
-const payPal = document.querySelector('#paypal');
-const bitcoin = document.querySelector('#bitcoin');
-//hide 'Select Payment Method' from dropdown option
-paymentOption[0].hidden = true;
-payment.value = 'credit card';
-payPal.style.display = 'none';
-bitcoin.style.display = 'none';
+
 // listen for change in dropdown in select payment 
 payment.addEventListener('change', (e) => {
     //if selected value is credit card hide paypal and bitcoin option
@@ -195,23 +192,19 @@ function isEmailValid() {
         return false;
     }
 }
+activities.prepend(pickActivity);
 //function to validate activity
-function isActivityChecked() {
-    const actError = document.createElement('p');
-    let unchecked = 0;
-    //for each check box check if the boxes have been checked
+function checkActivities() {
     
-      if(unchecked === checkboxes.length){
-        actError.textContent = 'Please Select at least one activity';
-        actError.style.color = 'red';
-        activities.appendChild(actError);
-        if(activities.children.length > 9 ) {
-          activities.removeChild(activities.lastElementChild);
-        }
-     
-      }
+    for (let i = 0; i < checkboxes.length; i++) {
+       if(!checkboxes[i].checked) {
+        checkboxes[i].setAttribute('required', true)
+        pickActivity.textContent = 'Please Select an Activity';
+        return true;
+       }
     }
-// isActivityChecked();
+ }
+ 
  //get the input element with id cc-num set it to ccNum
 const ccNum = document.getElementById('cc-num');
 const cvvLabel = document.querySelectorAll('.col-3 label')[1];
@@ -308,7 +301,7 @@ submitButton.addEventListener('click', (e) => {
     console.log('the button works boom');
     isNameValid();
     isEmailValid();
-    isActivityChecked();
+    checkActivities();
     alert('Please complete the form');
 
 });

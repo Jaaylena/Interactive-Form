@@ -57,7 +57,7 @@ form {
 fieldset,
 legend,
 button {
-	padding: 0;
+	padding: 1;
 	border: none;
 }
 
