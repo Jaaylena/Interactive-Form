@@ -3,7 +3,7 @@
 //select element with id name and set it to focus
 document.getElementById('name').focus();
 //create a error message explaination
-const fieldset = document.querySelector('fieldset');
+const form = document.querySelector('fieldset');
 const submitButton = document.querySelector('button');
 //create a error message explaination
 document.querySelector('form').insertAdjacentHTML('afterbegin', `<p class="reqField">* - required field</p>`);
@@ -219,7 +219,6 @@ function isEmailValid() {
 // isActivityChecked();
  //get the input element with id cc-num set it to ccNum
 const ccNum = document.getElementById('cc-num');
-const ccNumValue = ccNum.value;
 const cvvLabel = document.querySelectorAll('.col-3 label')[1];
 cvvLabel.innerHTML = '*cvv';
 const expDate = document.querySelectorAll('.credit-card label')[3];
@@ -236,7 +235,7 @@ function isCcValid() {
     const regexNums = /^(\d{13,16})$/;
     ccLabel.append(ccNumError);
     //if input matches the regex requirements return true and display error message
-    if (!regexNums.test(ccNumValue)) {
+    if (!regexNums.test(ccNum.value) || 0) {
         ccNum.setAttribute('required', true);
         ccNumError.innerHTML = ' Card number should contain 13 to 16 digits';
         ccNumError.style.color = 'red';
@@ -244,7 +243,7 @@ function isCcValid() {
     } else if(regexNums.test(ccNumValue)) {
         ccNum.setAttribute('required', false);
         //ccNumError change in text content is not working        
-        ccNumError.textContent = 'none';
+        ccNumError.innerHTML = '';
         return false;
         //end function	    
     }
@@ -286,7 +285,7 @@ function isCcValid() {
 // }
 
 //an eventlistener that calls tha validate funtions and verifies fieldsets
-fieldset.addEventListener('keyup', (e) => {
+form.addEventListener('keyup', (e) => {
     e.preventDefault();
 
     //if user enters text in name input 
@@ -305,7 +304,6 @@ fieldset.addEventListener('keyup', (e) => {
         isEmailValid();
     }
     if (e.target.id === 'cc-num') {
-        e.preventDefault();
 
     } else {
         isCcValid();
