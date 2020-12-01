@@ -214,8 +214,6 @@ function isEmailValid() {
 //       }
 
 //     }
-    
-
 // isActivityChecked();
  //get the input element with id cc-num set it to ccNum
 const ccNum = document.getElementById('cc-num');
