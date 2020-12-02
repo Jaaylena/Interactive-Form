@@ -101,18 +101,14 @@ designMenu.addEventListener('change', (e) => {
     }
 });
 /*register for activities section*/
-
 activities.addEventListener('change', (e) => {
     let checkedBox = e.target;
     const cost = parseInt(checkedBox.getAttribute('data-cost'));
     //if the input element is checked
     if (checkedBox.checked == true) {
-        //add the cost of the currently clicked activity to the total cost variable.
         totalCost += cost;
-        //use a template literal to display the value of cost
         totalCostLabel.innerHTML = `Total Cost: $${totalCost}`;
     } else {
-        //subtract the cost
         totalCost -= cost;
         totalCostLabel.innerHTML = `Total Cost: $${totalCost}`;
     }
