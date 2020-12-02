@@ -8,7 +8,6 @@ document.querySelector('form').insertAdjacentHTML('afterbegin', `<p class="reqFi
 const otherInput = document.getElementById('other-title');
 otherInput.style.display = 'none';
 const title = document.getElementById('title');
-let titleValue = title.value;
 //created elements to display error messages
 const nameError = document.createElement('span:before');
 const emailError = document.createElement('span:before');
@@ -32,9 +31,35 @@ const colorOption = document.querySelectorAll('#color option');
 const colorPlaceholder = document.createElement('option');
 colorPlaceholder.style.display = 'none';
 colors.appendChild(colorPlaceholder).text = 'Please Select a T-Shirt Theme';
-colors.value = 'Please Select a T-Shirt Theme';   
+colors.value = 'Please Select a T-Shirt Theme'; 
+//get the input element with id cc-num set it to ccNum
+const ccNum = document.getElementById('cc-num');
+const cvvLabel = document.querySelectorAll('.col-3 label')[1];
+cvvLabel.innerHTML = '*cvv';
+const expDate = document.querySelectorAll('.credit-card label')[3];
+expDate.innerHTML = '*Expiration Date:';
+const expYear = document.querySelectorAll('.credit-card label')[4];
+expYear.innerHTML = '*Expiration Year:';
+//get the label of the div element with id credit-card
+const ccLabel = document.querySelector('.col-6 label');
+ccLabel.innerHTML = '*Card Number:';
+const totalCostDiv = document.createElement('div');
+totalCostDiv.id = 'total-cost';
+const totalCostLabel = document.createElement('label');
+totalCostDiv.append(totalCostLabel);
+let totalCost = 0;
+totalCostLabel.innerHTML = `Total Cost: $${totalCost}`;
+const activities = document.querySelector('.activities');
+activities.appendChild(totalCostDiv);
+const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+//set email label innerHTML to *Email: to show user required fields
+const email = document.getElementsByTagName('label')[1];
+email.innerHTML = '*Email:';
+//setting the first label element and setting it to the variable name
+const name = document.getElementsByTagName('label')[0];
+name.innerHTML = '*Name:';
+  
 /***job role section **/
-//when "other" job role is selected in the drop down and text input appears 
 title.addEventListener('change', (e) => {
     e.target.value === 'other' ?
         otherInput.style.display = 'block' :
@@ -76,24 +101,9 @@ designMenu.addEventListener('change', (e) => {
     }
 });
 /*register for activities section*/
-//create an element to display the total activity cost
-const totalCostDiv = document.createElement('div');
-totalCostDiv.id = 'total-cost';
-const totalCostLabel = document.createElement('label');
-totalCostDiv.append(totalCostLabel);
-//create a global variable to store  activity cost initially set to $0
-let totalCost = 0;
-totalCostLabel.innerHTML = `Total Cost: $${totalCost}`;
-//totalCostDiv.append(totalCost);
-const activities = document.querySelector('.activities');
-//append to the .activity section
-activities.appendChild(totalCostDiv);
-//set the checkbox input to a variable checkboxes
-const checkboxes = document.querySelectorAll('input[type="checkbox]');
-//listen for changes in the Activity section using an event listener
+
 activities.addEventListener('change', (e) => {
     let checkedBox = e.target;
-    //get the 'data-cost' attribute value of the clicked element
     const cost = parseInt(checkedBox.getAttribute('data-cost'));
     //if the input element is checked
     if (checkedBox.checked == true) {
@@ -122,7 +132,6 @@ activities.addEventListener('change', (e) => {
 });
 /********* payment section ********/
 
-// listen for change in dropdown in select payment 
 payment.addEventListener('change', (e) => {
     //if selected value is credit card hide paypal and bitcoin option
     if (e.target.value === 'credit card') {
@@ -145,9 +154,6 @@ payment.addEventListener('change', (e) => {
 });
 /** form Validation section */
 function isNameValid() {
-    //setting the first label element and setting it to the variable name
-    const name = document.getElementsByTagName('label')[0];
-    // a variable that gets the element with the ID 'name'
     const nameInput = document.getElementById('name');
     nameInput.insertAdjacentElement('beforebegin', nameError);
     const regName = /^(\w+)\s(\w+)\s?$/i;
@@ -155,8 +161,6 @@ function isNameValid() {
     if (!regName.test(nameInput.value)) {
         //display message 'name is required'
         nameInput.setAttribute('required', true);
-        //adding a * to the name lable to alert the user that its required
-        name.innerHTML = '*Name:';
         nameError.textContent = '* Please enter your first and last name';
         nameError.style.color = '#250D54';
         return true;
@@ -175,9 +179,6 @@ function isEmailValid() {
     //get the value of the input with ID mail setting it to a variable
     const emailInputValue = emailInput.value;
     emailInput.insertAdjacentElement('beforebegin', emailError);
-    //set email label innerHTML to *Email: to show user required fields
-    const email = document.getElementsByTagName('label')[1];
-    email.innerHTML = '*Email:';
     //if userInput is null
     if (!regEmail.test(emailInputValue)) {
         //display message 'incorrect email information'
@@ -192,47 +193,37 @@ function isEmailValid() {
         return false;
     }
 }
-activities.prepend(pickActivity);
 //function to validate activity
 function checkActivities() {
-    
+    const checkbox1 = document.querySelectorAll('.activities label')[0];
     for (let i = 0; i < checkboxes.length; i++) {
        if(!checkboxes[i].checked) {
         checkboxes[i].setAttribute('required', true)
-        pickActivity.textContent = 'Please Select an Activity';
+        pickActivity.textContent = '* Please Select an Activity';
+        pickActivity.style.color = 'red';
+        activities.insertBefore(pickActivity, checkbox1);
         return true;
+       } else {
+           pickActivity.textContent = '';
+           return false;
        }
     }
  }
- 
- //get the input element with id cc-num set it to ccNum
-const ccNum = document.getElementById('cc-num');
-const cvvLabel = document.querySelectorAll('.col-3 label')[1];
-cvvLabel.innerHTML = '*cvv';
-const expDate = document.querySelectorAll('.credit-card label')[3];
-expDate.innerHTML = '*Expiration Date:';
-const expYear = document.querySelectorAll('.credit-card label')[4];
-expYear.innerHTML = '*Expiration Year:';
-//get the label of the div element with id credit-card
-const ccLabel = document.querySelector('.col-6 label');
-//set it's innerHTML to required field
-ccLabel.innerHTML = '*Card Number:';
 //function not working still accepting nondigit input
 function isCcValid() {
     //A variable to store a regex for numbers 
     const regexNums = /^(\d{13,16})$/;
     ccLabel.append(ccNumError);
     //if input matches the regex requirements return true and display error message
-    if (!regexNums.test(ccNum.value) || 0) {
+    if (!regexNums.test(ccNum.value) || /^[^@]+@[^@.]+\.[\w+]+$/) {
         ccNum.setAttribute('required', true);
         ccNumError.textContent = ' Card number should contain 13 to 16 digits';
         ccNumError.style.color = 'red';
         return true;
-    } else if(regexNums.test(ccNum.value)) {
+    } else {
         ccNum.setAttribute('required', false);
         ccNumError.textContent = '';
         return false;
-        //end function	    
     }
 }
 //formatting funtion to reformat the ccnumber input
@@ -302,6 +293,7 @@ submitButton.addEventListener('click', (e) => {
     isNameValid();
     isEmailValid();
     checkActivities();
+    isCcValid();
     alert('Please complete the form');
 
 });
