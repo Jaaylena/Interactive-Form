@@ -11,7 +11,7 @@ const title = document.getElementById('title');
 //created elements to display error messages
 const nameError = document.createElement('span:before');
 const emailError = document.createElement('span:before');
-const ccNumError = document.createElement('span:before');
+const ccNumError = document.createElement('p');
 const zipErrorSpan = document.createElement('span:before');
 const pickActivity = document.createElement('p');
 //variables for separating the payment methods 
@@ -131,20 +131,17 @@ activities.addEventListener('change', (e) => {
     }
 });
 /********* payment section ********/
-
+//show/hide pym options depending on the users selection
 payment.addEventListener('change', (e) => {
-    //if selected value is credit card hide paypal and bitcoin option
     if (e.target.value === 'credit card') {
         creditCard.style.display = 'block';
         payPal.style.display = 'none';
         bitcoin.style.display = 'none';
-        //if selected value is paypal hide credit card and bitcoin option
     }
     if (e.target.value === 'paypal') {
         payPal.style.display = 'block';
         creditCard.style.display = 'none';
         bitcoin.style.display = 'none';
-        //if selected value is bitcoin hide paypal, and credit card option 
     }
     if (e.target.value === 'bitcoin') {
         bitcoin.style.display = 'block';
@@ -211,15 +208,11 @@ function checkActivities() {
  }
 //function not working still accepting nondigit input
 function isCcValid() {
-    //A variable to store a regex for numbers 
     const regexNums = /^(\d{13,16})$/;
-    ccLabel.append(ccNumError);
     //if input matches the regex requirements return true and display error message
     if (!regexNums.test(ccNum.value) || /^[^@]+@[^@.]+\.[\w+]+$/) {
         ccNum.setAttribute('required', true);
-        ccNumError.textContent = ' Card number should contain 13 to 16 digits';
-        ccNumError.style.color = 'red';
-        return true;
+        
     } else {
         ccNum.setAttribute('required', false);
         ccNumError.textContent = '';
