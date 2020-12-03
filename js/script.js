@@ -248,7 +248,7 @@ function isCvvValid(){
     cvvLabel.append(errorCVV);
   } else {
     cvvInput.setAttribute('required', false);
-
+    errorCVV.textContent = '';
   }
 }
 
