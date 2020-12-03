@@ -1,7 +1,7 @@
 /*
  */
 document.getElementById('name').focus();
-const form = document.querySelector('fieldset');
+const form = document.querySelector('form');
 const submitButton = document.querySelector('button');
 //create a error message explaination
 document.querySelector('form').insertAdjacentHTML('afterbegin', `<p class="reqField">* - required field</p>`);
@@ -62,7 +62,12 @@ name.innerHTML = '*Name:';
 const zip = document.getElementById('zip');
 const zipLabel = document.querySelectorAll('.col-3 label')[0];
 zipLabel.innerHTML = '*Zip Code:';
-
+checkboxes.addEventListener('focus', (event) => {
+    event.target.style.background = '#250D54';
+}, true);
+checkboxes.addEventListener('blur', (event) => {
+    event.target.style.background = '';
+}, true);
 /***job role section **/
 title.addEventListener('change', (e) => {
     e.target.value === 'other' ?
@@ -170,7 +175,6 @@ function isEmailValid() {
         emailError.textContent = '*Please enter a valid Email address';
         emailError.style.color = '#250D54';
         return true;
-        e.preventDefault();
     } else {
         emailInput.setAttribute('required', false);
         emailError.textContent = '';
@@ -206,13 +210,6 @@ function isCcValid() {
         return false;
     }
 }
-//formatting funtion to reformat the ccnumber input
-
-//  function formatCcNumber() {
-//      const regexNums = /(\d{4})-?(\d{4})-?(\d{4})-?(\d{4})/;
-//      return ccNumValue.replace(regexNums, $1 - $2 - $3 - $4);
-//  }
-// console.log(formatCcNumber);
 function isZipValid() {
     const regexZip = /\b\d{5}\b/;
     if(!regexZip.test(zip.value)){
@@ -238,37 +235,23 @@ function isCvvValid(){
     errorCVV.textContent = '';
   }
 }
-
 //an eventlistener that calls tha validate funtions and verifies fieldsets
 form.addEventListener('keyup', (e) => {
     e.preventDefault();
-
-    //if user enters text in name input 
     if (e.target.id === 'name') {
         e.preventDefault();
-
-        //validate name
-    } else {
         isNameValid();
-
-    }
-    if (e.target.id === 'email') {
+    } else if (e.target.id === 'mail') {
         e.preventDefault();
-
-    } else {
         isEmailValid();
-    }
-    if (e.target.id === 'cc-num') {
+    } else if (e.target.id === 'cc-num') {
         e.preventDefault();
-    } else {
         isCcValid();
-    } if(e.target.id === 'zip') {
+    } else if(e.target.id === 'zip') {
         e.preventDefault();
-    } else {
         isZipValid();
-    } if(e.target.id === 'cvv') {
+    } else if(e.target.id === 'cvv') {
         e.preventDefault();
-    } else {
         isCvvValid();
     }
  });

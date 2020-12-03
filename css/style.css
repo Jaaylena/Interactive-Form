@@ -112,10 +112,9 @@ input:focus {
 
 input[type="checkbox"],
 input[type="radio"] {
-	display: inline-block;
+	display: inline;
 }
-/** created this block to display invalid
-found on this page https://developer.mozilla.org/en-US/docs/Web/CSS/:valid */
+/** created this block to display invalid */
 input {
 	position: relative;
   }
@@ -128,19 +127,11 @@ input {
   
   input:invalid {
 	border: 2px solid rgb(241, 6, 6);
-	
-  }
-  /* not function css code  */
-  input:invalid + span {
-	content: '✖';
-	background-color: red;
 	background-color: rgb(243, 107, 107);
+
   }
-  
-  input:valid + span::before {
-	content: '✓';
-	color: green;
-  }
+
+
 /** end of the created invalid structure*/
 
 button {
@@ -235,6 +226,11 @@ option {
 	header {
 		padding: 4.65em 0 2.5em;
 	}
+	.name, 
+	.mail {
+		float: left;
+	}
+	
 	.col {
 		float: left;
 	}
@@ -247,7 +243,9 @@ option {
 	.col-6 {
 		width: 49%;
 	}
-
+	button {
+		float: center;
+	}
 	label {
 		clear: both;
 	}
