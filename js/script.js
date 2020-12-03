@@ -9,8 +9,8 @@ const otherInput = document.getElementById('other-title');
 otherInput.style.display = 'none';
 const title = document.getElementById('title');
 //created elements to display error messages
-const nameError = document.createElement('span:before');
-const emailError = document.createElement('span:before');
+const nameError = document.createElement('div');
+const emailError = document.createElement('div');
 const errorCC = document.createElement('div');
 const zipError = document.createElement('div');
 const errorCVV = document.createElement('div');
@@ -89,7 +89,7 @@ designMenu.addEventListener('change', (e) => {
         colors[i].style.display = 'none';
         //if user selects "Theme- I Puns"
         if (e.target.value === 'js puns') {
-            //the color menu should display "cornflower blue", "dark slate grey", and "gold"
+            //the color menu displays "cornflower blue", "dark slate grey", and "gold"
             colorOption[0].style.display = 'block';
             colorOption[1].style.display = 'block';
             colorOption[2].style.display = 'block';
@@ -97,7 +97,7 @@ designMenu.addEventListener('change', (e) => {
         }
         //if user selects "theme- I heart JS" 
         if (e.target.value === 'heart js') {
-            //color menu should display "Tomatoe", "steel blue", and "dim grey"
+        //color menu displays "Tomatoe", "steel blue", and "dim grey"
             colorOption[3].style.display = 'block';
             colorOption[4].style.display = 'block';
             colorOption[5].style.display = 'block';
@@ -108,7 +108,7 @@ designMenu.addEventListener('change', (e) => {
 activities.addEventListener('change', (e) => {
     let checkedBox = e.target;
     const cost = parseInt(checkedBox.getAttribute('data-cost'));
-    //if the input element is checked
+    const activityTime = checkedBox.getAttribute('data-day-and-time');
     if (checkedBox.checked == true) {
         totalCost += cost;
         totalCostLabel.innerHTML = `Total Cost: $${totalCost}`;
@@ -116,14 +116,9 @@ activities.addEventListener('change', (e) => {
         totalCost -= cost;
         totalCostLabel.innerHTML = `Total Cost: $${totalCost}`;
     }
-    const activityTime = checkedBox.getAttribute('data-day-and-time');
-    //retrieve the list of activities with an attribute of 'data-day-and time'
     for (let i = 0; i < checkboxes.length; i++) {
-        //set the iterate to a variable called dateAndTimee
         const dateAndTime = checkboxes[i].getAttribute('data-day-and-time');
-        //check to see if the checked activity matches anothers dateAndTime
         if (dateAndTime === activityTime && checkedBox !== checkboxes[i]) {
-            //disable any activity with conflicting times 
             checkedBox.checked ?
                 checkboxes[i].disabled = true :
                 checkboxes[i].disabled = false;
@@ -154,9 +149,7 @@ function isNameValid() {
     const nameInput = document.getElementById('name');
     nameInput.insertAdjacentElement('beforebegin', nameError);
     const regName = /^(\w+)\s(\w+)\s?$/i;
-    //if userInput in name field is blank 
     if (!regName.test(nameInput.value)) {
-        //display message 'name is required'
         nameInput.setAttribute('required', true);
         nameError.textContent = '* Please enter your first and last name';
         nameError.style.color = '#250D54';
@@ -169,16 +162,10 @@ function isNameValid() {
 }
 
 function isEmailValid() {
-    //regex for testing the input email
     const regEmail = /^[^@]+@[^@.]+\.[\w+]+$/i;
-    //get the input with id email and set it to a variable
     const emailInput = document.getElementById('mail');
-    //get the value of the input with ID mail setting it to a variable
-    const emailInputValue = emailInput.value;
     emailInput.insertAdjacentElement('beforebegin', emailError);
-    //if userInput is null
-    if (!regEmail.test(emailInputValue)) {
-        //display message 'incorrect email information'
+    if (!regEmail.test(emailInput.value)) {
         emailInput.setAttribute('required', true);
         emailError.textContent = '*Please enter a valid Email address';
         emailError.style.color = '#250D54';
@@ -243,7 +230,7 @@ function isCvvValid(){
   const regexCvv = /^\d{3}$/;
   if(!regexCvv.test(cvvInput.value)) {
     cvvInput.setAttribute('required', true);
-    errorCVV.style.borderColor = 'red';
+    errorCVV.style.color = 'red';
     errorCVV.textContent = ' *Security Code Needed';
     cvvLabel.append(errorCVV);
   } else {
@@ -253,33 +240,40 @@ function isCvvValid(){
 }
 
 //an eventlistener that calls tha validate funtions and verifies fieldsets
-// form.addEventListener('keyup', (e) => {
-//     e.preventDefault();
+form.addEventListener('keyup', (e) => {
+    e.preventDefault();
 
-//     //if user enters text in name input 
-//     if (e.target.id === 'name') {
-//         e.preventDefault();
+    //if user enters text in name input 
+    if (e.target.id === 'name') {
+        e.preventDefault();
 
-//         //validate name
-//     } else {
-//         isNameValid();
+        //validate name
+    } else {
+        isNameValid();
 
-//     }
-//     if (e.target.id === 'email') {
-//         e.preventDefault();
+    }
+    if (e.target.id === 'email') {
+        e.preventDefault();
 
-//     } else {
-//         isEmailValid();
-//     }
-//     if (e.target.id === 'cc-num') {
-
-//     } else {
-//         isCcValid();
-//     }
-// });
+    } else {
+        isEmailValid();
+    }
+    if (e.target.id === 'cc-num') {
+        e.preventDefault();
+    } else {
+        isCcValid();
+    } if(e.target.id === 'zip') {
+        e.preventDefault();
+    } else {
+        isZipValid();
+    } if(e.target.id === 'cvv') {
+        e.preventDefault();
+    } else {
+        isCvvValid();
+    }
+ });
 submitButton.addEventListener('click', (e) => {
     e.preventDefault();
-    console.log('the button works boom');
     isNameValid();
     isEmailValid();
     checkActivities();
@@ -287,5 +281,4 @@ submitButton.addEventListener('click', (e) => {
     isZipValid();
     isCvvValid();
     alert('Please complete the form');
-
 });
