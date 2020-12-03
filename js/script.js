@@ -11,9 +11,10 @@ const title = document.getElementById('title');
 //created elements to display error messages
 const nameError = document.createElement('span:before');
 const emailError = document.createElement('span:before');
-const ccNumError = document.createElement('p');
-const zipErrorSpan = document.createElement('span:before');
-const pickActivity = document.createElement('p');
+const errorCC = document.createElement('div');
+const zipError = document.createElement('div');
+const errorCVV = document.createElement('div');
+const pickActivity = document.createElement('span:before');
 //variables for separating the payment methods 
 const payments = document.querySelectorAll('#payment');
 const paymentOption = document.querySelectorAll('#payment option');
@@ -58,7 +59,10 @@ email.innerHTML = '*Email:';
 //setting the first label element and setting it to the variable name
 const name = document.getElementsByTagName('label')[0];
 name.innerHTML = '*Name:';
-  
+const zip = document.getElementById('zip');
+const zipLabel = document.querySelectorAll('.col-3 label')[0];
+zipLabel.innerHTML = '*Zip Code:';
+
 /***job role section **/
 title.addEventListener('change', (e) => {
     e.target.value === 'other' ?
@@ -157,7 +161,7 @@ function isNameValid() {
         nameError.textContent = '* Please enter your first and last name';
         nameError.style.color = '#250D54';
         return true;
-    } else if (regName.test(nameInput.value)) {
+    } else {
         nameInput.setAttribute('required', false);
         nameError.textContent = '';
         return false;
@@ -186,7 +190,6 @@ function isEmailValid() {
         return false;
     }
 }
-//function to validate activity
 function checkActivities() {
     const checkbox1 = document.querySelectorAll('.activities label')[0];
     for (let i = 0; i < checkboxes.length; i++) {
@@ -202,16 +205,17 @@ function checkActivities() {
        }
     }
  }
-//function not working still accepting nondigit input
 function isCcValid() {
     const regexNums = /^(\d{13,16})$/;
-    //if input matches the regex requirements return true and display error message
-    if (!regexNums.test(ccNum.value) || /^[^@]+@[^@.]+\.[\w+]+$/) {
+    if (!regexNums.test(ccNum.value)) {
         ccNum.setAttribute('required', true);
-        
+        errorCC.textContent = ' *should contain 13-16 digits';
+        errorCC.style.color = 'red';
+        ccLabel.append(errorCC);
+        return true;
     } else {
         ccNum.setAttribute('required', false);
-        ccNumError.textContent = '';
+        errorCC.textContent = '';
         return false;
     }
 }
@@ -222,34 +226,31 @@ function isCcValid() {
 //      return ccNumValue.replace(regexNums, $1 - $2 - $3 - $4);
 //  }
 // console.log(formatCcNumber);
-// // //function that validates the zip code input
-// function isZipValid() {
-//     //create a regex to test zip code input that 
-//     const regexZip = /\b\d{5}\b/;
-//     const zip = document.getElementById('zip');
-//     const zipLabel = document.querySelectorAll('.col-3 label')[0];
-//     zip.append(zipErrorSpan);
-//     zipLabel.innerHTML = '*Zip Code:';
-//     if(!regexZip.test(zip.value)){
-//       zip.setAttribute('required', true);
-//       zipErrorSpan.innerHTML = 'Please enter a valid Zip code';
-//       return true;
-//     } else {
-//       zip.setAttribute('required', false);
-//       return false;
-//     }
-// }
-// function isCvvValid(){
-//   const cvvInput = document.getElementById('cvv');
-//   const regexCvv = /^\d{3}$/;
-//   if(!regexCvv.test(cvvInput.value) === false) {
-//   cvvInput.setAttribute('required', true);
-//   cvvInput.style.borderColor = 'red';
-//   } else {
-//     cvvInput.setAttribute('required', false);
+function isZipValid() {
+    const regexZip = /\b\d{5}\b/;
+    if(!regexZip.test(zip.value)){
+      zip.setAttribute('required', true);
+      zipLabel.append(zipError);
+      zipError.textContent = ' *Invalid zip code';
+      zipError.style.color = 'red';
+    } else {
+      zip.setAttribute('required', false);
+      zipError.textContent = '';
+    }
+}
+function isCvvValid(){
+  const cvvInput = document.getElementById('cvv');
+  const regexCvv = /^\d{3}$/;
+  if(!regexCvv.test(cvvInput.value)) {
+    cvvInput.setAttribute('required', true);
+    errorCVV.style.borderColor = 'red';
+    errorCVV.textContent = ' *Security Code Needed';
+    cvvLabel.append(errorCVV);
+  } else {
+    cvvInput.setAttribute('required', false);
 
-//   }
-// }
+  }
+}
 
 //an eventlistener that calls tha validate funtions and verifies fieldsets
 // form.addEventListener('keyup', (e) => {
@@ -283,6 +284,8 @@ submitButton.addEventListener('click', (e) => {
     isEmailValid();
     checkActivities();
     isCcValid();
+    isZipValid();
+    isCvvValid();
     alert('Please complete the form');
 
 });
