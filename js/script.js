@@ -62,7 +62,6 @@ name.innerHTML = '*Name:';
 const zip = document.getElementById('zip');
 const zipLabel = document.querySelectorAll('.col-3 label')[0];
 zipLabel.innerHTML = '*Zip Code:';
-
 /***job role section **/
 title.addEventListener('change', (e) => {
     e.target.value === 'other' ?
@@ -124,6 +123,12 @@ activities.addEventListener('change', (e) => {
                 checkboxes[i].disabled = false;
         }
     }
+});
+activities.addEventListener('focus', (e) => {
+    e.target.style.background = 'red';
+});
+activities.addEventListener('blur', (e) => {
+    e.target.style.background = 'red';
 });
 /********* payment section ********/
 //show/hide pym options depending on the users selection
