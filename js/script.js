@@ -62,12 +62,7 @@ name.innerHTML = '*Name:';
 const zip = document.getElementById('zip');
 const zipLabel = document.querySelectorAll('.col-3 label')[0];
 zipLabel.innerHTML = '*Zip Code:';
-checkboxes.addEventListener('focus', (event) => {
-    event.target.style.background = '#250D54';
-}, true);
-checkboxes.addEventListener('blur', (event) => {
-    event.target.style.background = '';
-}, true);
+
 /***job role section **/
 title.addEventListener('change', (e) => {
     e.target.value === 'other' ?
