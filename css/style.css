@@ -127,7 +127,7 @@ input {
   
   input:invalid {
 	border: 2px solid rgb(241, 6, 6);
-	background-color: rgb(243, 107, 107);
+	background-color: rgb(245, 127, 127);
 
   }
 
@@ -226,11 +226,7 @@ option {
 	header {
 		padding: 4.65em 0 2.5em;
 	}
-	.name, 
-	.mail {
-		float: left;
-	}
-	
+		
 	.col {
 		float: left;
 	}

@@ -73,30 +73,22 @@ for (let i = 0; i < colors.length; i++) {
     //hide the colors in the "color" drop down    
     colors[i].style.display = 'none';
 }
-//when a design theme is selected show the colors for that theme
+//event listener for displaying colors depending on selected theme
 designMenu.addEventListener('change', (e) => {
-    //when a theme is selected drop down placeholder changes to 'choose a color' 
     colors.appendChild(colorPlaceholder).text = 'Choose a Color';
     colors.value = 'Choose a Color';
     if (designMenu.value === 'Select Theme') {
         colors.appendChild(colorPlaceholder).text = 'Please Select a T-Shirt Theme';
         colors.value = 'Please Select a T-Shirt Theme';
     }
-    //filter the available "color" options by the selected theme in the design field
     for (let i = 0; i < colors.length; i++) {
-        //hide the colors in the "color" drop down    
         colors[i].style.display = 'none';
-        //if user selects "Theme- I Puns"
         if (e.target.value === 'js puns') {
-            //the color menu displays "cornflower blue", "dark slate grey", and "gold"
             colorOption[0].style.display = 'block';
             colorOption[1].style.display = 'block';
             colorOption[2].style.display = 'block';
-            //display options that match the users theme selection
         }
-        //if user selects "theme- I heart JS" 
         if (e.target.value === 'heart js') {
-        //color menu displays "Tomatoe", "steel blue", and "dim grey"
             colorOption[3].style.display = 'block';
             colorOption[4].style.display = 'block';
             colorOption[5].style.display = 'block';
@@ -124,11 +116,12 @@ activities.addEventListener('change', (e) => {
         }
     }
 });
-activities.addEventListener('focus', (e) => {
-    e.target.style.background = 'red';
+const activityCheckbox = document.querySelector('.activities input[type="checkbox"]');
+activityCheckbox.addEventListener('focus', (e) => {
+    e.target.style.color = 'red';
 });
-activities.addEventListener('blur', (e) => {
-    e.target.style.background = 'red';
+activityCheckbox.addEventListener('blur', (e) => {
+    e.target.style.bordercolor = '';
 });
 /********* payment section ********/
 //show/hide pym options depending on the users selection
