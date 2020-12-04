@@ -121,9 +121,8 @@ activityCheckbox.addEventListener('focus', (e) => {
     const activitiesLabel = document.querySelectorAll('.activities label');
     activitiesLabel.classList = 'focus';        
     for(let i = 0; activitiesLabel.length; i++) {
-        break;
-
         console.log(activitiesLabel[i]);
+        break;
     }
      console.log('checkbox focus is working');
      console.log(activitiesLabel);
