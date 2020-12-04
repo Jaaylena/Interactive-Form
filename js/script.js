@@ -116,9 +116,16 @@ activities.addEventListener('change', (e) => {
         }
     }
 });
+
 const activityCheckbox = document.querySelector('.activities input[type="checkbox"]');
-activityCheckbox.addEventListener('focus', (e) => {
-    e.target.style.color = 'red';
+
+ activityCheckbox.addEventListener('focus', (e) => {
+     for(let i = 0; i <= activities.length; i++) {
+         activities[i].style.color = '#250D54';        
+     }
+     console.log('checkbox focus is working');
+
+ 
 });
 activityCheckbox.addEventListener('blur', (e) => {
     e.target.style.bordercolor = '';
@@ -230,7 +237,6 @@ function isCvvValid(){
 }
 //an eventlistener that calls tha validate funtions and verifies fieldsets
 form.addEventListener('keyup', (e) => {
-    e.preventDefault();
     if (e.target.id === 'name') {
         e.preventDefault();
         isNameValid();
