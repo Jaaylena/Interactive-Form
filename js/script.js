@@ -115,10 +115,19 @@ activities.addEventListener('change', (e) => {
                 checkboxes[i].disabled = false;
         }
     }
+    [...checkboxes].forEach(cb => (cb.disabled) ? cb.parentElement.classList.add('disabled') : cb.parentElement.classList.remove('disabled'));
+
 });
-const checkboxes = document.querySelector('.activities input');
-document.querySelector(.activities).addEventListener('focus', (e) => {
-    
+activities.addEventListener('focus', (e) => {
+    const click = e.target;
+    const clickType = clicked.getAttribute('data-cost');
+    for(let i = 0; i < checkboxes.length; i++) {
+        const checkboxType = checkboxes[i].getAttribute('data-cost');
+        if(clickType.checked) {
+
+        }
+    }
+    console.log(clickType);
 });
 
 /********* payment section ********/
