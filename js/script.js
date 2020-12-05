@@ -116,20 +116,11 @@ activities.addEventListener('change', (e) => {
         }
     }
 });
-const activityCheckbox = document.querySelector('.activities input[type="checkbox"]');
-activityCheckbox.addEventListener('focus', (e) => {
-    const activitiesLabel = document.querySelectorAll('.activities label');
-    activitiesLabel.classList = 'focus';        
-    for(let i = 0; activitiesLabel.length; i++) {
-        console.log(activitiesLabel[i]);
-        break;
-    }
-     console.log('checkbox focus is working');
-     console.log(activitiesLabel);
+const checkboxes = document.querySelector('.activities input');
+document.querySelector(.activities).addEventListener('focus', (e) => {
+    
 });
-// activityCheckbox.addEventListener('blur', (e) => {
-//     e.target.style.bordercolor = '';
-// });
+
 /********* payment section ********/
 //show/hide pym options depending on the users selection
 payment.addEventListener('change', (e) => {
