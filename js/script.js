@@ -123,7 +123,6 @@ activities.addEventListener('change', (e) => {
       if (active) active.classList.remove('focus');
     })
   });
-
 /********* payment section ********/
 //show/hide pym options depending on the users selection
 payment.addEventListener('change', (e) => {
@@ -159,7 +158,6 @@ function isNameValid() {
         return false;
     }
 }
-
 function isEmailValid() {
     const regEmail = /^[^@]+@[^@.]+\.[\w+]+$/i;
     const emailInput = document.getElementById('mail');
@@ -248,7 +246,7 @@ form.addEventListener('keyup', (e) => {
         isCvvValid();
     }
  });
-submitButton.addEventListener('click', (e) => {
+submitButton.addEventListener('submit', (e) => {
     e.preventDefault();
     isNameValid();
     isEmailValid();
@@ -256,5 +254,7 @@ submitButton.addEventListener('click', (e) => {
     isCcValid();
     isZipValid();
     isCvvValid();
-    alert('Please complete the form');
+    if(isNameValid() || isEmailValid() || checkActivities() || isCcValid() || isZipValid() || isCvvValid() === null || 0) {
+        alert('Please complete the form');
+    } 
 });
