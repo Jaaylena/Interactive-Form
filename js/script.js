@@ -120,7 +120,7 @@ activities.addEventListener('change', (e) => {
     cb.addEventListener('focus', e => cb.parentElement.classList.add('focus'));
     cb.addEventListener('blur', e => {
       const active = document.querySelector('.focus');
-      active.style.display.bordercolor = '#3f3288';
+     console.log('checkbox focus is working');
       if (active) active.classList.remove('focus');
     })
   });
