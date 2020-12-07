@@ -14,7 +14,7 @@ const emailError = document.createElement('div');
 const errorCC = document.createElement('div');
 const zipError = document.createElement('div');
 const errorCVV = document.createElement('div');
-const pickActivity = document.createElement('span:before');
+const pickActivity = document.createElement('div');
 //variables for separating the payment methods 
 const payments = document.querySelectorAll('#payment');
 const paymentOption = document.querySelectorAll('#payment option');
@@ -246,7 +246,7 @@ form.addEventListener('keyup', (e) => {
         isCvvValid();
     }
  });
-submitButton.addEventListener('submit', (e) => {
+submitButton.addEventListener('click', (e) => {
     e.preventDefault();
     isNameValid();
     isEmailValid();
@@ -254,7 +254,7 @@ submitButton.addEventListener('submit', (e) => {
     isCcValid();
     isZipValid();
     isCvvValid();
-    if(isNameValid() || isEmailValid() || checkActivities() || isCcValid() || isZipValid() || isCvvValid() === null || 0) {
+    if(isNameValid() || isEmailValid() || checkActivities() === null) {
         alert('Please complete the form');
     } 
 });
