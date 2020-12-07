@@ -120,20 +120,10 @@ activities.addEventListener('change', (e) => {
     cb.addEventListener('focus', e => cb.parentElement.classList.add('focus'));
     cb.addEventListener('blur', e => {
       const active = document.querySelector('.focus');
+      active.style.display.bordercolor = '#3f3288';
       if (active) active.classList.remove('focus');
     })
   });
-activities.addEventListener('focus', (e) => {
-    const click = e.target;
-    const clickType = clicked.getAttribute('data-cost');
-    for(let i = 0; i < checkboxes.length; i++) {
-        const checkboxType = checkboxes[i].getAttribute('data-cost');
-        if(clickType.checked) {
-
-        }
-    }
-    console.log(clickType);
-});
 
 /********* payment section ********/
 //show/hide pym options depending on the users selection
