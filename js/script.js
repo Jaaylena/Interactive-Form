@@ -115,9 +115,14 @@ activities.addEventListener('change', (e) => {
                 checkboxes[i].disabled = false;
         }
     }
-    [...checkboxes].forEach(cb => (cb.disabled) ? cb.parentElement.classList.add('disabled') : cb.parentElement.classList.remove('disabled'));
-
 });
+[...checkboxes].forEach((cb) => {
+    cb.addEventListener('focus', e => cb.parentElement.classList.add('focus'));
+    cb.addEventListener('blur', e => {
+      const active = document.querySelector('.focus');
+      if (active) active.classList.remove('focus');
+    })
+  });
 activities.addEventListener('focus', (e) => {
     const click = e.target;
     const clickType = clicked.getAttribute('data-cost');
