@@ -100,7 +100,7 @@ activities.addEventListener('change', (e) => {
     let checkedBox = e.target;
     const cost = parseInt(checkedBox.getAttribute('data-cost'));
     const activityTime = checkedBox.getAttribute('data-day-and-time');
-    if (checkedBox.checked == true) {
+    if (checkedBox.checked === true) {
         totalCost += cost;
         totalCostLabel.innerHTML = `Total Cost: $${totalCost}`;
     } else {
