@@ -227,6 +227,18 @@ function isCvvValid(){
     errorCVV.textContent = '';
   }
 }
+function validateForm() {
+    const formFields = [isNameValid(), isEmailValid(), checkActivities()]
+    if(creditCard.style.display == 'none') {
+       return formFields; 
+       
+} else {
+    formFields;
+    isZipValid();
+    isCcValid();
+    isCvvValid();
+    }
+}
 
 //an eventlistener that calls tha validate funtions and verifies fieldsets
 document.getElementById('name').addEventListener('keyup', isNameValid);
@@ -235,11 +247,8 @@ document.getElementById('cc-num').addEventListener('keyup', isCcValid);
 document.getElementById('zip').addEventListener('keyup', isZipValid);
 document.getElementById('cvv').addEventListener('keyup', isCvvValid);
 submitButton.addEventListener('click', (e) => {
-    isNameValid();
-    isEmailValid();
-    checkActivities();
-    isCcValid();
-    isZipValid();
-    isCvvValid();
     e.preventDefault();
+    validateForm();
+    
+   
 });
