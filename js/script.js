@@ -227,34 +227,19 @@ function isCvvValid(){
     errorCVV.textContent = '';
   }
 }
+
 //an eventlistener that calls tha validate funtions and verifies fieldsets
-form.addEventListener('keyup', (e) => {
-    if (e.target.id === 'name') {
-        e.preventDefault();
-        isNameValid();
-    } else if (e.target.id === 'mail') {
-        e.preventDefault();
-        isEmailValid();
-    } else if (e.target.id === 'cc-num') {
-        e.preventDefault();
-        isCcValid();
-    } else if(e.target.id === 'zip') {
-        e.preventDefault();
-        isZipValid();
-    } else if(e.target.id === 'cvv') {
-        e.preventDefault();
-        isCvvValid();
-    }
- });
+document.getElementById('name').addEventListener('keyup', isNameValid);
+document.getElementById('mail').addEventListener('keyup', isEmailValid);
+document.getElementById('cc-num').addEventListener('keyup', isCcValid);
+document.getElementById('zip').addEventListener('keyup', isZipValid);
+document.getElementById('cvv').addEventListener('keyup', isCvvValid);
 submitButton.addEventListener('click', (e) => {
-    e.preventDefault();
     isNameValid();
     isEmailValid();
     checkActivities();
     isCcValid();
     isZipValid();
     isCvvValid();
-    if(isNameValid() || isEmailValid() || checkActivities() === null) {
-        alert('Please complete the form');
-    } 
+    e.preventDefault();
 });
