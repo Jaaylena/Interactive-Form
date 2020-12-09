@@ -230,9 +230,7 @@ function isCvvValid() {
 }
 function validateForm() {
   const formFields = [isNameValid(), isEmailValid(), checkActivities()];
-  if (creditCard.style.display == "none") {
-    return formFields;
-  } else {
+  if (payments.value = 'credit-card') {
     formFields;
     isZipValid();
     isCcValid();
