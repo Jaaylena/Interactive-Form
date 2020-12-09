@@ -9,7 +9,7 @@ const otherInput = document.getElementById('other-title');
 otherInput.style.display = 'none';
 const title = document.getElementById('title');
 //created elements to display error messages
-const nameError = document.createElement('div');
+let nameError = document.createElement('div');
 const emailError = document.createElement('div');
 const errorCC = document.createElement('div');
 const zipError = document.createElement('div');
@@ -152,11 +152,11 @@ function isNameValid() {
         nameError.textContent = '* Please enter your first and last name';
         nameError.style.color = '#250D54';
         return true;
-    } else {
+     } else {
         nameInput.setAttribute('required', false);
         nameError.textContent = '';
         return false;
-    }
+    } 
 }
 function isEmailValid() {
     const regEmail = /^[^@]+@[^@.]+\.[\w+]+$/i;
@@ -250,5 +250,4 @@ submitButton.addEventListener('click', (e) => {
     e.preventDefault();
     validateForm();
     
-   
 });
