@@ -152,12 +152,12 @@ function isNameValid() {
     nameInput.setAttribute("required", true);
     nameError.textContent = "* Please enter your first and last name";
     nameError.style.color = "#250D54";
-    return true;
+    return true; 
   } else {
     nameInput.setAttribute("required", false);
     nameError.textContent = "";
     return false;
-  }
+  } 
 }
 function isEmailValid() {
   const regEmail = /^[^@]+@[^@.]+\.[\w+]+$/i;
@@ -246,9 +246,10 @@ document.getElementById("cc-num").addEventListener("keyup", isCcValid);
 document.getElementById("zip").addEventListener("keyup", isZipValid);
 document.getElementById("cvv").addEventListener("keyup", isCvvValid);
 submitButton.addEventListener("click", (e) => {
-  validateForm();
-
-    e.preventDefault();
-
-
+ 
+if(!validateForm()) {
+  e.preventDefault();
+  } else {
+    validateForm();
+  }
 });
