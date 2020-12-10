@@ -21,7 +21,7 @@ const zipError = document.createElement("div");
 const errorCVV = document.createElement("div");
 const pickActivity = document.createElement("div");
 //variables for separating the payment methods
-const payments = document.querySelectorAll("#payment");
+const payments = document.querySelector("#payment");
 const paymentOption = document.querySelectorAll("#payment option");
 const creditCard = document.querySelector("#credit-card");
 const payPal = document.querySelector("#paypal");
@@ -229,13 +229,17 @@ function isCvvValid() {
   }
 }
 function validateForm() {
-  const formFields = [isNameValid(), isEmailValid(), checkActivities()];
-  if (payments.value = 'credit-card') {
-    formFields;
-    isZipValid();
-    isCcValid();
-    isCvvValid();
-  }
+  let formFields = [isNameValid(), isEmailValid(), checkActivities()];
+    if(payments.value === 'credit card') {
+      formFields.push(isZipValid(), isCcValid(), isCvvValid());
+    }
+    for(let i = 0; i < formFields.length; i++) {
+      if(formFields[i] == false) {
+        return false;
+      } else {
+        return true;
+      }
+    }
 }
 //an eventlistener that calls tha validate funtions and verifies fieldsets
 document.getElementById("name").addEventListener("keyup", isNameValid);
@@ -244,10 +248,8 @@ document.getElementById("cc-num").addEventListener("keyup", isCcValid);
 document.getElementById("zip").addEventListener("keyup", isZipValid);
 document.getElementById("cvv").addEventListener("keyup", isCvvValid);
 submitButton.addEventListener("click", (e) => {
- 
-if(!validateForm()) {
+
+if(validateForm()) {
   e.preventDefault();
-  } else {
-    validateForm();
-  }
+}
 });
