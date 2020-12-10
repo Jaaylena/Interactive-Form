@@ -27,7 +27,7 @@ const creditCard = document.querySelector("#credit-card");
 const payPal = document.querySelector("#paypal");
 const bitcoin = document.querySelector("#bitcoin");
 paymentOption[0].hidden = true;
-payment.value = "credit card";
+payments.value = "credit card";
 payPal.style.display = "none";
 bitcoin.style.display = "none";
 const designMenu = document.querySelector("#design");
@@ -210,9 +210,11 @@ function isZipValid() {
     zipLabel.append(zipError);
     zipError.textContent = " *Invalid zip code";
     zipError.style.color = "red";
+    return true;
   } else {
     zip.setAttribute("required", false);
     zipError.textContent = "";
+    return false;
   }
 }
 function isCvvValid() {
@@ -223,26 +225,27 @@ function isCvvValid() {
     errorCVV.style.color = "red";
     errorCVV.textContent = " *Security Code Needed";
     cvvLabel.append(errorCVV);
+    return true;
   } else {
     cvvInput.setAttribute("required", false);
     errorCVV.textContent = "";
+    return false;
   }
 }
 function validateForm() {
-  let formFields = [isNameValid(), isEmailValid(), checkActivities()];
-    if(payments.value === 'credit card') {
-      formFields.push(isZipValid(), isCcValid(), isCvvValid());
-      console.log(formFields);
+  const formFields = [isNameValid(), isEmailValid(), checkActivities()];
+  if(payments.value === 'credit card') {
+    formFields.push(isCcValid(), isZipValid(), isCvvValid());
+  }
+  for(let i = 0; i < formFields.length; i++) {
+    if(formFields[i] == false) {
+      return false;
+    } else {
+      return true;
     }
-    for(let i = 0; i < formFields.length; i++) {
-      if(formFields[i] === false) {
-        return false;
-      } else {
-        return true;
-      }
-    }
+  }
 }
-console.log(validateForm());
+// console.log(validateForm());
 //an eventlistener that calls tha validate funtions and verifies fieldsets
 document.getElementById("name").addEventListener("keyup", isNameValid);
 document.getElementById("mail").addEventListener("keyup", isEmailValid);
