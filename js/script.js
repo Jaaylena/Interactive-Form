@@ -232,15 +232,17 @@ function validateForm() {
   let formFields = [isNameValid(), isEmailValid(), checkActivities()];
     if(payments.value === 'credit card') {
       formFields.push(isZipValid(), isCcValid(), isCvvValid());
+      console.log(formFields);
     }
     for(let i = 0; i < formFields.length; i++) {
-      if(formFields[i] == false) {
+      if(formFields[i] === false) {
         return false;
       } else {
         return true;
       }
     }
 }
+console.log(validateForm());
 //an eventlistener that calls tha validate funtions and verifies fieldsets
 document.getElementById("name").addEventListener("keyup", isNameValid);
 document.getElementById("mail").addEventListener("keyup", isEmailValid);
@@ -248,8 +250,7 @@ document.getElementById("cc-num").addEventListener("keyup", isCcValid);
 document.getElementById("zip").addEventListener("keyup", isZipValid);
 document.getElementById("cvv").addEventListener("keyup", isCvvValid);
 submitButton.addEventListener("click", (e) => {
-
-if(validateForm()) {
-  e.preventDefault();
-}
+  if(validateForm()) {
+    e.preventDefault();
+  }
 });
