@@ -149,16 +149,19 @@ function isNameValid() {
   nameInput.insertAdjacentElement("beforebegin", nameError);
   const regName = /^(\w+)?$/i;
   if (!regName.test(nameInput.value)) {
-    nameInput.setCustomValidity("Invalid field");
+    nameInput.setAttribute("required", true);
     nameError.textContent = "* Please enter your first name";
     nameError.style.color = "#250D54";
+    console.log(nameError);
     return false; 
     } else {
     nameInput.setAttribute("required", false);
     nameError.textContent = "";
+    
     return true;
   } 
 }
+
 function isEmailValid() {
   const regEmail = /^[^@]+@[^@.]+\.[\w+]+$/i;
   const emailInput = document.getElementById("mail");
