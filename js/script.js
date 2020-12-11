@@ -149,7 +149,7 @@ function isNameValid() {
   nameInput.insertAdjacentElement("beforebegin", nameError);
   const regName = /^(\w+)?$/i;
   if (!regName.test(nameInput.value)) {
-    nameInput.setAttribute("required", true);
+    nameInput.setCustomValidity("Invalid field");
     nameError.textContent = "* Please enter your first name";
     nameError.style.color = "#250D54";
     return false; 
