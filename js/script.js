@@ -153,7 +153,7 @@ function isNameValid() {
     nameError.textContent = "* Please enter your first and last name";
     nameError.style.color = "#250D54";
     return true; 
-  } else {
+          } else {
     nameInput.setAttribute("required", false);
     nameError.textContent = "";
     return false;
@@ -223,7 +223,7 @@ function isCvvValid() {
   if (!regexCvv.test(cvvInput.value)) {
     cvvInput.setAttribute("required", true);
     errorCVV.style.color = "red";
-    errorCVV.textContent = " *Security Code Needed";
+    errorCVV.textContent = " *3 digits on back";
     cvvLabel.append(errorCVV);
     return true;
   } else {
@@ -240,12 +240,11 @@ function validateForm() {
   for(let i = 0; i < formFields.length; i++) {
     if(formFields[i] == false) {
       return false;
-    } else {
-      return true;
-    }
+    }    
   }
+  return true;
+
 }
-// console.log(validateForm());
 //an eventlistener that calls tha validate funtions and verifies fieldsets
 document.getElementById("name").addEventListener("keyup", isNameValid);
 document.getElementById("mail").addEventListener("keyup", isEmailValid);
