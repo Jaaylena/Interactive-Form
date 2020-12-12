@@ -146,12 +146,13 @@ function createError(formField, message) {
     const errorText = document.createTextNode(message);
     errorMessage.appendChild(errorText);
     errorMessage.className = 'error';
-    formField.style.display.backgroundColor = 'red';
+    formField.setAttribute('required', true);
     formField.parentElement.insertBefore(errorMessage, formField);
   }
 }
 function removeError(formField) {
   if(formField.previousElementSibling.classList.contains('error')) {
+    formField.setAttribute('required', false);
     formField.previousElementSibling.remove();
   }
 }
@@ -205,7 +206,6 @@ function checkActivities() {
     }
   }
 }
-console.log(isEmailValid());
 
 function isCcValid() {
   const ccNum = document.getElementById("cc-num");
@@ -242,7 +242,6 @@ function isCcValid() {
   }
   return true;
 }
-console.log(isCcValid());
 //an eventlistener that calls tha validate funtions and verifies fieldsets
 document.getElementById("name").addEventListener("keyup", isNameValid);
 document.getElementById("mail").addEventListener("keyup", isEmailValid);
@@ -250,10 +249,11 @@ document.getElementById("cc-num").addEventListener("keyup", isCcValid);
 document.getElementById('zip').addEventListener('keyup', isCcValid);
 document.getElementById('cvv').addEventListener('keyup', isCcValid)
 submitButton.addEventListener("click", (e) => {
-  if (isNameValid() && isEmailValid && isCcValid() && checkActivities()) {
-    console.log('submission processed');
+  if (isNameValid() && isEmailValid() && isCcValid() && checkActivities()) {
+    alert('registration is Complete');
   } else {
     e.preventDefault();
+
     isNameValid();
     isEmailValid();
     isCcValid();

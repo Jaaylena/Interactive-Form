@@ -127,10 +127,9 @@ input {
 	top: 5px;
   }
   
-  .error {
+  input:invalid {
 	border: 2px solid rgb(241, 6, 6);
 	background-color: rgb(245, 127, 127);
-	max-width: 100%;
   }
 
 
