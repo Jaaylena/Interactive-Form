@@ -238,12 +238,11 @@ function validateForm() {
     formFields.push(isCcValid(), isZipValid(), isCvvValid());
   }
   for(let i = 0; i < formFields.length; i++) {
-    if(formFields[i] == false) {
+    if(formFields[i] === false) {
       return false;
-    }    
+    } 
+    return true;
   }
-  return true;
-
 }
 //an eventlistener that calls tha validate funtions and verifies fieldsets
 document.getElementById("name").addEventListener("keyup", isNameValid);
