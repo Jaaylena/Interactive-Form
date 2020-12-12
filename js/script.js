@@ -245,10 +245,11 @@ submitButton.addEventListener("click", (e) => {
   if (isNameValid() && isEmailValid && isCcValid() && checkActivities()) {
     console.log('submission processed');
   } else {
-    e.preventDefault();
     isNameValid();
     isEmailValid();
     isCcValid();
     checkActivities();
+    e.preventDefault();
+
   }
 });
