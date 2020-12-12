@@ -165,6 +165,7 @@ function isNameValid() {
   if(nameInput.value.search(/\d/) != -1) {
     removeError(nameInput);
     createError(nameInput, '* Name cannot contain numbers');
+    return false;
   } else {
     removeError(nameInput);
     return true;  
@@ -182,7 +183,7 @@ function isEmailValid() {
     if (!regEmail.test(emailInput.value)) {
       removeError(emailInput);
       createError(emailInput, '* Please enter a valid Email Address');
-      return false; 
+      return false;
     } else {
       removeError(emailInput);
       return true;
@@ -204,6 +205,7 @@ function checkActivities() {
     }
   }
 }
+console.log(isEmailValid());
 
 function isCcValid() {
   const ccNum = document.getElementById("cc-num");
@@ -232,9 +234,15 @@ function isCcValid() {
     } else {
       removeError(cvvInput);
     }
+    if(validate === true) {
+      return true;
+    } else {
+      return false;
+    }
   }
   return true;
 }
+console.log(isCcValid());
 //an eventlistener that calls tha validate funtions and verifies fieldsets
 document.getElementById("name").addEventListener("keyup", isNameValid);
 document.getElementById("mail").addEventListener("keyup", isEmailValid);
@@ -245,11 +253,11 @@ submitButton.addEventListener("click", (e) => {
   if (isNameValid() && isEmailValid && isCcValid() && checkActivities()) {
     console.log('submission processed');
   } else {
+    e.preventDefault();
     isNameValid();
     isEmailValid();
     isCcValid();
     checkActivities();
-    e.preventDefault();
 
   }
 });
