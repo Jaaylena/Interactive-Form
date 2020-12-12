@@ -147,18 +147,21 @@ payment.addEventListener("change", (e) => {
 function isNameValid() {
   const nameInput = document.getElementById("name");
   nameInput.insertAdjacentElement("beforebegin", nameError);
-  const regName = /^(\w+)\s(\w+)\s?$/i;
+  const regName = /^(\w+)?$/i;
   if (!regName.test(nameInput.value)) {
     nameInput.setAttribute("required", true);
-    nameError.textContent = "* Please enter your first and last name";
+    nameError.textContent = "* Please enter your first name";
     nameError.style.color = "#250D54";
-    return true; 
-          } else {
+    console.log(nameError);
+    return false; 
+    } else {
     nameInput.setAttribute("required", false);
     nameError.textContent = "";
-    return false;
+    
+    return true;
   } 
 }
+
 function isEmailValid() {
   const regEmail = /^[^@]+@[^@.]+\.[\w+]+$/i;
   const emailInput = document.getElementById("mail");
@@ -167,11 +170,11 @@ function isEmailValid() {
     emailInput.setAttribute("required", true);
     emailError.textContent = "*Please enter a valid Email address";
     emailError.style.color = "#250D54";
-    return true;
+    return false;
   } else {
     emailInput.setAttribute("required", false);
     emailError.textContent = "";
-    return false;
+    return true;
   }
 }
 function checkActivities() {
@@ -182,10 +185,10 @@ function checkActivities() {
       pickActivity.textContent = "* Must Select Main conference.";
       pickActivity.style.color = "red";
       activities.insertBefore(pickActivity, checkbox1);
-      return true;
+      return false;
     } else {
       pickActivity.textContent = "";
-      return false;
+      return true;
     }
   }
 }
@@ -196,11 +199,11 @@ function isCcValid() {
     errorCC.textContent = " *should contain 13-16 digits";
     errorCC.style.color = "red";
     ccLabel.append(errorCC);
-    return true;
+    return false;
   } else {
     ccNum.setAttribute("required", false);
     errorCC.textContent = "";
-    return false;
+    return true;
   }
 }
 function isZipValid() {
@@ -210,11 +213,11 @@ function isZipValid() {
     zipLabel.append(zipError);
     zipError.textContent = " *Invalid zip code";
     zipError.style.color = "red";
-    return true;
+    return false;
   } else {
     zip.setAttribute("required", false);
     zipError.textContent = "";
-    return false;
+    return true;
   }
 }
 function isCvvValid() {
@@ -251,7 +254,7 @@ document.getElementById("cc-num").addEventListener("keyup", isCcValid);
 document.getElementById("zip").addEventListener("keyup", isZipValid);
 document.getElementById("cvv").addEventListener("keyup", isCvvValid);
 submitButton.addEventListener("click", (e) => {
-  if(validateForm()) {
+  if(!validateForm()) {
     e.preventDefault();
   }
 });
