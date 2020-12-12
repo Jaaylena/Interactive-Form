@@ -127,10 +127,10 @@ input {
 	top: 5px;
   }
   
-  input:invalid {
+  .error {
 	border: 2px solid rgb(241, 6, 6);
 	background-color: rgb(245, 127, 127);
-
+	max-width: 100%;
   }
 
 
@@ -225,7 +225,8 @@ option {
 	}
 }
 
-@media (min-width: 680px) {
+@media (min-width: 980px) {
+	
 	header {
 		padding: 4.65em 0 2.5em;
 	}
