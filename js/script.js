@@ -247,7 +247,7 @@ document.getElementById("name").addEventListener("keyup", isNameValid);
 document.getElementById("mail").addEventListener("keyup", isEmailValid);
 document.getElementById("cc-num").addEventListener("keyup", isCcValid);
 document.getElementById('zip').addEventListener('keyup', isCcValid);
-document.getElementById('cvv').addEventListener('keyup', isCcValid)
+document.getElementById('cvv').addEventListener('keyup', isCcValid);
 submitButton.addEventListener("click", (e) => {
   if (isNameValid() && isEmailValid() && isCcValid() && checkActivities()) {
     alert('registration is Complete');
