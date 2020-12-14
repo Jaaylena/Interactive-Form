@@ -1,8 +1,7 @@
 /*
  */
 document.getElementById("name").focus();
-const form = document.querySelector("form");
-const submitButton = document.querySelector("button");
+
 //create a error message explaination
 document
   .querySelector("form")
@@ -10,18 +9,31 @@ document
     "afterbegin",
     `<p class="reqField">* - required field</p>`
   );
-
+  const otherInput = document.getElementById("other-title");
+  otherInput.style.display = "none";
+  const title = document.getElementById("title");
+  const colors = document.getElementById("color");
+  //variables that add the total cost to the activites sections 
+const totalCostDiv = document.createElement("div");
+totalCostDiv.id = "total-cost";
+const totalCostLabel = document.createElement("label");
+totalCostDiv.append(totalCostLabel);
+let totalCost = 0;
+totalCostLabel.innerHTML = `Total Cost: $${totalCost}`;
+const activities = document.querySelector(".activities");
+activities.appendChild(totalCostDiv);
+const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+const form = document.querySelector("form");
+const submitButton = document.querySelector("button");
 /***job role section **/
-const otherInput = document.getElementById("other-title");
-otherInput.style.display = "none";
-const title = document.getElementById("title");
+
 title.addEventListener("change", (e) => {
   e.target.value === "other" ?
     (otherInput.style.display = "block") :
     (otherInput.style.display = "none");
 });
 //T-shirt section
-const colors = document.getElementById("color");
+
 for (let i = 0; i < colors.length; i++) {
   //hide the colors in the "color" drop down
   colors[i].style.display = "none";
@@ -31,19 +43,24 @@ const colorOption = document.querySelectorAll("#color option");
 //at initial load update the "color" field to read "Please select a Theme"
 const colorPlaceholder = document.createElement("option");
 colorPlaceholder.style.display = "none";
-colors.appendChild(colorPlaceholder).text = "Please Select a T-Shirt Theme";
-colors.value = "Please Select a T-Shirt Theme";
+//colors.appendChild(colorPlaceholder).text = "Please Select a T-Shirt Theme";
+//colors.value = "Please Select a T-Shirt Theme";
 //event listener for displaying colors depending on selected theme
+const shirtColors = document.querySelector('.shirt-colors');
+shirtColors.style.display = "none"
+console.log(shirtColors);
 designMenu.addEventListener("change", (e) => {
+ 
   colors.appendChild(colorPlaceholder).text = "Choose a Color";
   colors.value = "Choose a Color";
   if (designMenu.value === "Select Theme") {
-    colors.appendChild(colorPlaceholder).text = "Please Select a T-Shirt Theme";
-    colors.value = "Please Select a T-Shirt Theme";
+    //shirtColors.style.display = "block";
   }
   for (let i = 0; i < colors.length; i++) {
     colors[i].style.display = "none";
+    shirtColors.style.display = "block";
     if (e.target.value === "js puns") {
+    
       colorOption[0].style.display = "block";
       colorOption[1].style.display = "block";
       colorOption[2].style.display = "block";
@@ -55,17 +72,9 @@ designMenu.addEventListener("change", (e) => {
     }
   }
 });
+
 /*register for activities section*/
-//variables that add the total cost to the activites sections 
-const totalCostDiv = document.createElement("div");
-totalCostDiv.id = "total-cost";
-const totalCostLabel = document.createElement("label");
-totalCostDiv.append(totalCostLabel);
-let totalCost = 0;
-totalCostLabel.innerHTML = `Total Cost: $${totalCost}`;
-const activities = document.querySelector(".activities");
-activities.appendChild(totalCostDiv);
-const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
 //event listens for the checkbox selection and adds the price to the total
 activities.addEventListener("change", (e) => {
   let checkedBox = e.target;
@@ -105,6 +114,7 @@ paymentOption[0].hidden = true;
 payments.value = "credit card";
 payPal.style.display = "none";
 bitcoin.style.display = "none";
+
 //show/hide pym options depending on the users selection
 payment.addEventListener("change", (e) => {
   if (e.target.value === "credit card") {
@@ -124,6 +134,7 @@ payment.addEventListener("change", (e) => {
   }
 });
 /** form Validation section */
+
 //variables that add the * to each label
 const name = document.getElementsByTagName("label")[0];
 name.innerHTML = "*Name:";
@@ -139,6 +150,7 @@ const ccLabel = document.querySelector(".col-6 label");
 ccLabel.innerHTML = "*Card Number:";
 const zipLabel = document.querySelectorAll(".col-3 label")[0];
 zipLabel.innerHTML = "*Zip Code:";
+
 //creating error messages
 function createError(formField, message) {
   if(!formField.previousElementSibling.classList.contains('error')) {
@@ -150,12 +162,14 @@ function createError(formField, message) {
     formField.parentElement.insertBefore(errorMessage, formField);
   }
 }
+
 function removeError(formField) {
   if(formField.previousElementSibling.classList.contains('error')) {
     formField.setAttribute('required', false);
     formField.previousElementSibling.remove();
   }
 }
+
 function isNameValid() {
   const nameInput = document.getElementById("name");
   if(nameInput.value === '') {
