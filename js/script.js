@@ -167,7 +167,13 @@ function removeError(formField) {
 }
 
 function isNameValid() {
+  const regName = /^(\w+)?$/i;
   const nameInput = document.getElementById("name");
+  if (!regName.test(nameInput.value)) {
+    removeError(nameInput);
+    createError(nameInput, "* Please Enter Your Name");
+    return false;
+  }
   if (nameInput.value === "") {
     removeError(nameInput);
     createError(nameInput, "* Please Enter Your Name");
@@ -226,7 +232,8 @@ function isCcValid() {
     let validate = true;
     if (!regexNums.test(ccNum.value)) {
       createError(ccNum, "*Please Enter a Valid Credit Card");
-      validate = false;
+      validate = false; 
+    
     } else {
       removeError(ccNum);
     }
