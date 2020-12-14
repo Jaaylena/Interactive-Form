@@ -43,19 +43,14 @@ const colorOption = document.querySelectorAll("#color option");
 //at initial load update the "color" field to read "Please select a Theme"
 const colorPlaceholder = document.createElement("option");
 colorPlaceholder.style.display = "none";
-//colors.appendChild(colorPlaceholder).text = "Please Select a T-Shirt Theme";
-//colors.value = "Please Select a T-Shirt Theme";
 //event listener for displaying colors depending on selected theme
 const shirtColors = document.querySelector('.shirt-colors');
 shirtColors.style.display = "none"
 console.log(shirtColors);
 designMenu.addEventListener("change", (e) => {
- 
   colors.appendChild(colorPlaceholder).text = "Choose a Color";
   colors.value = "Choose a Color";
-  if (designMenu.value === "Select Theme") {
-    //shirtColors.style.display = "block";
-  }
+
   for (let i = 0; i < colors.length; i++) {
     colors[i].style.display = "none";
     shirtColors.style.display = "block";
@@ -165,8 +160,8 @@ function createError(formField, message) {
 
 function removeError(formField) {
   if(formField.previousElementSibling.classList.contains('error')) {
-    formField.setAttribute('required', false);
     formField.previousElementSibling.remove();
+    formField.setAttribute('required', false);
   }
 }
 
