@@ -176,7 +176,7 @@ function isNameValid() {
   }
   if (nameInput.value === "") {
     removeError(nameInput);
-    createError(nameInput, "* Please Enter Your Name");
+    createError(nameInput, "* Name Field is empty");
     return false;
   }
   if (nameInput.value.search(/\d/) != -1) {
@@ -236,6 +236,7 @@ function isCcValid() {
     
     } else {
       removeError(ccNum);
+      validate = true;
     }
     if (!regexZip.test(zip.value)) {
       createError(zip, "*Invalid zip code");
