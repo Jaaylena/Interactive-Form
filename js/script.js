@@ -78,6 +78,8 @@ for (let i = 0; i < colors.length; i++) {
 designMenu.addEventListener("change", (e) => {
   colors.appendChild(colorPlaceholder).text = "Choose a Color";
   colors.value = "Choose a Color";
+  const hideDesignOption = document.querySelector('#design');
+  hideDesignOption[0].style.display = 'none';
 
   for (let i = 0; i < colors.length; i++) {
     colors[i].style.display = "none";
@@ -86,6 +88,7 @@ designMenu.addEventListener("change", (e) => {
       colorOption[0].style.display = "block";
       colorOption[1].style.display = "block";
       colorOption[2].style.display = "block";
+     
     }
     if (e.target.value === "heart js") {
       colorOption[3].style.display = "block";
