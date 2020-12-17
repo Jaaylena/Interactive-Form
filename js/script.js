@@ -88,7 +88,6 @@ designMenu.addEventListener("change", (e) => {
       colorOption[0].style.display = "block";
       colorOption[1].style.display = "block";
       colorOption[2].style.display = "block";
-     
     }
     if (e.target.value === "heart js") {
       colorOption[3].style.display = "block";
@@ -212,7 +211,7 @@ function isEmailValid() {
 
 function checkActivities() {
   for (let i = 0; i < checkboxes.length; i++) {
-    if (!checkboxes[i].checked) {
+    if (!totalCost) {
       checkboxes[i].setAttribute("required", true);
       pickActivity.textContent = "* Must Choose an Activity";
       pickActivity.style.color = "red";
